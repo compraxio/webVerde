@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Directorio de Contactos - Negocios Verdes Cardique</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased h-screen overflow-hidden flex">
+    <!-- Sidebar Navigation -->
+    <aside
+        class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col h-full">
+        <div class="p-6 flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <span class="material-icons text-white">eco</span>
+            </div>
+            <div>
+                <h1 class="font-bold text-sm leading-tight">Negocios Verdes</h1>
+                <p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Cardique</p>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 space-y-1 mt-4">
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                href="#">
+                <span class="material-icons text-xl">dashboard</span>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                href="#">
+                <span class="material-icons text-xl">storefront</span>
+                <span class="text-sm font-medium">Negocios</span>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary transition-colors"
+                href="#">
+                <span class="material-icons text-xl">contacts</span>
+                <span class="text-sm font-semibold">Contactos</span>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                href="#">
+                <span class="material-icons text-xl">analytics</span>
+                <span class="text-sm font-medium">Reportes</span>
+            </a>
+            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                href="#">
+                <span class="material-icons text-xl">settings</span>
+                <span class="text-sm font-medium">Configuración</span>
+            </a>
+        </nav>
+        <div class="p-4 mt-auto">
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Usuario Administrador</p>
+                <div class="flex items-center gap-2">
+                    <img alt="Avatar" class="w-8 h-8 rounded-full border-2 border-primary"
+                        data-alt="Portrait of a male business professional"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAywzgAMVaMliEkuoIZnB4eisapYx_M5Niouw4O7EDBMGNAmBZoei2Yf5Drataz0Y-rF8JD6kQx15aL8nDj180qA-jbnYDRwv-071ej5thYiximZ5NLFMVEk1kU1Z_VWNX6Tzg8k8Dri8qOKaHmPpbSjfvcHl8a063JwshcD-lge0Fa9do8qHof8uRto95qRqdBmIjJjI2S1j9BJxnCEBQltwnBjZOhQKC2uTb9kjwadqt5UF41tiyJ4zFsNF4fwBRq1i0xlzM_6-Up" />
+                    <div class="truncate">
+                        <p class="text-xs font-bold truncate">Carlos Mendoza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <!-- Top Header -->
+        <header
+            class="h-16 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8">
+            <div class="flex items-center gap-4 flex-1">
+                <div class="relative w-full max-w-md">
+                    <span
+                        class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                    <input
+                        class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800/50 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-slate-800 transition-all"
+                        placeholder="Buscar por nombre, empresa o cargo..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-icons">notifications</span>
+                </button>
+                <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-icons">help_outline</span>
+                </button>
+            </div>
+        </header>
+        <!-- Dynamic Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <!-- Page Title & CTA -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 dark:text-white">Directorio de Contactos</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Gestiona la red de contactos vinculada a los
+                        Negocios Verdes.</p>
+                </div>
+                <button
+                    class="bg-primary hover:bg-primary/90 text-background-dark font-bold px-5 py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
+                    <span class="material-icons text-lg">person_add</span>
+                    <span>Agregar Contacto</span>
+                </button>
+            </div>
+            <!-- Table Container -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Nombre Completo</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Cargo / Rol</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Empresa / Negocio</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Correo Electrónico</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Teléfono</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right">
+                                    Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img alt="Contact"
+                                            class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+                                            data-alt="Portrait of a smiling professional woman"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTJiyiuU9pptJOdE4E9Lhdd4lhYfZdnKlYKp1cGY2WtXYgY0RKlEVbbkjPK5Q_iBavkOYIFPE0O9ldBknImaijVdrH_8s55FFzmVjiOmGXhzGm9lbGoxMRDTMFELunC0MCBJaNqU2q97iVmN--vspLKgvh36-hlrUt1ebG_SZn08agR7_F87jRwUb-kKcqLRfhaMpQgvZJVY5gw9C-W4SVKqpHiSCUg7Gh-GXPak7c3bHpc5cSfzjWQS27bEe3DSHq2x9xEd9SLVas" />
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">Ana
+                                                Lucía Torres</p>
+                                            <span
+                                                class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold uppercase">Activo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Directora de
+                                    Sostenibilidad</td>
+                                <td class="px-6 py-4 text-sm font-medium text-primary hover:underline cursor-pointer">
+                                    Ecoplast Cartagenas</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">ana.torres@ecoplast.co
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">+57 300 456 7890</td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex items-center justify-end gap-3">
+                                        <a class="text-xs font-bold text-primary hover:text-primary/70" href="#">Ver
+                                            más</a>
+                                        <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-icons">more_vert</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img alt="Contact"
+                                            class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+                                            data-alt="Portrait of a male corporate executive"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0w9yisxvIxQDGY0PyCZBRD-amIaZ6CgHEZ2avTq2QArmEE5JKfF_UIAVWypGZdOWinFLnJUgTrAKd-bUsQej_fpNaSQfo9n4K3dh3RLYzR0kV5rVhMHpsSX-OIEK_rdIFIt3ZC8JDk0jeg8po7NbjfWDTZ6n0FEABD_VPpOjx5lQ4HPzc4CdZMFYLSnq48Fu49fsm_D01a7S5T73eQkvt0C3YV4STNV0hf-fsIouiVLQEWBN7LgHvkzu5t4h2PfbPiCXHQj86i94" />
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">Jorge
+                                                Ivan Meza</p>
+                                            <span
+                                                class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 font-bold uppercase">Pendiente</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Gerente General</td>
+                                <td class="px-6 py-4 text-sm font-medium text-primary hover:underline cursor-pointer">
+                                    BioAbonos del Caribe</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                    jorge.meza@bioabonos.com</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">+57 315 221 4455</td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex items-center justify-end gap-3">
+                                        <a class="text-xs font-bold text-primary hover:text-primary/70" href="#">Ver
+                                            más</a>
+                                        <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-icons">more_vert</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 font-bold text-xs uppercase">
+                                            MR
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">Marta
+                                                Rodríguez</p>
+                                            <span
+                                                class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold uppercase">Activo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Representante Legal
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-primary hover:underline cursor-pointer">
+                                    Miel Purísima Bolívar</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                    marta.bee@mielbolivar.co</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">+57 311 009 1234</td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex items-center justify-end gap-3">
+                                        <a class="text-xs font-bold text-primary hover:text-primary/70" href="#">Ver
+                                            más</a>
+                                        <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-icons">more_vert</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img alt="Contact"
+                                            class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+                                            data-alt="Portrait of a young male professional"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPBNedBhgyS6obzv_abPmwGcjfdMfn0Y3G0e2OpCKOtieYGoBMdMWS1LAMeBai6Ah4IbDubeGtV_zDNdEySooz9qwosMKdiUoajsJiHNc40aAAOrPCnrZOk0vamFzJL8nK4O6WS3mEVWjdUQDg11JyFmAMvEgJXFb4_goWZpSufPVpYQUTHgNxGR0UPBFFVCBrXT0DVnldReBFlJO8ybP1k1ZnbpXx7RiMD3qhzH5OWFrjd3BgwaJd3SpUPYE1507kHDee2bG87qDQ" />
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">Samuel
+                                                Petro</p>
+                                            <span
+                                                class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-bold uppercase">Activo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Coordinador Técnico
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-primary hover:underline cursor-pointer">
+                                    Viveros de la Costa</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                    samuel.p@viveroscosta.com</td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">+57 320 888 7766</td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex items-center justify-end gap-3">
+                                        <a class="text-xs font-bold text-primary hover:text-primary/70" href="#">Ver
+                                            más</a>
+                                        <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-icons">more_vert</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination Footer -->
+                <div
+                    class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Mostrando 1 a 4 de 24 contactos</p>
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="p-1 rounded border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                            disabled="">
+                            <span class="material-icons text-sm">chevron_left</span>
+                        </button>
+                        <button
+                            class="w-8 h-8 rounded bg-primary text-background-dark font-bold text-xs flex items-center justify-center">1</button>
+                        <button
+                            class="w-8 h-8 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs flex items-center justify-center font-medium">2</button>
+                        <button
+                            class="w-8 h-8 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs flex items-center justify-center font-medium">3</button>
+                        <button
+                            class="p-1 rounded border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                            <span class="material-icons text-sm">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="bg-primary/10 border border-primary/20 p-4 rounded-xl flex items-center gap-4">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-background-dark">
+                        <span class="material-icons">groups</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase">Total Contactos</p>
+                        <h4 class="text-xl font-bold">156</h4>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-primary">
+                        <span class="material-icons">domain</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase">Empresas Activas</p>
+                        <h4 class="text-xl font-bold">42</h4>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-primary">
+                        <span class="material-icons">verified</span>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase">Verificados</p>
+                        <h4 class="text-xl font-bold">128</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
