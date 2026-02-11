@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Actualizar Negocio - Negocios Verdes Cardique</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2D7A3E",
+                        secondary: "#8DC63F",
+                        accent: "#0091DA",
+                        "background-light": "#F8FAF8",
+                        "background-dark": "#0F1713",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-card {
+            @apply bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm;
+        }
+        .input-group {
+            @apply flex flex-col gap-1.5;
+        }
+        .input-label {
+            @apply text-sm font-semibold text-slate-700 dark:text-slate-300;
+        }
+        .input-field {
+            @apply w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm;
+        }
+        .btn-save {
+            @apply flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md shadow-primary/10;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200">
+    <header
+        class="sticky top-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-slate-200 dark:border-zinc-800 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <a class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium"
+                    href="#">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span>Volver</span>
+                </a>
+                <div class="h-6 w-px bg-slate-200 dark:border-zinc-800"></div>
+                <h1 class="text-xl font-bold text-slate-900 dark:text-white">Actualizar Información de Negocio</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500"
+                    onclick="toggleDarkMode()">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                </button>
+                <div class="flex items-center gap-3 pl-3 border-l border-slate-200 dark:border-zinc-800">
+                    <img alt="Profile" class="w-8 h-8 rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAgHAy6p5O3N6DJko9qVgl2y-BRdLLu8aDo8qo1rPKYvocjzi2u1_Z4j4NCjHCJ4ofzsWyKfprDwZEe9RsDtBs6qNLQdpI2xDcWxu7c3oZ3Ow7_YM7sqlIqDklysDiakFkwEEsvty226PPNWyMvapTJcYyHxbMv8StCdLvXCdbLekG0hU5JdpiyWlKjRlvPDd6KyCfAnRxgR-07NcQLbOWh9y0lva609LnmmlvBawSfXbM9U6d7qsGb4Pjjndn9GAqsjc_i5KWU4A" />
+                    <span class="text-sm font-semibold hidden sm:inline-block">Admin Cardique</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <aside class="lg:col-span-4 space-y-6">
+                <div
+                    class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-3xl p-6 sticky top-28 shadow-sm">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-6">
+                            <div
+                                class="w-32 h-32 rounded-3xl bg-slate-100 dark:bg-zinc-800 border-4 border-white dark:border-zinc-800 shadow-xl overflow-hidden">
+                                <img alt="Logo" class="w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAgHAy6p5O3N6DJko9qVgl2y-BRdLLu8aDo8qo1rPKYvocjzi2u1_Z4j4NCjHCJ4ofzsWyKfprDwZEe9RsDtBs6qNLQdpI2xDcWxu7c3oZ3Ow7_YM7sqlIqDklysDiakFkwEEsvty226PPNWyMvapTJcYyHxbMv8StCdLvXCdbLekG0hU5JdpiyWlKjRlvPDd6KyCfAnRxgR-07NcQLbOWh9y0lva609LnmmlvBawSfXbM9U6d7qsGb4Pjjndn9GAqsjc_i5KWU4A" />
+                            </div>
+                            <button
+                                class="absolute -bottom-2 -right-2 bg-white dark:bg-zinc-800 p-2 rounded-xl border border-slate-200 dark:border-zinc-700 shadow-lg text-primary hover:bg-primary hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-lg">photo_camera</span>
+                            </button>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Eco Hotel Campo Verde</h2>
+                        <div class="flex items-center gap-1 mb-4 text-yellow-400">
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined fill-1">star</span>
+                            <span class="material-symbols-outlined">star_half</span>
+                            <span class="ml-2 text-sm font-bold text-slate-600 dark:text-slate-400">4.5</span>
+                        </div>
+                        <div class="w-full space-y-3 pt-6 border-t border-slate-100 dark:border-zinc-800">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">ID Registro</span>
+                                <span class="font-mono font-bold">#NV-2023-084</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Fase Actual</span>
+                                <span
+                                    class="px-2 py-0.5 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-[10px] font-bold uppercase rounded">Básico</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Última Actualización</span>
+                                <span class="text-slate-900 dark:text-slate-200">12 Oct, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-accent/5 dark:bg-accent/10 border border-accent/20 rounded-2xl p-5">
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-accent">info</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-accent mb-1">Guía de Actualización</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Asegúrese de que la
+                                información de impacto ambiental esté respaldada por evidencias actuales para mantener
+                                su calificación.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div class="lg:col-span-8">
+                <section class="form-card">
+                    <div
+                        class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100 dark:border-zinc-800">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">business</span>
+                            </div>
+                            <h3 class="text-lg font-bold">Datos Básicos</h3>
+                        </div>
+                        <button class="btn-save">
+                            <span class="material-symbols-outlined text-sm">save</span>
+                            Guardar Cambios
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group md:col-span-2">
+                            <label class="input-label">Nombre del Negocio Verde</label>
+                            <input class="input-field" type="text" value="Eco Hotel Campo Verde" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">NIT / Identificación</label>
+                            <input class="input-field" type="text" value="900.345.678-2" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Tipo de Persona</label>
+                            <select class="input-field">
+                                <option>Persona Jurídica</option>
+                                <option>Persona Natural</option>
+                            </select>
+                        </div>
+                        <div class="input-group md:col-span-2">
+                            <label class="input-label">Descripción General</label>
+                            <textarea class="input-field"
+                                rows="3">Ofrecemos servicios de ecoturismo sostenible con mínimo impacto ambiental, enfocado en la conservación del bosque seco tropical de la región de Cardique.</textarea>
+                        </div>
+                    </div>
+                </section>
+                <section class="form-card">
+                    <div
+                        class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100 dark:border-zinc-800">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
+                                <span class="material-symbols-outlined">contact_phone</span>
+                            </div>
+                            <h3 class="text-lg font-bold">Contacto</h3>
+                        </div>
+                        <button class="btn-save bg-accent hover:bg-accent/90 shadow-accent/10">
+                            <span class="material-symbols-outlined text-sm">save</span>
+                            Guardar Cambios
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label class="input-label">Representante Legal</label>
+                            <input class="input-field" type="text" value="María Fernanda González" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Teléfono de Contacto</label>
+                            <input class="input-field" type="tel" value="+57 300 123 4567" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Correo Electrónico</label>
+                            <input class="input-field" type="email" value="contacto@campoverde.eco" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Municipio</label>
+                            <select class="input-field">
+                                <option>Arjona</option>
+                                <option selected="">Turbaco</option>
+                                <option>Mahates</option>
+                                <option>Turbaná</option>
+                            </select>
+                        </div>
+                        <div class="input-group md:col-span-2">
+                            <label class="input-label">Dirección de Sede</label>
+                            <input class="input-field" type="text" value="Km 12 Vía Principal - Vereda El Silencio" />
+                        </div>
+                    </div>
+                </section>
+                <section class="form-card">
+                    <div
+                        class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100 dark:border-zinc-800">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">eco</span>
+                            </div>
+                            <h3 class="text-lg font-bold">Impacto Ambiental</h3>
+                        </div>
+                        <button class="btn-save bg-secondary hover:bg-secondary/90 text-primary shadow-secondary/10">
+                            <span class="material-symbols-outlined text-sm">save</span>
+                            Guardar Cambios
+                        </button>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="input-group">
+                            <label class="input-label">Categoría de Negocio Verde</label>
+                            <select class="input-field">
+                                <option>Bienes y servicios sostenibles provenientes de recursos naturales</option>
+                                <option selected="">Ecoturismo y servicios ecosistémicos</option>
+                                <option>Mercados de carbono</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div
+                                class="p-4 rounded-xl border border-slate-100 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-800/30">
+                                <p class="text-sm font-bold mb-3 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">water_drop</span>
+                                    Uso de Recursos
+                                </p>
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input checked="" class="rounded text-primary focus:ring-primary"
+                                            type="checkbox" />
+                                        <span class="text-sm">Sistema de cosecha de lluvia</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input checked="" class="rounded text-primary focus:ring-primary"
+                                            type="checkbox" />
+                                        <span class="text-sm">Energías renovables (Solar)</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input class="rounded text-primary focus:ring-primary" type="checkbox" />
+                                        <span class="text-sm">Tratamiento de aguas grises</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl border border-slate-100 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-800/30">
+                                <p class="text-sm font-bold mb-3 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">groups</span>
+                                    Impacto Social
+                                </p>
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input checked="" class="rounded text-primary focus:ring-primary"
+                                            type="checkbox" />
+                                        <span class="text-sm">Empleo a comunidad local</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input checked="" class="rounded text-primary focus:ring-primary"
+                                            type="checkbox" />
+                                        <span class="text-sm">Proveedores regionales</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input class="rounded text-primary focus:ring-primary" type="checkbox" />
+                                        <span class="text-sm">Programas de educación ambiental</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Metas de Sostenibilidad (Próximo Año)</label>
+                            <textarea class="input-field" placeholder="Describa sus objetivos ambientales..."
+                                rows="3">Aumentar la eficiencia energética en un 20% mediante la instalación de 10 paneles solares adicionales y reducir el uso de plásticos de un solo uso en todas las operaciones del hotel.</textarea>
+                        </div>
+                    </div>
+                </section>
+                <div class="lg:hidden sticky bottom-6 left-0 right-0 flex justify-center px-4">
+                    <button
+                        class="bg-primary text-white px-8 py-3 rounded-2xl font-bold shadow-2xl flex items-center gap-2">
+                        <span class="material-symbols-outlined">publish</span>
+                        Publicar Cambios Globales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
