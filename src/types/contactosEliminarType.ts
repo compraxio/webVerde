@@ -1,6 +1,6 @@
 export interface ContactosResponse {
   success: boolean;
-  data: Contacto[];
+  data: Contacto;
   message: string;
 }
 export interface Contacto {
@@ -9,4 +9,3 @@ export interface Contacto {
   telefono: string;
   correo: string;
 }
-

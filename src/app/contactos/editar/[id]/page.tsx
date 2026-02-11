@@ -2,14 +2,14 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contactSchema } from '@/schemas/contactSchema';
+import { contactEliminarSchema } from '@/schemas/contactSchema';
 import { z } from 'zod';
 import { useRouter, useParams } from 'next/navigation';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import type { ContactosResponse } from '@/types/contactosType';
+import type { ContactosResponse } from '@/types/contactosEliminarType';
 
-type Inputs = z.infer<typeof contactSchema>;
+type Inputs = z.infer<typeof contactEliminarSchema>;
 
 type CrearContacto = {
   nombre: string;
@@ -21,12 +21,21 @@ export default function Crear() {
   const queryCliente = useQueryClient();
   const router = useRouter();
 
-  const params =  useParams()
-  const id_contacto = params.id
-  console.log(id_contacto)
+  const params = useParams();
+  const id_contacto = params.id as string;
+
+  const { data, isPending } = useQuery<ContactosResponse>({
+    queryKey: ['editarContacto', id_contacto],
+    queryFn: async () => {
+      const res = await axios(`https://api-base-de-datos.vercel.app/contactos/${id_contacto}`);
+      return res.data;
+    },
+    enabled: !!id_contacto,
+  });
+
   const crearContacto = useMutation({
     mutationFn: async (data: CrearContacto) => {
-      await axios.post('https://api-base-de-datos.vercel.app/contactos/', data);
+      await axios.put(`https://api-base-de-datos.vercel.app/contactos/${id_contacto}`, data);
     },
 
     onSuccess: () => {
@@ -38,15 +47,19 @@ export default function Crear() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm<Inputs>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(contactEliminarSchema),
     mode: 'onChange',
   });
 
+  setValue('nombre', `${data?.data.nombre}`);
+  setValue("numero", `${data?.data.telefono}`)
+  setValue('correo', `${data?.data.correo}`);
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     crearContacto.mutate({
       nombre: data.nombre,
-      telefono: `${data.extension} ${data.numero}`,
+      telefono: `${data.numero}`,
       correo: data.correo,
     });
     router.replace('/');
@@ -103,6 +116,7 @@ export default function Crear() {
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
             htmlFor="Nombre"
+
           >
             Nombre de contacto
           </label>
@@ -111,6 +125,7 @@ export default function Crear() {
             type="text"
             placeholder="María Fernanda González"
             id="Nombre"
+
             {...register('nombre')}
           />
           {errors.nombre?.message && <p>{errors.nombre.message}</p>}
@@ -123,41 +138,6 @@ export default function Crear() {
             Numero
           </label>
           <div className="flex gap-6 ">
-            <select
-              id="extension"
-              className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-              {...register('extension')}
-            >
-              <option value="+57">+57</option>
-              <option disabled>──────────</option>
-              <option value="+1">+1</option>
-              <option value="+52">+52</option>
-              <option value="+54">+54</option>
-              <option value="+55">+55</option>
-              <option value="+56">+56</option>
-              <option value="+58">+58</option>
-              <option value="+51">+51</option>
-              <option value="+593">+593</option>
-              <option value="+591">+591</option>
-              <option value="+595">+595</option>
-              <option value="+598">+598</option>
-
-              <option value="+34">+34</option>
-              <option value="+33">+33</option>
-              <option value="+49">+49</option>
-              <option value="+39">+39</option>
-              <option value="+44">+44</option>
-
-              <option value="+86">+86</option>
-              <option value="+81">+81</option>
-              <option value="+82">+82</option>
-              <option value="+91">+91</option>
-
-              <option value="+61">+61</option>
-              <option value="+7">+7</option>
-              <option value="+20">+20</option>
-              <option value="+27">+27</option>
-            </select>
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="tel"
@@ -165,7 +145,6 @@ export default function Crear() {
               {...register('numero')}
             />
           </div>
-          {errors.extension?.message && <p>{errors.extension.message}</p>}
           {errors.numero?.message && <p>{errors.numero.message}</p>}
         </div>
         <div className="flex flex-col gap-1.5">

@@ -32,7 +32,20 @@ export const contactSchema = z.object({
     .min(1, { message: 'El nombre es obligatorio' })
     .max(100, { message: 'El nombre no puede exceder los 100 caracteres' }),
   extension: z.enum(code, { message: 'codigo invalido' }),
-  numero: z.string()
+  numero: z
+    .string()
+    .min(8, { message: 'numero de telefono muy corto' })
+    .max(15, { message: 'numero de telefono muy largo' }),
+  correo: z.email({ message: 'correo electronico invalido' }).optional(),
+});
+
+export const contactEliminarSchema = z.object({
+  nombre: z
+    .string()
+    .min(1, { message: 'El nombre es obligatorio' })
+    .max(100, { message: 'El nombre no puede exceder los 100 caracteres' }),
+  numero: z
+    .string()
     .min(8, { message: 'numero de telefono muy corto' })
     .max(15, { message: 'numero de telefono muy largo' }),
   correo: z.email({ message: 'correo electronico invalido' }).optional(),

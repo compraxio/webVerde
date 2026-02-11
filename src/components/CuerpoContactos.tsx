@@ -17,7 +17,7 @@ export function CuerpoContactos() {
       return res.data;
     },
   });
-
+  
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
       await axios.delete(`https://api-base-de-datos.vercel.app/contactos/${id}`);
