@@ -45,7 +45,7 @@ export default function Editar() {
       telefono: `${data.extension} ${data.numero}`,
       correo: data.correo,
     });
-    router.replace('/');
+    router.replace('/contactos');
   };
 
   return (

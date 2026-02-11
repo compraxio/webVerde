@@ -62,7 +62,7 @@ export default function Crear() {
       telefono: `${data.numero}`,
       correo: data.correo,
     });
-    router.replace('/');
+    router.replace('/contactos');
   };
 
   return (
@@ -116,16 +116,14 @@ export default function Crear() {
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
             htmlFor="Nombre"
-
           >
             Nombre de contacto
           </label>
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="text"
-            placeholder="María Fernanda González"
+            placeholder={isPending ? 'cargando...' : ''}
             id="Nombre"
-
             {...register('nombre')}
           />
           {errors.nombre?.message && <p>{errors.nombre.message}</p>}
@@ -141,7 +139,7 @@ export default function Crear() {
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="tel"
-              placeholder="300 123 4567"
+              placeholder={isPending ? 'cargando...' : ''}
               {...register('numero')}
             />
           </div>
@@ -157,7 +155,7 @@ export default function Crear() {
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="email"
-            placeholder="contacto@campoverde.eco"
+            placeholder={isPending ? 'cargando...' : ''}
             id="Correo"
             {...register('correo')}
           />
