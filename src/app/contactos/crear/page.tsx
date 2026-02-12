@@ -4,10 +4,12 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema } from '../../../schemas/contactSchema';
 import { z } from 'zod';
-import { useRouter} from 'next/navigation';
-import { useQueryClient, useMutation} from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 type Inputs = z.infer<typeof contactSchema>;
+import { toast } from 'sonner';
+
 
 type CrearContacto = {
   nombre: string;
@@ -15,10 +17,19 @@ type CrearContacto = {
   correo?: string;
 };
 
+type ApiError = {
+  response?: {
+    status: number;
+    data: {
+      success: boolean;
+      message: string;
+    };
+  };
+};
+
 export default function Editar() {
   const queryCliente = useQueryClient();
   const router = useRouter();
-
 
   const crearContacto = useMutation({
     mutationFn: async (data: CrearContacto) => {
@@ -27,6 +38,15 @@ export default function Editar() {
 
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
+      toast.success('contacto creado correctamente', { position: 'top-right' });
+      router.push('/contactos');
+    },
+    onError: (error: ApiError) => {
+      if (error.response?.status === 409) {
+        toast.error(error.response.data.message, { position: 'top-right' });
+      } else {
+        alert('Error al crear contacto');
+      }
     },
   });
 
@@ -45,7 +65,6 @@ export default function Editar() {
       telefono: `${data.extension} ${data.numero}`,
       correo: data.correo,
     });
-    router.replace('/contactos');
   };
 
   return (

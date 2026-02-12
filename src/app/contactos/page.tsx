@@ -45,28 +45,7 @@ export default function Contactos() {
             </tbody>
           </table>
         </div>
-        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Mostrando 1 a 4 de 24 contactos
-          </p>
-          <div className="flex items-center gap-2">
-            <button className="p-1 rounded border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
-              <span className="material-icons text-sm">chevron_left</span>
-            </button>
-            <button className="w-8 h-8 rounded bg-primary text-background-dark font-bold text-xs flex items-center justify-center">
-              1
-            </button>
-            <button className="w-8 h-8 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs flex items-center justify-center font-medium">
-              2
-            </button>
-            <button className="w-8 h-8 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs flex items-center justify-center font-medium">
-              3
-            </button>
-            <button className="p-1 rounded border border-slate-200 dark:border-slate-700 text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors">
-              <span className="material-icons text-sm">chevron_right</span>
-            </button>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

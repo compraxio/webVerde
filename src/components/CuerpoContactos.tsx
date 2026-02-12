@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { ContactosResponse } from '@/types/contactosType';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 export function CuerpoContactos() {
   const queryCliente = useQueryClient();
@@ -24,6 +25,7 @@ export function CuerpoContactos() {
     },
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
+      toast.success('contacto eliminado', {position: "top-right"})
     },
   });
 
@@ -31,19 +33,19 @@ export function CuerpoContactos() {
     return (
       <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
         <td className="px-6 py-4">
-          <Skeleton className="h-7.25 w-61.5" />
+          <Skeleton className="max-h-7.25 max-w-61.5" />
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="h-7.25 w-61.5" />
+          <Skeleton className="max-h-7.25 max-w-61.5" />
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="h-7.25 w-61.5" />
+          <Skeleton className="max-h-7.25 max-w-61.5" />
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 text-right">
-          <Skeleton className="h-6 w-6" />
+          <Skeleton className="max-h-6 max-w-6" />
         </td>
       </tr>
     );

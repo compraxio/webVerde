@@ -8,6 +8,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import type { ContactosEliminar } from '@/types/contactosType';
+import { toast } from 'sonner';
 
 type Inputs = z.infer<typeof contacEliminarSchema>;
 
@@ -24,6 +25,7 @@ export default function Crear() {
   const params = useParams();
   const id_contacto = params.id;
 
+
   const { data, isPending } = useQuery<ContactosEliminar>({
     queryKey: ['actualizarContacto', id_contacto],
     queryFn: async () => {
@@ -31,6 +33,7 @@ export default function Crear() {
       return res.data;
     },
     enabled: !!id_contacto,
+    staleTime: 1000 * 60 * 60,
   });
 
   const crearContacto = useMutation({
@@ -40,6 +43,8 @@ export default function Crear() {
 
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
+      toast.success('el contacto a sido editado correctamente', { position: 'top-right' });
+      router.replace('/contactos');
     },
   });
 
@@ -63,7 +68,8 @@ export default function Crear() {
       telefono: `${data.numero}`,
       correo: data.correo,
     });
-    router.replace('/contactos');
+
+
   };
 
   return (
