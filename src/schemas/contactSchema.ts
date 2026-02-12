@@ -37,3 +37,15 @@ export const contactSchema = z.object({
     .max(15, { message: 'numero de telefono muy largo' }),
   correo: z.email({ message: 'correo electronico invalido' }).optional(),
 });
+
+export const contacEliminarSchema = z.object({
+  nombre: z
+    .string()
+    .min(1, { message: 'El nombre es obligatorio' })
+    .max(100, { message: 'El nombre no puede exceder los 100 caracteres' }),
+  numero: z
+    .string()
+    .min(8, { message: 'numero de telefono muy corto' })
+    .max(15, { message: 'numero de telefono muy largo' }),
+  correo: z.email({ message: 'correo electronico invalido' }).optional(),
+});

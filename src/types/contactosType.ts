@@ -10,3 +10,9 @@ export interface ContactosResponse {
   data: Contacto[];
   message: string;
 }
+
+export interface ContactosEliminar {
+  success: boolean;
+  data: Contacto;
+  message: string;
+}
