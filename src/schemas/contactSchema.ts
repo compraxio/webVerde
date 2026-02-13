@@ -38,7 +38,7 @@ export const contactSchema = z.object({
   correo: z.email({ message: 'correo electronico invalido' }).optional(),
 });
 
-export const contacEliminarSchema = z.object({
+export const contacEditarSchema = z.object({
   nombre: z
     .string()
     .min(1, { message: 'El nombre es obligatorio' })

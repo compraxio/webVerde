@@ -3,6 +3,11 @@ export interface Municipios {
   data: Datum[];
   message: string;
 }
+export interface MunicipiosEditar {
+  success: boolean;
+  data: Datum;
+  message: string;
+}
 
 export interface Datum {
   cod_munic: number;

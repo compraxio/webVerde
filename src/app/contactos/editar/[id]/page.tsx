@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contacEliminarSchema } from '@/schemas/contactSchema';
+import { contacEditarSchema} from '@/schemas/contactSchema';
 import { z } from 'zod';
 import { useRouter, useParams } from 'next/navigation';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
@@ -10,7 +10,7 @@ import axios from 'axios';
 import type { ContactosEliminar } from '@/types/contactosType';
 import { toast } from 'sonner';
 
-type Inputs = z.infer<typeof contacEliminarSchema>;
+type Inputs = z.infer<typeof contacEditarSchema>;
 
 type CrearContacto = {
   nombre: string;
@@ -18,7 +18,7 @@ type CrearContacto = {
   correo?: string;
 };
 
-export default function Crear() {
+export default function EditarContacto() {
   const queryCliente = useQueryClient();
   const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function Crear() {
 
 
   const { data, isPending } = useQuery<ContactosEliminar>({
-    queryKey: ['actualizarContacto', id_contacto],
+    queryKey: ['actualizarContacto', id_contacto, 'contactos'],
     queryFn: async () => {
       const res = await axios(`https://api-base-de-datos.vercel.app/contactos/${id_contacto}`);
       return res.data;
@@ -54,7 +54,7 @@ export default function Crear() {
     formState: { errors },
     setValue,
   } = useForm<Inputs>({
-    resolver: zodResolver(contacEliminarSchema),
+    resolver: zodResolver(contacEditarSchema),
     mode: 'onChange',
   });
 
