@@ -3,7 +3,7 @@ import  Link from "next/link"
 export default function Municipio() {
   return (
     <div className="flex-1 flex overflow-hidden">
-      <aside className="w-64 h-full border-r border-slate-200 dark:border-zinc-800 p-6 shrink-0 bg-white/50 dark:bg-zinc-900/50">
+      <aside className="flex flex-col items-center h-full border-r border-slate-200 dark:border-zinc-800 p-6 shrink-0 bg-white/50 dark:bg-zinc-900/50">
         <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">
           Zonas
         </h3>
