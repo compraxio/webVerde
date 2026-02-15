@@ -2,19 +2,20 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MunicipiosSchema } from '../../../schemas/MunicipiosSchema';
+import { ProductoSchema } from '../../../../schemas/productosSchema';
 import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useParams, useRouter } from 'next/navigation';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'sonner';
-type Inputs = z.infer<typeof MunicipiosSchema>;
+import type { ProductosEditar } from '@/types/productosType';
 
-type CrearMunicipio = {
-  cod_munic: number;
-  departamento: string;
-  zona: string;
-  municipio: string;
+type Inputs = z.infer<typeof ProductoSchema>;
+
+type EditarProducto = {
+  nombre: string;
+  descripcion: string;
+  precio:number;
 };
 
 type ApiError = {
@@ -27,17 +28,31 @@ type ApiError = {
   };
 };
 
-export default function CrearMunicipio() {
+/**/
+export default function ActualizarProducto() {
   const queryCliente = useQueryClient();
+  const params = useParams();
   const router = useRouter();
 
-  const CrearMunicipio = useMutation({
-    mutationFn: async (data: CrearMunicipio) => {
-      await axios.post('https://api-base-de-datos.vercel.app/municipios', data);
+  const id_producto = params.id_producto;
+
+  const { data } = useQuery<ProductosEditar>({
+    queryKey: ['productos', id_producto],
+    queryFn: async () => {
+      const res = await axios(`https://api-base-de-datos.vercel.app/productos/${id_producto}`);
+      return res.data;
+    },
+    enabled: !!id_producto,
+    staleTime: 1000 * 60 * 60,
+  });
+
+  const ActualizarProducto = useMutation({
+    mutationFn: async (data: EditarProducto) => {
+      await axios.put(`https://api-base-de-datos.vercel.app/productos/${id_producto}`, data);
     },
 
     onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['municipios'] });
+      queryCliente.invalidateQueries({ queryKey: ['productos'] });
       router.back();
     },
     onError: (error: ApiError) => {
@@ -47,30 +62,32 @@ export default function CrearMunicipio() {
     },
   });
 
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    toast.promise(() => ActualizarProducto.mutateAsync({
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      precio: Number(data.precio)
+    }), {
+      loading: 'Actualizando producto...',
+      success: 'Producto Actualizado correctamente',
+    });
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<Inputs>({
-    resolver: zodResolver(MunicipiosSchema),
+    resolver: zodResolver(ProductoSchema),
     mode: 'onChange',
   });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.promise(
-      () =>
-        CrearMunicipio.mutateAsync({
-          cod_munic: Number(data.cod_munic),
-          departamento: data.departamento,
-          zona: data.zona,
-          municipio: data.municipio,
-        }),
-      {
-        loading: 'Creando producto...',
-        success: 'Producto creado correctamente',
-      },
-    );
-  };
+  setValue('nombre', `${ActualizarProducto.isPending ? "cargando...": data?.data.nombre}`);
+  setValue(
+    'descripcion',
+    `${ActualizarProducto.isPending ? 'cargando...' : data?.data.descripcion}`,
+  );
+  setValue('precio', `${ActualizarProducto.isPending ? 'cargando...' : data?.data.precio}`);
 
   return (
     <form
@@ -95,7 +112,7 @@ export default function CrearMunicipio() {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-bold">Municipio</h3>
+          <h3 className="text-lg font-bold">Producto</h3>
         </div>
         <button
           type="submit"
@@ -122,69 +139,51 @@ export default function CrearMunicipio() {
         <div className="flex flex-col gap-1.5">
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="cod_munic"
+            htmlFor="nombre"
           >
-            Codigo del Municipio
+            Nombre del producto
           </label>
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            type="number"
+            type="text"
             placeholder="13006"
-            id="cod_munic"
-            {...register('cod_munic')}
+            id="nombre"
+            {...register('nombre')}
           />
-          {errors.cod_munic?.message && <p>{errors.cod_munic.message}</p>}
+          {errors.nombre?.message && <p>{errors.nombre.message}</p>}
         </div>
         <div className="flex flex-col gap-1.5">
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="departamento"
+            htmlFor="descripcion"
           >
-            Departamento
+            Descripcion
           </label>
           <div className="flex gap-6 ">
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="text"
               placeholder="BOLIVAR"
-              {...register('departamento')}
+              {...register('descripcion')}
             />
           </div>
-          {errors.departamento?.message && <p>{errors.departamento.message}</p>}
+          {errors.descripcion?.message && <p>{errors.descripcion.message}</p>}
         </div>
         <div className="flex flex-col gap-1.5">
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="zona"
+            htmlFor="precio"
           >
-            zona
-          </label>
-          <select
-            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            id="zona"
-            {...register('zona')}
-          >
-            <option value="NORTE">NORTE</option>
-            <option value="SUR">SUR</option>
-            <option value="CENTRO">CENTRO</option>
-          </select>
-          {errors.zona?.message && <p>{errors.zona.message}</p>}
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label
-            className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="municipio"
-          >
-            municipio
+            Precio del producto
           </label>
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            type="text"
+            type="number"
             placeholder="ACHI"
-            id="municipio"
-            {...register('municipio')}
+            id="precio"
+            {...register('precio')}
           />
-          {errors.municipio?.message && <p>{errors.municipio.message}</p>}
+          {errors.precio?.message && <p>{errors.precio.message}</p>}
         </div>
       </div>
     </form>

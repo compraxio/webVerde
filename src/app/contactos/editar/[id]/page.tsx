@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { contacEditarSchema} from '@/schemas/contactSchema';
+import { contacEditarSchema } from '@/schemas/contactSchema';
 import { z } from 'zod';
 import { useRouter, useParams } from 'next/navigation';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
@@ -18,13 +18,22 @@ type CrearContacto = {
   correo?: string;
 };
 
+type ApiError = {
+  response?: {
+    status: number;
+    data: {
+      success: boolean;
+      message: string;
+    };
+  };
+};
+
 export default function EditarContacto() {
   const queryCliente = useQueryClient();
   const router = useRouter();
 
   const params = useParams();
   const id_contacto = params.id;
-
 
   const { data, isPending } = useQuery<ContactosEliminar>({
     queryKey: ['actualizarContacto', id_contacto, 'contactos'],
@@ -43,8 +52,13 @@ export default function EditarContacto() {
 
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      toast.success('el contacto a sido editado correctamente', { position: 'top-right' });
       router.replace('/contactos');
+    },
+
+    onError: (error: ApiError) => {
+      if (error?.response) {
+        toast.error(error.response.data.message);
+      }
     },
   });
 
@@ -63,13 +77,18 @@ export default function EditarContacto() {
   setValue('correo', `${data?.data.correo}`);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    crearContacto.mutate({
-      nombre: data.nombre,
-      telefono: `${data.numero}`,
-      correo: data.correo,
-    });
-
-
+    toast.promise(
+      () =>
+        crearContacto.mutateAsync({
+          nombre: data.nombre,
+          telefono: `${data.numero}`,
+          correo: data.correo,
+        }),
+      {
+        loading: 'Actualizando contacto...',
+        success: 'Contacto Actualizado correctamente',
+      },
+    );
   };
 
   return (

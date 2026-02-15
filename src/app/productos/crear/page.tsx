@@ -1,21 +1,29 @@
 'use client';
 
+import { useState } from 'react';
+import { FilePond, registerPlugin } from 'react-filepond';
+
+import 'filepond/dist/filepond.min.css';
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MunicipiosSchema } from '../../../schemas/MunicipiosSchema';
+import { ProductoSchema } from '../../../schemas/productosSchema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'sonner';
-type Inputs = z.infer<typeof MunicipiosSchema>;
 
-type CrearMunicipio = {
-  cod_munic: number;
-  departamento: string;
-  zona: string;
-  municipio: string;
-};
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
+
+type Inputs = z.infer<typeof ProductoSchema>;
+
+
 
 type ApiError = {
   response?: {
@@ -27,51 +35,52 @@ type ApiError = {
   };
 };
 
-export default function CrearMunicipio() {
+/**/
+export default function CrearProducto() {
+  const [files, setFiles] = useState<any[]>([]);
   const queryCliente = useQueryClient();
   const router = useRouter();
 
-  const CrearMunicipio = useMutation({
-    mutationFn: async (data: CrearMunicipio) => {
-      await axios.post('https://api-base-de-datos.vercel.app/municipios', data);
+  const CrearProducto = useMutation({
+    mutationFn: async (data: FormData) => {
+      await axios.post('https://api-base-de-datos.vercel.app/productos/', data);
     },
 
     onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['municipios'] });
+      queryCliente.invalidateQueries({ queryKey: ['productos'] });
       router.back();
     },
     onError: (error: ApiError) => {
       if (error?.response) {
         toast.error(error.response.data.message);
       }
-    },
+    }
+
   });
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const formData = new FormData();
+    formData.append('nombre', data.nombre);
+    formData.append('descripcion', data.descripcion);
+    formData.append('precio', String(data.precio));
+    if (files[0]?.file) {
+      formData.append('img_prodcto', files[0].file);
+    }
+    //*Ponerse atento a esto
+    toast.promise(() => CrearProducto.mutateAsync(formData), {
+      loading: 'Creando producto...',
+      success: 'Producto creado correctamente',
+    });
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(MunicipiosSchema),
+    resolver: zodResolver(ProductoSchema),
     mode: 'onChange',
   });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.promise(
-      () =>
-        CrearMunicipio.mutateAsync({
-          cod_munic: Number(data.cod_munic),
-          departamento: data.departamento,
-          zona: data.zona,
-          municipio: data.municipio,
-        }),
-      {
-        loading: 'Creando producto...',
-        success: 'Producto creado correctamente',
-      },
-    );
-  };
-
   return (
     <form
       className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm m-10 flex flex-col"
@@ -95,7 +104,7 @@ export default function CrearMunicipio() {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-bold">Municipio</h3>
+          <h3 className="text-lg font-bold">Producto</h3>
         </div>
         <button
           type="submit"
@@ -120,71 +129,65 @@ export default function CrearMunicipio() {
       </div>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-1.5">
-          <label
-            className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="cod_munic"
-          >
-            Codigo del Municipio
-          </label>
-          <input
-            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            type="number"
-            placeholder="13006"
-            id="cod_munic"
-            {...register('cod_munic')}
+          <FilePond
+            files={files}
+            onupdatefiles={setFiles}
+            name="files"
+            labelIdle='Arrastra tus imágenes o <span class="filepond--label-action">Selecciona</span>'
+            acceptedFileTypes={['image/png', 'image/jpeg']}
+            labelFileTypeNotAllowed="Archivo no válido"
+            fileValidateTypeLabelExpectedTypes="Se espera PNG o JPEG"
+            required
           />
-          {errors.cod_munic?.message && <p>{errors.cod_munic.message}</p>}
         </div>
         <div className="flex flex-col gap-1.5">
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="departamento"
+            htmlFor="nombre"
           >
-            Departamento
+            Nombre del producto
+          </label>
+          <input
+            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
+            type="text"
+            placeholder="13006"
+            id="nombre"
+            {...register('nombre')}
+          />
+          {errors.nombre?.message && <p>{errors.nombre.message}</p>}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label
+            className="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            htmlFor="descripcion"
+          >
+            Descripcion
           </label>
           <div className="flex gap-6 ">
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="text"
               placeholder="BOLIVAR"
-              {...register('departamento')}
+              {...register('descripcion')}
             />
           </div>
-          {errors.departamento?.message && <p>{errors.departamento.message}</p>}
+          {errors.descripcion?.message && <p>{errors.descripcion.message}</p>}
         </div>
         <div className="flex flex-col gap-1.5">
           <label
             className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="zona"
+            htmlFor="precio"
           >
-            zona
-          </label>
-          <select
-            className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            id="zona"
-            {...register('zona')}
-          >
-            <option value="NORTE">NORTE</option>
-            <option value="SUR">SUR</option>
-            <option value="CENTRO">CENTRO</option>
-          </select>
-          {errors.zona?.message && <p>{errors.zona.message}</p>}
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label
-            className="text-sm font-semibold text-slate-700 dark:text-slate-300"
-            htmlFor="municipio"
-          >
-            municipio
+            Precio del producto
           </label>
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-            type="text"
+            type="number"
             placeholder="ACHI"
-            id="municipio"
-            {...register('municipio')}
+            id="precio"
+            {...register('precio')}
           />
-          {errors.municipio?.message && <p>{errors.municipio.message}</p>}
+          {errors.precio?.message && <p>{errors.precio.message}</p>}
         </div>
       </div>
     </form>

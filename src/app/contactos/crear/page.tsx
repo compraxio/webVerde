@@ -38,14 +38,11 @@ export default function Editar() {
 
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      toast.success('contacto creado correctamente', { position: 'top-right' });
       router.push('/contactos');
     },
     onError: (error: ApiError) => {
       if (error.response?.status === 409) {
-        toast.error(error.response.data.message, { position: 'top-right' });
-      } else {
-        alert('Error al crear contacto');
+        toast.error(error.response.data.message);
       }
     },
   });
@@ -60,11 +57,18 @@ export default function Editar() {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    crearContacto.mutate({
-      nombre: data.nombre,
-      telefono: `${data.extension} ${data.numero}`,
-      correo: data.correo,
-    });
+    toast.promise(
+      () =>
+        crearContacto.mutateAsync({
+          nombre: data.nombre,
+          telefono: `${data.extension} ${data.numero}`,
+          correo: data.correo,
+        }),
+      {
+        loading: 'Creando contacto...',
+        success: 'Contacto creado correctamente',
+      },
+    );
   };
 
   return (

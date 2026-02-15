@@ -19,13 +19,22 @@ type EditarMunicipio = {
   municipio: string;
 };
 
+type ApiError = {
+  response?: {
+    status: number;
+    data: {
+      success: boolean;
+      message: string;
+    };
+  };
+};
+
 export default function EditarMunicipio() {
   const queryCliente = useQueryClient();
   const router = useRouter();
 
   const params = useParams();
   const cod_munic = params.cod_munic;
-
 
   const { data, isPending } = useQuery<MunicipiosEditar>({
     queryKey: ['actualizarContacto', cod_munic],
@@ -44,8 +53,13 @@ export default function EditarMunicipio() {
 
     onSuccess: () => {
       queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      toast.success('el municipio a sido editado correctamente', { position: 'top-right' });
       router.back();
+    },
+
+    onError: (error: ApiError) => {
+      if (error?.response) {
+        toast.error(error.response.data.message);
+      }
     },
   });
 
@@ -65,14 +79,19 @@ export default function EditarMunicipio() {
   setValue('municipio', `${data?.data.municipio}`);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    crearContacto.mutate({
-      cod_munic: Number(data.cod_munic),
-      departamento: data.departamento,
-      zona: data.zona,
-      municipio: data.municipio,
-    });
-
-
+    toast.promise(
+      () =>
+        crearContacto.mutateAsync({
+          cod_munic: Number(data.cod_munic),
+          departamento: data.departamento,
+          zona: data.zona,
+          municipio: data.municipio,
+        }),
+      {
+        loading: 'Actualizando municipio...',
+        success: 'Municipio Actualizado correctamente',
+      },
+    );
   };
 
   return (

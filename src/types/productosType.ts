@@ -4,6 +4,11 @@ export interface Productos {
   message: string;
 }
 
+export interface ProductosEditar {
+  success: boolean;
+  data: Datum;
+  message: string;
+}
 export interface Datum {
   id_prodcucto: number;
   nombre: string;

@@ -1,5 +1,5 @@
 import { CuerpoProductos } from "@/components/CuerpoProductos";
-
+import Link from "next/link";
 export default function Productos() {
   return (
     <div className="flex-1 overflow-auto custom-scrollbar p-6">
@@ -10,10 +10,10 @@ export default function Productos() {
             Gestiona el catálogo de productos de los negocios verdes
           </p>
         </div>
-        <button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all">
+        <Link href="/productos/crear" className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all">
           {/*<span className="material-symbols-outlined">add</span>*/}
           Agregar Producto
-        </button>
+        </Link>
       </div>
       <div className="flex items-center gap-2 mb-6">
         <h3 className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide text-sm">

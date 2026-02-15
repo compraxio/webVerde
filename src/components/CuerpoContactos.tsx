@@ -22,15 +22,15 @@ export function CuerpoContactos() {
     return (
       <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
         <td className="px-6 py-4">
-          <Skeleton className="max-h-7.25 max-w-61.5" />
+          cargando....
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="max-h-7.25 max-w-61.5" />
+          cargando....
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="max-h-7.25 max-w-61.5" />
+          cargando....
         </td>
 
         <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 text-right">
