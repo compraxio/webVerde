@@ -164,12 +164,13 @@ export default function ActualizarProducto() {
             Descripcion
           </label>
           <div className="flex gap-6 ">
-            <input
-              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
-              type="text"
+            <textarea
+              rows={3}
+              id="descripcion"
               placeholder="Papaya fresca rica en Vitamina C, A y Fibra."
               {...register('descripcion')}
-            />
+              className="w-full px-4 py-2.5 min-h-20 max-h-28 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
+            ></textarea>
           </div>
           {errors.descripcion?.message && <p>{errors.descripcion.message}</p>}
         </div>

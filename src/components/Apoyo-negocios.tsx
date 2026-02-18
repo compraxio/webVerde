@@ -4,7 +4,7 @@ import type { DirVerde } from '@/types/dir_verdeType';
 
 export async function ApoyoNegocios() {
   const response = await fetch('https://api-base-de-datos.vercel.app/dir_verde', {
-    next: { revalidate: 60 }
+    next: { revalidate: 30 }
   });
   if (!response.ok) {
     throw new Error('La peticion fallo');

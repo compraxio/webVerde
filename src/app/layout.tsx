@@ -188,30 +188,8 @@ export default function RootLayout({
             </div>
           </aside>
           <main className="lg:ml-64 min-h-screen da">
-            <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-200 dark:border-zinc-800">
-              <form className="relative flex-1 max-w-md hidden md:block">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    stroke="currentColor"
-                    className="size-5"
-                    strokeWidth={1.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607"
-                    />
-                  </svg>
-                </span>
-                <input
-                  className="w-full pl-10 pr-4 py-2 bg-white dark:bg-zinc-900 border dark:border-zinc-700 rounded-xl focus:outline-2 focus:outline-primary dark:text-white transition-colors font-medium"
-                  placeholder="Buscar negocios por nombre o categoría..."
-                  type="text"
-                />
-              </form>
+            <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b border-slate-200 dark:border-zinc-800">
+
               <div className="flex items-center gap-4">
                 <ModeToggle />
                 <button className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-slate-400 relative">

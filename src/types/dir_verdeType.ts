@@ -3,7 +3,11 @@ export interface DirVerde {
   data: Datum[];
   message: string;
 }
-
+export interface DirVerdeInfo {
+  success: boolean;
+  data: Datum;
+  message: string;
+}
 export interface Datum {
   id_negocio: number;
   negocio: string;

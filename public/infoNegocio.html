@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Business Profile - Negocios Verdes Cardique</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "forest": "#0d1b12",
+                        "leaf": "#4c9a66",
+                        "earth": "#7d6b5d"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-forest dark:text-white font-display">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside
+            class="w-64 bg-white dark:bg-background-dark border-r border-leaf/10 hidden lg:flex flex-col sticky top-0 h-screen">
+            <div class="p-6 flex flex-col gap-8 h-full">
+                <!-- Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-primary size-10 rounded-lg flex items-center justify-center text-forest">
+                        <span class="material-symbols-outlined">eco</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <h1 class="text-forest dark:text-white text-base font-bold leading-none">Negocios Verdes</h1>
+                        <p class="text-leaf text-xs font-normal">Cardique Admin</p>
+                    </div>
+                </div>
+                <!-- Nav -->
+                <nav class="flex flex-col gap-1 flex-1">
+                    <a class="flex items-center gap-3 px-3 py-2.5 text-leaf hover:bg-primary/10 rounded-lg transition-colors"
+                        href="#">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <span class="text-sm font-medium">Dashboard</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-forest dark:text-primary rounded-lg"
+                        href="#">
+                        <span class="material-symbols-outlined"
+                            style="font-variation-settings: 'FILL' 1">storefront</span>
+                        <span class="text-sm font-bold">Business Profile</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 text-leaf hover:bg-primary/10 rounded-lg transition-colors"
+                        href="#">
+                        <span class="material-symbols-outlined">verified_user</span>
+                        <span class="text-sm font-medium">Verification</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 text-leaf hover:bg-primary/10 rounded-lg transition-colors"
+                        href="#">
+                        <span class="material-symbols-outlined">assessment</span>
+                        <span class="text-sm font-medium">Impact Reports</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 text-leaf hover:bg-primary/10 rounded-lg transition-colors"
+                        href="#">
+                        <span class="material-symbols-outlined">settings</span>
+                        <span class="text-sm font-medium">Settings</span>
+                    </a>
+                </nav>
+                <!-- User Profile Summary -->
+                <div class="pt-6 border-t border-leaf/10">
+                    <div class="flex items-center gap-3">
+                        <div class="size-10 rounded-full bg-cover bg-center"
+                            data-alt="Administrator user profile picture"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmZR7-tz-fpxCSxSUAhm5zbmmsP5025FKDfAmVIBqFsCRFhGw0hL3tWOS10jcVl499g7XEedKMD1n-nUfAqVEiXyRJP-agsWXJxJO3-rDgnAk6W39qKs0olBVf8YrW65Y3D2ON2nfeDNWorOvG7GTncyOUlJzpkhDLwlrK4aegmWkgMbtgVW9zubig9SI8WBKVvamTNpEr-26VIGSieQn5WLXPl8N370wS0ei6nMRp_ElPOk0mJgIw1-MkAPGvxQcaia_nwP__r9FV')">
+                        </div>
+                        <div class="flex flex-col overflow-hidden">
+                            <p class="text-sm font-bold truncate">Juan Pérez</p>
+                            <p class="text-xs text-leaf truncate">Lead Auditor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0">
+            <!-- Header -->
+            <header
+                class="h-16 bg-white dark:bg-background-dark border-b border-leaf/10 px-8 flex items-center justify-between sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="text-leaf text-sm font-medium">Directory</span>
+                    <span class="material-symbols-outlined text-leaf text-xs">chevron_right</span>
+                    <span class="text-forest dark:text-white text-sm font-bold">Negocios Verdes Cardique</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden sm:block">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-leaf text-xl">search</span>
+                        <input
+                            class="pl-10 pr-4 py-2 bg-leaf/5 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50"
+                            placeholder="Search businesses..." type="text" />
+                    </div>
+                    <button class="size-10 flex items-center justify-center text-leaf hover:bg-leaf/5 rounded-lg">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button class="size-10 flex items-center justify-center text-leaf hover:bg-leaf/5 rounded-lg">
+                        <span class="material-symbols-outlined">help</span>
+                    </button>
+                </div>
+            </header>
+            <!-- Scrollable Content -->
+            <div class="p-8 @container max-w-[1400px] mx-auto w-full">
+                <!-- Business Profile Header Card -->
+                <div class="bg-white dark:bg-background-dark rounded-xl shadow-sm border border-leaf/10 p-6 mb-8">
+                    <div class="flex flex-col @[800px]:flex-row gap-8 items-start">
+                        <div class="relative">
+                            <div
+                                class="size-32 @[800px]:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 border-primary overflow-hidden">
+                                <img alt="Business Logo" class="object-contain p-4"
+                                    data-alt="Official logo of Negocios Verdes Cardique"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDriF1qcN9oLU-V75oDvgdkZNmY2eQpGkZoP0g9YBUbCGX_GNUuiXR_BMeoVw6gFbbCqq2Vx7qjARpkKq6An5aohVCzMkOlkPaTx0BxgS20MoafZAtZwIi3oJp5MomdGHVMUR9EYEvQPjp_t7oWflPvss0c4sW9RCukYE5-XqSC71hok6znno07UuwNrxhOaH_Ie1TwUT-1WWmROBQWUxzdW22FIZrIyEWQFleFJYs78o168fGbjI70XH8tyFDp38oGoQf3yWRb5yCn" />
+                            </div>
+                            <div
+                                class="absolute -bottom-2 -right-2 bg-primary text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                VERIFIED
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-2">
+                                <h1 class="text-3xl font-black tracking-tight text-forest dark:text-white">Negocios
+                                    Verdes Cardique</h1>
+                                <span
+                                    class="px-3 py-1 bg-leaf/10 text-leaf rounded text-xs font-bold uppercase tracking-wider">Active</span>
+                            </div>
+                            <p class="text-leaf text-lg mb-6 max-w-2xl font-medium">Sostenibilidad y conservación
+                                ambiental a través de procesos productivos responsables en la región de Bolívar.</p>
+                            <div class="flex flex-wrap gap-3">
+                                <a class="inline-flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
+                                    href="https://wa.me/1234567890">
+                                    <span class="material-symbols-outlined text-lg">chat</span>
+                                    WhatsApp
+                                </a>
+                                <a class="inline-flex items-center gap-2 bg-primary text-forest px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-lg">language</span>
+                                    Visit Website
+                                </a>
+                                <div class="flex items-center gap-2 ml-auto">
+                                    <button
+                                        class="size-10 flex items-center justify-center rounded-lg border border-leaf/20 text-leaf hover:bg-leaf/5"><span
+                                            class="material-symbols-outlined">share</span></button>
+                                    <button
+                                        class="size-10 flex items-center justify-center rounded-lg border border-leaf/20 text-leaf hover:bg-leaf/5"><span
+                                            class="material-symbols-outlined">edit</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grid Layout for Information Cards -->
+                <div class="grid grid-cols-1 @[1000px]:grid-cols-3 gap-6">
+                    <!-- General Identification -->
+                    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-leaf/10 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-primary">badge</span>
+                            <h3 class="font-bold text-lg">General Identification</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Business
+                                    ID</label>
+                                <p class="text-forest dark:text-white font-medium">NIT: 900.123.456-7</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Category</label>
+                                <p class="text-forest dark:text-white font-medium">Bienes y Servicios Sostenibles</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Group</label>
+                                <p class="text-forest dark:text-white font-medium">Agrosistemas Sostenibles</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Sub-group</label>
+                                <p class="text-forest dark:text-white font-medium">Producción Orgánica</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Operational Details -->
+                    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-leaf/10 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-primary">settings_applications</span>
+                            <h3 class="font-bold text-lg">Operational Details</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Activity</label>
+                                <p class="text-forest dark:text-white font-medium">Transformación de Cacao Orgánico</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Productive
+                                    Unit</label>
+                                <p class="text-forest dark:text-white font-medium">Unidad Tecnificada "La Esperanza"</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Development
+                                    Phase</label>
+                                <p class="text-forest dark:text-white font-medium">Escalamiento / Crecimiento</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Status
+                                    (Estado)</label>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <div class="size-2 rounded-full bg-primary animate-pulse"></div>
+                                    <p class="text-forest dark:text-white font-bold">ACTIVO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Location & Contact -->
+                    <div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-leaf/10 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-primary">location_on</span>
+                            <h3 class="font-bold text-lg">Location &amp; Contact</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Municipality /
+                                    Zone</label>
+                                <p class="text-forest dark:text-white font-medium">Turbaco, Bolívar | Zona Norte</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Address</label>
+                                <p class="text-forest dark:text-white font-medium">Kilómetro 5 Vía Principal, Finca 12
+                                </p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Legal
+                                    Representative</label>
+                                <p class="text-forest dark:text-white font-medium">Dra. María Fernanda Cardona</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf font-bold uppercase tracking-tighter">Email
+                                    Address</label>
+                                <p class="text-forest dark:text-white font-medium truncate">
+                                    contacto@negocioscardique.org</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Social Media & Web -->
+                    <div
+                        class="bg-white dark:bg-background-dark p-6 rounded-xl border border-leaf/10 shadow-sm @[1000px]:col-span-2">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">public</span>
+                                <h3 class="font-bold text-lg">Social &amp; Digital Presence</h3>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 @[600px]:grid-cols-4 gap-4">
+                            <a class="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-leaf/10 transition-colors group"
+                                href="#">
+                                <span
+                                    class="size-8 rounded flex items-center justify-center bg-red-600 text-white font-bold text-xs">YT</span>
+                                <span class="text-sm font-bold text-leaf group-hover:text-forest">YouTube</span>
+                            </a>
+                            <a class="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-leaf/10 transition-colors group"
+                                href="#">
+                                <span
+                                    class="size-8 rounded flex items-center justify-center bg-blue-700 text-white font-bold text-xs">FB</span>
+                                <span class="text-sm font-bold text-leaf group-hover:text-forest">Facebook</span>
+                            </a>
+                            <a class="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-leaf/10 transition-colors group"
+                                href="#">
+                                <span
+                                    class="size-8 rounded flex items-center justify-center bg-pink-600 text-white font-bold text-xs">IG</span>
+                                <span class="text-sm font-bold text-leaf group-hover:text-forest">Instagram</span>
+                            </a>
+                            <a class="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-leaf/10 transition-colors group"
+                                href="#">
+                                <span
+                                    class="size-8 rounded flex items-center justify-center bg-black text-white font-bold text-xs">TK</span>
+                                <span class="text-sm font-bold text-leaf group-hover:text-forest">TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Verification & Compliance -->
+                    <div
+                        class="bg-forest dark:bg-primary/5 p-6 rounded-xl shadow-sm @[1000px]:col-span-1 text-white dark:text-forest">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <h3 class="font-bold text-lg text-white dark:text-white">Compliance</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white/10 dark:bg-primary/10 p-4 rounded-lg">
+                                <label
+                                    class="text-[10px] text-primary font-black uppercase tracking-widest">Verification
+                                    Year</label>
+                                <p class="text-2xl font-black">2023</p>
+                            </div>
+                            <div>
+                                <label class="text-xs text-leaf/80 font-bold uppercase tracking-tighter">Authorized
+                                    By</label>
+                                <p class="font-bold text-white dark:text-white">Ministerio de Ambiente / CARDIQUE</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Description Block -->
+                    <div
+                        class="bg-white dark:bg-background-dark p-6 rounded-xl border border-leaf/10 shadow-sm @[1000px]:col-span-3">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-primary">description</span>
+                            <h3 class="font-bold text-lg">Business Description</h3>
+                        </div>
+                        <div class="prose prose-sm dark:prose-invert max-w-none text-leaf/80 leading-relaxed">
+                            Negocios Verdes Cardique se especializa en la implementación de modelos de economía circular
+                            dentro del sector agroindustrial de la costa caribe. Nuestro enfoque principal es la
+                            producción de cacao fino de aroma, garantizando que cada etapa del proceso, desde la siembra
+                            hasta el empaque final, cumpla con criterios rigurosos de sostenibilidad ambiental, justicia
+                            social y viabilidad económica. Colaboramos con más de 50 familias locales para promover el
+                            desarrollo rural y la protección del ecosistema seco tropical.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Information -->
+            <footer
+                class="mt-auto border-t border-leaf/10 p-8 flex flex-wrap justify-between items-center gap-4 bg-white dark:bg-background-dark">
+                <p class="text-xs text-leaf">© 2024 Negocios Verdes - Cardique Administrator System. All rights
+                    reserved.</p>
+                <div class="flex gap-4">
+                    <a class="text-xs font-bold text-leaf hover:text-primary" href="#">Terms of Use</a>
+                    <a class="text-xs font-bold text-leaf hover:text-primary" href="#">Data Privacy</a>
+                    <a class="text-xs font-bold text-leaf hover:text-primary" href="#">Support Center</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+
+</html>
