@@ -3,7 +3,7 @@ import { TargetaNegocios } from '@/components/targetaNegocios';
 import Link from 'next/link';
 import { MdAddBusiness } from 'react-icons/md';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="p-6 lg:p-10 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">

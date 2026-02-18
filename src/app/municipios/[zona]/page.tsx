@@ -1,6 +1,11 @@
-import { CuerpoMunicipios } from "@/components/CuerpoMunicipios";
-import  Link from "next/link"
-export default function Municipio() {
+import { CuerpoMunicipios } from '@/components/CuerpoMunicipios';
+import Link from 'next/link';
+export default async function Municipio({
+  params,
+}: Readonly<{ params: Promise<{ zona: string }> }>) {
+  const { zona } = await params;
+  const zonaMayus = zona.toUpperCase().trim();
+
   return (
     <div className="flex-1 flex overflow-hidden">
       <aside className="flex flex-col items-center h-full border-r border-slate-200 dark:border-zinc-800 p-6 shrink-0 bg-white/50 dark:bg-background-dark">
@@ -71,7 +76,7 @@ export default function Municipio() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
-              <CuerpoMunicipios />
+              <CuerpoMunicipios zona={zonaMayus} />
             </tbody>
           </table>
         </div>
