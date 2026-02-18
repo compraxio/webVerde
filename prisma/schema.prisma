@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model contactos {
+  id_contacto Int     @id @default(autoincrement())
+  nombre      String?
+  telefono    String? @unique
+  correo      String? @unique
+}
+
+model criterios {
+  id_criterio            Int                      @id
+  criterio               String
+  dir_verde_vs_criterios dir_verde_vs_criterios[]
+}
+
+model dir_verde {
+  id_negocio             Int                      @id @default(autoincrement())
+  negocio                String
+  id_grupo               Int
+  sub_categoria          String?
+  descripcion            String?
+  actividad              String
+  unidad_productiva      String?
+  zona                   String
+  municipio              String
+  direccion              String
+  representante          String?
+  whatsup                String?
+  logo                   String?
+  url_youtube            String?
+  url_facebook           String?
+  url_instagram          String?
+  url_tiktok             String?
+  correo                 String                   @unique
+  url_negocio            String?
+  pos_gps                String?
+  id_fase                Int?
+  estado                 String?
+  a_o_verificacion       Int?                     @map("año_verificacion")
+  autorizado_por         String?
+  grupos                 grupos                   @relation(fields: [id_grupo], references: [id_grupo])
+  dir_verde_vs_criterios dir_verde_vs_criterios[]
+  fotografias            fotografias[]
+}
+
+model dir_verde_vs_criterios {
+  id_negocio  Int
+  id_criterio Int
+  criterios   criterios @relation(fields: [id_criterio], references: [id_criterio])
+  dir_verde   dir_verde @relation(fields: [id_negocio], references: [id_negocio])
+
+  @@id([id_negocio, id_criterio])
+}
+
+model estados {
+  estado     String  @id
+  des_estado String?
+}
+
+model eventos {
+  id_evento        Int     @id @default(autoincrement())
+  evento           String
+  direccion        String
+  fecha            String?
+  hora             String?
+  link             String?
+  temas            String?
+  tipo_evento      String?
+  estado           String
+  Img_Presentacion String
+}
+
+model fases {
+  id_fase   Int     @id @default(autoincrement())
+  des_fase  String
+  logo_fase String
+  id_fasex  String?
+}
+
+model fotografias {
+  id_foto    Int       @id @default(autoincrement())
+  id_negocio Int
+  url_foto   String?
+  dir_verde  dir_verde @relation(fields: [id_negocio], references: [id_negocio])
+}
+
+model grupos {
+  id_grupo   Int         @id @default(autoincrement())
+  actividad  String
+  logo_grupo String?
+  dir_verde  dir_verde[]
+}
+
+model municipios {
+  cod_munic    Int    @id @default(autoincrement())
+  departamento String
+  zona         String
+  municipio    String
+}
+
+model productos {
+  id_prodcucto Int     @id @default(autoincrement())
+  nombre       String?
+  descripcion  String?
+  img_prodcto  String?
+  precio       Int?
+}
+
+model videos {
+  id_video  Int     @id @default(autoincrement())
+  url_video String?
+}
