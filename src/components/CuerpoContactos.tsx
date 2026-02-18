@@ -1,47 +1,13 @@
-'use client';
+import prisma from '@/lib/prisma';
 
-import { Skeleton } from './ui/skeleton';
 import Link from 'next/link';
 
-import type { ContactosResponse } from '@/types/contactosType';
-import { useQuery} from '@tanstack/react-query';
-import axios from 'axios';
+export async function CuerpoContactos() {
+  const contactos = await prisma.contactos.findMany()
 
-export function CuerpoContactos() {
-
-  const { data, isPending } = useQuery<ContactosResponse>({
-    queryKey: ['contactos'],
-    queryFn: async () => {
-      const res = await axios('https://api-base-de-datos.vercel.app/contactos/');
-      return res.data;
-    },
-  });
-
-
-  if (isPending) {
-    return (
-      <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-        <td className="px-6 py-4">
-          <Skeleton className="min-h-6 min-w-6" />
-        </td>
-
-        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="min-h-6 min-w-6" />
-        </td>
-
-        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
-          <Skeleton className="min-h-6 min-w-6" />
-        </td>
-
-        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 text-right">
-          <Skeleton className="min-h-6 min-w-6" />
-        </td>
-      </tr>
-    );
-  }
   return (
     <>
-      {data?.data.map((c) => (
+      {contactos.map((c) => (
         <tr
           className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
           key={c.id_contacto}

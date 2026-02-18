@@ -1,40 +1,20 @@
-'use client';
+import prisma from '@/lib/prisma';
 
-import { Skeleton } from "./ui/skeleton";
-import type { Productos } from '@/types/productosType';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
 import Link from 'next/link';
 
-export function CuerpoProductos() {
-  const { data, isPending } = useQuery<Productos>({
-    queryKey: ['productos'],
-    queryFn: async () => {
-      const res = await axios('https://api-base-de-datos.vercel.app/productos/');
-      return res.data;
-    },
-  });
+export async function CuerpoProductos() {
+      const productos = await prisma.productos.findMany();
 
-
-  if (isPending) {
-    return (
-      <>
-        <Skeleton className="rounded-2xl min-h-73.25 min-w-73"></Skeleton>
-        <Skeleton className="rounded-2xl min-h-73.25 min-w-73"></Skeleton>
-        <Skeleton className="rounded-2xl min-h-73.25 min-w-73"></Skeleton>
-        <Skeleton className="rounded-2xl min-h-73.25 min-w-73"></Skeleton>
-      </>
-    );
-  }
   return (
     <>
-      {data?.data.map((p) => (
+      {productos.map((p) => (
         <div
           className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-all hover:shadow-md group"
           key={p.id_prodcucto}
         >
           <div className="bg-slate-100 dark:bg-zinc-800 flex items-center justify-center relative overflow-hidden">
-            <img src={p.img_prodcto} alt={p.nombre} className="bg-cover" />
+            <img src={p.img_prodcto ?? ''} alt={p.nombre ?? ''} className="bg-cover" />
           </div>
           <div className="p-4">
             <h4 className="font-bold text-slate-900 dark:text-white truncate">{p.nombre}</h4>

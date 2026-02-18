@@ -1,8 +1,6 @@
 'use client';
-import type { DirVerde } from '@/types/dir_verdeType';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { Skeleton } from './ui/skeleton';
-import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
 import { toast } from 'sonner';
 import { MdEditNote } from 'react-icons/md';
 
@@ -10,54 +8,17 @@ import Image from 'next/image';
 import errorImg from './ui/error.png';
 import Link from 'next/link';
 
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
+import { Prisma } from '../../generated/prisma/client';
+import { EliminarNegocio } from '@/actions/eliminarNegocio';
 
-export function CuerpoNegocio() {
-  const queryClient = useQueryClient();
+type negocios = Prisma.dir_verdeGetPayload<object>;
 
-  const { data, isPending } = useQuery<DirVerde>({
-    queryKey: ['negocios'],
-    queryFn: async () => {
-      const res = await axios('https://api-base-de-datos.vercel.app/dir_verde/');
-      return res.data;
-    },
-  });
-
-  const deleteMutacion = useMutation({
-    mutationFn: async (id: number) => {
-      await axios.delete(`https://api-base-de-datos.vercel.app/dir_verde/${id}`);
-    },
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['negocios'] });
-    },
-
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
-
-  if (isPending) {
-    return (
-      <>
-        <Skeleton className="rounded-2xl min-h-100 min-w-94.5"></Skeleton>
-      </>
-    );
-  }
+export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) {
+  const router = useRouter();
 
   return (
     <>
-      {data?.data.map((n) => (
+      {negocios.map((n) => (
         <div
           key={n.id_negocio}
           className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300"
@@ -70,7 +31,7 @@ export function CuerpoNegocio() {
               height="1508"
               width="1920"
             />
-            {n?.ano_verificacion ? (
+            {n.a_o_verificacion ? (
               <div className="absolute top-4 left-4">
                 <span className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
                   <svg
@@ -135,9 +96,14 @@ export function CuerpoNegocio() {
                 <button
                   className="p-2 text-slate-400 hover:text-red-500 transition-colors"
                   onClick={() => {
-                    toast.promise(() => deleteMutacion.mutateAsync(n.id_negocio), {
+                    toast.promise(EliminarNegocio(n.id_negocio, n.logo ?? ''), {
                       loading: 'Eliminando negocio...',
-                      success: 'negocio eliminado',
+                      success: (res) => {
+                        if (!res.ok) throw new Error(res.message);
+                        router.refresh();
+                        return 'Negocio eliminado';
+                      },
+                      error: (err) => err.message,
                     });
                   }}
                 >

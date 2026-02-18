@@ -1,6 +1,8 @@
 import { CuerpoProductos } from "@/components/CuerpoProductos";
 import Link from "next/link";
+
 export default function Productos() {
+
   return (
     <div className="flex-1 overflow-auto custom-scrollbar p-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

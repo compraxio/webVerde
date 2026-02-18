@@ -1,61 +1,31 @@
 'use client';
+import { useRouter } from 'next/navigation';
 
-import type { Grupos } from '@/types/gruposType';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { Skeleton } from './ui/skeleton';
-import axios from 'axios';
+import { Prisma } from '../../generated/prisma/client';
+type grupo = Prisma.gruposGetPayload<{
+  include: {
+    dir_verde: true
+  }
+}>
+
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { EliminarGrupo } from '@/actions/eliminarGrupo';
 
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
 
-export function CuerpoGrupos() {
-  const queryClient = useQueryClient();
+export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
+const router = useRouter();
 
-  const { data, isPending } = useQuery<Grupos>({
-    queryKey: ['grupos'],
-    queryFn: async () => {
-      const res = await axios('https://api-base-de-datos.vercel.app/grupos/');
-      return res.data;
-    },
-  });
 
-  const deleteMutacion = useMutation({
-    mutationFn: async (id: number) => {
-      await axios.delete(`https://api-base-de-datos.vercel.app/grupos/${id}`);
-    },
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['grupos'] });
-    },
-
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message)
-      }
-    }
-  });
-
-  if (isPending) {
-    return <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25"></Skeleton>;
-  }
   return (
     <>
-      {data?.data.map((g) => (
+      {grupos.map((g) => (
         <div
           className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-5 flex items-center gap-6 hover:shadow-md transition-all group"
           key={g.id_grupo}
         >
           <img
-            src={g.logo_grupo}
+            src={g.logo_grupo ?? ''}
             alt={g.actividad}
             className="bg-cover w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"
           />
@@ -69,7 +39,7 @@ export function CuerpoGrupos() {
           </div>
           <div className="flex items-center gap-6">
             <span className="block max-md:hidden text-sm font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full whitespace-nowrap">
-              Negocios ({g.negocio.length})
+              Negocios ({g.dir_verde.length})
             </span>
             <div className="flex items-center gap-1">
               <Link
@@ -94,9 +64,14 @@ export function CuerpoGrupos() {
               <button
                 className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
                 onClick={() => {
-                  toast.promise(() => deleteMutacion.mutateAsync(g.id_grupo), {
+                  toast.promise(EliminarGrupo(g.id_grupo, g.logo_grupo ?? ""), {
                     loading: 'Eliminando grupo...',
-                    success: 'grupo eliminado',
+                    success: (res) => {
+                      if (!res.ok) throw new Error(res.message);
+                      router.refresh();
+                      return 'Grupo eliminado';
+                    },
+                    error: (err) => err.message,
                   });
                 }}
               >

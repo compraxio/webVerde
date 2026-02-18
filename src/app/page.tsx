@@ -2,8 +2,10 @@ import { CuerpoNegocio } from '@/components/CuerpoNegocio';
 import { TargetaNegocios } from '@/components/targetaNegocios';
 import Link from 'next/link';
 import { MdAddBusiness } from 'react-icons/md';
+import prisma from '@/lib/prisma';
 
 export default async function Home() {
+  const negocios = await prisma.dir_verde.findMany()
   return (
     <div className="p-6 lg:p-10 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
@@ -35,7 +37,7 @@ export default async function Home() {
         </button>
       </div> */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <CuerpoNegocio />
+        <CuerpoNegocio negocios={ negocios } />
         <Link
           href="/crearNegocio"
           className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"

@@ -1,6 +1,8 @@
-'use client';
-import { useParams } from 'next/navigation';
-import { CiCircleCheck, CiEdit, CiLocationOn } from 'react-icons/ci';
+import prisma from '@/lib/prisma';
+import Image from 'next/image';
+import errorImg from '../../../components/ui/error.png';
+
+import { CiCircleCheck, CiLocationOn } from 'react-icons/ci';
 import {
   MdOutlineChat,
   MdLanguage,
@@ -8,35 +10,33 @@ import {
   MdOutlinePublic,
   MdOutlineDescription,
 } from 'react-icons/md';
-import { IoMdShare } from 'react-icons/io';
 import { FaRegIdBadge } from 'react-icons/fa';
 import { GoVerified } from 'react-icons/go';
+import { BotonesFormulario } from '@/components/botones/BotonesFormulario';
 
-import { useQuery } from '@tanstack/react-query';
-import type { DirVerdeInfo } from '@/types/dir_verdeType';
-import axios from 'axios';
-import { toast } from 'sonner';
-export default function usePerfilNegocio() {
-  const params = useParams();
-  const id_negocio = params.id_negocio;
-
-  const { data, isPending } = useQuery<DirVerdeInfo>({
-    queryKey: ['negocios', id_negocio],
-    queryFn: async () => {
-      const res = await axios(`https://api-base-de-datos.vercel.app/dir_verde/${id_negocio}`);
-      return res.data;
+export default async function usePerfilNegocio({
+  params,
+}: Readonly<{ params: Promise<{ id_negocio: string }> }>) {
+  const { id_negocio } = await params;
+  const negocio = await prisma.dir_verde.findFirst({
+    where: {
+      id_negocio: Number(id_negocio),
     },
-    enabled: !!id_negocio,
+    include: {
+      grupos: true,
+    },
   });
+  // const params = useParams();
+  // const id_negocio = params.id_negocio;
 
-  const copiarTexto = async () => {
-    if (data?.data.url_negocio) {
-      await navigator.clipboard.writeText(data?.data.url_negocio);
-    } else {
-      toast.info('Este negocio no tiene pagina web');
-    }
-    toast.success('Pagina web del nogico copiada');
-  };
+  // const { data, isPending } = useQuery<DirVerdeInfo>({
+  //   queryKey: ['negocios', id_negocio],
+  //   queryFn: async () => {
+  //     const res = await axios(`https://api-base-de-datos.vercel.app/dir_verde/${id_negocio}`);
+  //     return res.data;
+  //   },
+  //   enabled: !!id_negocio,
+  // });
 
   const fase = (id_fase: number) => {
     if (id_fase === 1) {
@@ -61,16 +61,21 @@ export default function usePerfilNegocio() {
         <div className="flex flex-col @[800px]:flex-row gap-8 items-start">
           <div className="relative">
             <div
-              className={`size-32 @[800px]:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${data?.data.ano_verificacion ? 'border-primary' : 'border-red-500'} overflow-hidden`}
+              className={`size-32 @[800px]:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${negocio?.a_o_verificacion ? 'border-primary' : 'border-red-500'} overflow-hidden`}
             >
-              {/* <img
-                alt={data?.data.negocio}
-                className="object-contain p-4"
-                data-alt={data?.data.actividad}
-                src={data?.data.logo ?? ''}
-              /> */}
+              {negocio?.logo ? (
+                <img alt={negocio?.negocio} className="object-contain p-4" src={negocio.logo} />
+              ) : (
+                <Image
+                  alt="Honey production"
+                  className="object-contain p-4 bg-white "
+                  src={negocio?.logo ?? errorImg}
+                  height="1508"
+                  width="1920"
+                />
+              )}
             </div>
-            {data?.data.ano_verificacion ? (
+            {negocio?.a_o_verificacion ? (
               <div className="absolute -bottom-2 -right-2 bg-primary text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
                 <CiCircleCheck size={15} />
                 VERIFICADO
@@ -84,18 +89,18 @@ export default function usePerfilNegocio() {
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <h1 className="text-3xl font-black tracking-tight text-forest dark:text-white">
-                {data?.data.negocio}
+                {negocio?.negocio}
               </h1>
               <span className="px-3 py-1 bg-amber-50/10 text-leaf rounded text-xs font-bold uppercase tracking-wider">
-                {data?.data.estado ?? 'No hay estado'}
+                {negocio?.estado ?? 'No hay estado'}
               </span>
             </div>
-            <p className="text-leaf text-lg mb-6 max-w-2xl font-medium">{data?.data.actividad}</p>
+            <p className="text-leaf text-lg mb-6 max-w-2xl font-medium">{negocio?.actividad}</p>
             <div className="flex flex-wrap gap-3">
-              {data?.data.whatsup && (
+              {negocio?.whatsup && (
                 <a
                   className="inline-flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
-                  href={`https://wa.me/${data?.data.whatsup}`}
+                  href={`https://wa.me/${negocio?.whatsup}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -103,10 +108,10 @@ export default function usePerfilNegocio() {
                   WhatsApp
                 </a>
               )}
-              {data?.data.url_negocio && (
+              {negocio?.url_negocio && (
                 <a
                   className="inline-flex items-center gap-2 bg-primary text-forest px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
-                  href={data?.data.url_negocio}
+                  href={negocio?.url_negocio}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -114,7 +119,7 @@ export default function usePerfilNegocio() {
                   Visitar Sitio Web
                 </a>
               )}
-              <div className="flex items-center gap-2 ml-auto">
+              {/* <div className="flex items-center gap-2 ml-auto">
                 <button
                   onClick={() => copiarTexto()}
                   className="size-10 flex items-center justify-center rounded-lg border border-leaf/20 text-leaf hover:bg-leaf/5"
@@ -124,7 +129,8 @@ export default function usePerfilNegocio() {
                 <button className="size-10 flex items-center justify-center rounded-lg border border-leaf/20 text-leaf hover:bg-leaf/5">
                   <CiEdit size={23} />
                 </button>
-              </div>
+              </div> */}
+              {negocio?.url_negocio && <BotonesFormulario url={negocio?.url_negocio ?? ''} />}
             </div>
           </div>
         </div>
@@ -138,7 +144,7 @@ export default function usePerfilNegocio() {
             <h2 className="font-bold text-lg">Descripción del Negocio</h2>
           </div>
           <div className="prose prose-sm dark:prose-invert max-w-none text-leaf/80 leading-relaxed">
-            {data?.data.descripcion}
+            {negocio?.descripcion}
           </div>
         </div>
         <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm">
@@ -148,20 +154,18 @@ export default function usePerfilNegocio() {
             <h2 className="font-bold text-lg">Identificación General</h2>
           </div>
           <div className="space-y-4">
-            {data?.data.sub_categoria && (
+            {negocio?.sub_categoria && (
               <div>
                 <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                   Categoría
                 </h3>
-                <p className="text-forest dark:text-white font-medium">
-                  {data?.data.sub_categoria}
-                </p>
+                <p className="text-forest dark:text-white font-medium">{negocio?.sub_categoria}</p>
               </div>
             )}
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Grupo</h3>
               <p className="text-forest dark:text-white font-medium">
-                {data?.data.grupo.actividad.split(':')[0]}
+                {negocio?.grupos.actividad.split(':')[0]}
               </p>
             </div>
           </div>
@@ -174,14 +178,14 @@ export default function usePerfilNegocio() {
           <div className="space-y-4">
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Actividad</h3>
-              <p className="text-forest dark:text-white font-medium">{data?.data.actividad}</p>
+              <p className="text-forest dark:text-white font-medium">{negocio?.actividad}</p>
             </div>
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Unidad Productiva
               </h3>
               <p className="text-forest dark:text-white font-medium">
-                {data?.data.unidad_productiva}
+                {negocio?.unidad_productiva}
               </p>
             </div>
             <div>
@@ -189,16 +193,16 @@ export default function usePerfilNegocio() {
                 Fase de Desarrollo
               </h3>
               <p className="text-forest dark:text-white font-medium">
-                {data?.data.id_fase && fase(data?.data.id_fase)}
+                {negocio?.id_fase && fase(negocio?.id_fase)}
               </p>
             </div>
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Estado</h3>
               <div className="flex items-center gap-2 mt-1">
                 <div
-                  className={`size-2 rounded-full ${data?.data.estado === 'Activo' ? 'bg-primary' : 'bg-red-500'} animate-pulse`}
+                  className={`size-2 rounded-full ${negocio?.estado === 'Activo' ? 'bg-primary' : 'bg-red-500'} animate-pulse`}
                 ></div>
-                <p className="text-forest dark:text-white font-bold">{data?.data.estado}</p>
+                <p className="text-forest dark:text-white font-bold">{negocio?.estado}</p>
               </div>
             </div>
           </div>
@@ -214,26 +218,24 @@ export default function usePerfilNegocio() {
                 Municipio / Zona
               </h3>
               <p className="text-forest dark:text-white font-medium">
-                {`${data?.data.municipio} | ${data?.data.zona}`}
+                {`${negocio?.municipio} | ${negocio?.zona}`}
               </p>
             </div>
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Dirección</h3>
-              <p className="text-forest dark:text-white font-medium">{data?.data.direccion}</p>
+              <p className="text-forest dark:text-white font-medium">{negocio?.direccion}</p>
             </div>
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Representante Legal
               </h3>
-              <p className="text-forest dark:text-white font-medium">{data?.data.representante}</p>
+              <p className="text-forest dark:text-white font-medium">{negocio?.representante}</p>
             </div>
             <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Correo Electrónico
               </h3>
-              <p className="text-forest dark:text-white font-medium truncate">
-                {data?.data.correo}
-              </p>
+              <p className="text-forest dark:text-white font-medium truncate">{negocio?.correo}</p>
             </div>
           </div>
         </div>
@@ -245,10 +247,10 @@ export default function usePerfilNegocio() {
             </div>
           </div>
           <div className="grid grid-cols-2 @[600px]:grid-cols-4 gap-4">
-            {data?.data.url_youtube && (
+            {negocio?.url_youtube && (
               <a
                 className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={data?.data.url_youtube}
+                href={negocio?.url_youtube}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -258,10 +260,10 @@ export default function usePerfilNegocio() {
                 <span className="text-sm font-bold text-leaf group-hover:text-forest">YouTube</span>
               </a>
             )}
-            {data?.data.url_facebook && (
+            {negocio?.url_facebook && (
               <a
                 className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={data?.data.url_facebook}
+                href={negocio?.url_facebook}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -273,10 +275,10 @@ export default function usePerfilNegocio() {
                 </span>
               </a>
             )}
-            {data?.data.url_instagram && (
+            {negocio?.url_instagram && (
               <a
                 className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={data?.data.url_instagram}
+                href={negocio?.url_instagram}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -288,10 +290,10 @@ export default function usePerfilNegocio() {
                 </span>
               </a>
             )}
-            {data?.data.url_tiktok && (
+            {negocio?.url_tiktok && (
               <a
                 className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={data?.data.url_tiktok}
+                href={negocio?.url_tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -303,7 +305,7 @@ export default function usePerfilNegocio() {
             )}
           </div>
         </div>
-        {data?.data.ano_verificacion && (
+        {negocio?.a_o_verificacion && (
           <div className="bg-forest dark:bg-primary/5 bg-primary p-6 rounded-xl shadow-sm @[1000px]:col-span-1 text-white dark:text-forest">
             <div className="flex items-center gap-3 mb-6">
               <GoVerified size={22} />
@@ -314,13 +316,13 @@ export default function usePerfilNegocio() {
                 <h3 className="text-[10px] dark:text-primary text-white font-black uppercase tracking-widest">
                   Año de Verificación
                 </h3>
-                <p className="text-2xl font-black">{data.data.ano_verificacion}</p>
+                <p className="text-2xl font-black">{negocio?.a_o_verificacion}</p>
               </div>
               <div>
                 <h3 className="text-xs text-leaf/80 font-bold uppercase tracking-tighter">
                   Autorizado Por
                 </h3>
-                <p className="font-bold text-white dark:text-white">{data.data.autorizado_por}</p>
+                <p className="font-bold text-white dark:text-white">{negocio?.autorizado_por}</p>
               </div>
             </div>
           </div>
