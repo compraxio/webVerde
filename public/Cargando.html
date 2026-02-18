@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        .animate-pulse-soft {
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        .bg-mesh {
+            background-color: #f6f8f6;
+            background-image: radial-gradient(at 50% 50%, rgba(19, 236, 91, 0.05) 0%, transparent 50%);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased">
+    <div
+        class="relative flex min-h-screen w-full flex-col items-center justify-center bg-background-light dark:bg-background-dark bg-mesh overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="layout-container flex flex-col items-center max-w-[480px] w-full px-6 z-10">
+            <!-- Logo Section -->
+            <div class="mb-12 flex flex-col items-center">
+                <div
+                    class="w-24 h-24 bg-white dark:bg-zinc-900 rounded-3xl shadow-xl shadow-primary/10 flex items-center justify-center mb-6 animate-pulse-soft border border-primary/10">
+                    <span class="material-symbols-outlined text-primary text-6xl select-none"
+                        style="font-variation-settings: 'FILL' 1">
+                        eco
+                    </span>
+                </div>
+                <h1 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100 tracking-tight">
+                    Negocios <span class="text-primary">Verdes</span>
+                </h1>
+            </div>
+            <!-- Loading Status Card -->
+            <div
+                class="w-full bg-white/70 dark:bg-zinc-900/50 backdrop-blur-md p-8 rounded-2xl border border-white dark:border-zinc-800 shadow-sm">
+                <div class="flex flex-col gap-5">
+                    <!-- Progress Header -->
+                    <div class="flex items-end justify-between">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-primary">Sistema</span>
+                            <p class="text-zinc-800 dark:text-zinc-200 text-lg font-medium leading-tight">Preparando tu
+                                experiencia...</p>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-zinc-900 dark:text-white text-2xl font-bold tracking-tighter">65</span>
+                            <span class="text-zinc-500 dark:text-zinc-400 text-sm font-medium">%</span>
+                        </div>
+                    </div>
+                    <!-- Progress Bar Container -->
+                    <div class="relative h-3 w-full bg-zinc-200/50 dark:bg-zinc-800 rounded-full overflow-hidden">
+                        <!-- Animated Shimmer Fill -->
+                        <div class="absolute top-0 left-0 h-full bg-primary rounded-full shadow-[0_0_15px_rgba(19,236,91,0.4)]"
+                            style="width: 65%;">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
+                                style="animation: shimmer 2s infinite;"></div>
+                        </div>
+                    </div>
+                    <!-- Status Detail -->
+                    <div class="flex items-center gap-2 px-1">
+                        <div class="flex gap-1">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
+                        </div>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Sincronizando negocios
+                            sostenibles...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Content -->
+            <div class="mt-12 flex flex-col items-center gap-6 text-center">
+                <div class="flex flex-col gap-2">
+                    <p class="text-zinc-400 dark:text-zinc-500 text-xs font-semibold uppercase tracking-[0.2em]">
+                        Innovación para un futuro sostenible</p>
+                </div>
+                <!-- Quote or Tip -->
+                <div class="max-w-[280px] p-4 rounded-xl border border-primary/10 bg-primary/5">
+                    <p class="text-zinc-600 dark:text-zinc-300 text-xs leading-relaxed italic">
+                        "El crecimiento verde no es solo una opción, es el motor de la nueva economía global."
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Logo/Branding -->
+        <div class="absolute bottom-10 flex items-center gap-2 opacity-40">
+            <span class="material-symbols-outlined text-zinc-400 text-sm">verified_user</span>
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Powered by EcoCore v2.4</span>
+        </div>
+    </div>
+    <!-- Background Images for context and depth -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none opacity-[0.03] z-0">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-center bg-no-repeat bg-cover"
+            data-alt="Abstract soft green organic patterns for background"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlYwuEWbeojyFKMg-wy9nq8_EHj5u8l5Z2EdhpFm-wb8ftEyL4bLiZ-WxUOvbYnhImMXDwm2SAYRb5tzvij_RQ9gztwoapnm2JYHaSFRm1SmoyQUKMgXiYeekIZEQbY65mF5Jf5tLC6s2oQ-izOGs1DA1_XgFBP8iYgAisbh0WYN6xY69Z-Srxj9bTOmIbttp6leNEFWuWDNevzX1AMHk8knr_0tVsVygTUVxK7iLQDs7y-qw8cwWL7IiEW4sOhmtx0D06O3cS506T");'>
+        </div>
+    </div>
+    <style>
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(200%);
+            }
+        }
+    </style>
+</body>
+
+</html>
