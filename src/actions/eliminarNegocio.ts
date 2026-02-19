@@ -12,7 +12,6 @@ export async function EliminarNegocio(id_negocio: number, url: string) {
     if (url) await del(url);
     return { ok: true };
   } catch (error) {
-    console.log(error);
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2003') {
         return {

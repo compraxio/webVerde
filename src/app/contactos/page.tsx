@@ -2,7 +2,7 @@
 import { CuerpoContactos } from '@/components/CuerpoContactos';
 import Link from 'next/link';
 
-export default async function Contactos() {
+export default function Contactos() {
   return (
     <div className="flex-1 overflow-y-auto p-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

@@ -10,7 +10,7 @@ type grupo = Prisma.gruposGetPayload<{
 
 import { toast } from 'sonner';
 import Link from 'next/link';
-import { EliminarGrupo } from '@/actions/eliminarGrupo';
+import { EliminarGrupo } from '@/actions/Grupos';
 
 
 export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {

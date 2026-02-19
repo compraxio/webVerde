@@ -5,73 +5,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { GrupoEditarSchema } from '../../../../schemas/GrupoSchema';
 import { z } from 'zod';
 import { useParams, useRouter } from 'next/navigation';
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'sonner';
-import type { GruposEditar } from '@/types/gruposType';
+import { useEffect } from 'react';
+import { ConseguirGrupo, EditarGrupo } from '@/actions/Grupos';
 
 type Inputs = z.infer<typeof GrupoEditarSchema>;
 
-type EditarGrupo = {
-  actividad: string;
-};
-
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
 export default function ActualizarGrupo() {
-  const queryCliente = useQueryClient();
   const params = useParams();
   const router = useRouter();
 
-  const id_grupo = params.id_grupo;
-
-  const { data } = useQuery<GruposEditar>({
-    queryKey: ['grupos', 'ActualizarGrupo', id_grupo],
-    queryFn: async () => {
-      const res = await axios(`https://api-base-de-datos.vercel.app/grupos/${id_grupo}`);
-      return res.data;
-    },
-    enabled: !!id_grupo,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
-
-  const ActualizarGrupo = useMutation({
-    mutationFn: async (data: EditarGrupo) => {
-      await axios.put(`https://api-base-de-datos.vercel.app/grupos/${id_grupo}`, data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['grupos'] });
-      router.back();
-    },
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.promise(
-      () =>
-        ActualizarGrupo.mutateAsync({
-          actividad: `${data.nombre}:${data.actividad}`,
-        }),
-      {
-        loading: 'Actualizando grupo...',
-        success: 'Grupo Actualizado correctamente',
-      },
-    );
-  };
+  const id_grupo = Number(params.id_grupo);
 
   const {
     register,
@@ -83,14 +27,37 @@ export default function ActualizarGrupo() {
     mode: 'onChange',
   });
 
-  setValue(
-    'nombre',
-    `${ActualizarGrupo.isPending ? 'cargando...' : data?.data.actividad.split(':')[0]}`,
-  );
-  setValue(
-    'actividad',
-    `${ActualizarGrupo.isPending ? 'cargando...' : data?.data.actividad.split(':')[1]}`,
-  );
+  useEffect(() => {
+    async function cargarGrupo() {
+      const grupo = await ConseguirGrupo(id_grupo);
+      if (!grupo) {
+        toast.error('Grupo no encontrado');
+        router.refresh();
+        router.back();
+      }
+      setValue('nombre', `${grupo?.actividad.split(':')[0]}`);
+      setValue('actividad', `${grupo?.actividad.split(':')[1]}`);
+    }
+    cargarGrupo()
+  }, [id_grupo, setValue, router]);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    toast.promise(
+      async () => {
+        const res = await EditarGrupo(id_grupo, `${data.nombre}: ${data.actividad}`);
+        if (!res.ok) throw new Error(res.message);
+        return res.message;
+      },
+      {
+        loading: 'Actualizando grupo',
+        success: (msg) => {
+          router.push('/grupos');
+          return msg;
+        },
+        error: (err) => err.message,
+      },
+    );
+  };
 
   return (
     <form
@@ -169,10 +136,10 @@ export default function ActualizarGrupo() {
             {...register('actividad')}
             className="w-full px-4 py-2.5 min-h-20 max-h-28 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
           ></textarea>
-          
+
           {errors.actividad?.message && <p>{errors.actividad.message}</p>}
         </div>
       </div>
     </form>
-  );;
+  );
 }

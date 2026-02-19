@@ -15,9 +15,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { GrupoSchema } from '../../../schemas/GrupoSchema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'sonner';
+
+import { CrearGrupo } from '@/actions/Grupos';
 
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -27,36 +27,12 @@ registerPlugin(
 
 type Inputs = z.infer<typeof GrupoSchema>;
 
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
 
-export default function CrearGrupo() {
+
+export default function CrearGrup() {
   const [files, setFiles] = useState<any[]>([]);
-  const queryCliente = useQueryClient();
   const router = useRouter();
 
-  const CrearGrupo = useMutation({
-    mutationFn: async (data: FormData) => {
-      await axios.post('https://api-base-de-datos.vercel.app/grupos/', data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['grupos'] });
-      router.back();
-    },
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const formData = new FormData();
@@ -64,11 +40,26 @@ export default function CrearGrupo() {
     if (files[0]?.file) {
       formData.append('logo_grupo', files[0].file);
     }
+
     //*Ponerse atento a esto
-    toast.promise(() => CrearGrupo.mutateAsync(formData), {
-      loading: 'Creando grupo...',
-      success: 'Grupo creado correctamente',
-    });
+    toast.promise(
+      (async () => {
+        const res = await CrearGrupo(formData);
+
+        if (!res.ok) {
+          throw new Error(res.message);
+        }
+
+        router.refresh()
+        router.push('/grupos')
+        return res.message;
+      })(),
+      {
+        loading: 'Creando grupo...',
+        success: (msg) => msg,
+        error: (err) => err.message,
+      },
+    );
   };
 
   const {

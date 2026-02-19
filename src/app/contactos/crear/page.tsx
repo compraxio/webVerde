@@ -1,51 +1,19 @@
 'use client';
 
+import { CrearContacto } from '@/actions/Contactos';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema } from '../../../schemas/contactSchema';
+
 import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+
 type Inputs = z.infer<typeof contactSchema>;
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
-
-type CrearContacto = {
-  nombre: string;
-  telefono: string;
-  correo?: string;
-};
-
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
-export default function Editar() {
-  const queryCliente = useQueryClient();
+export default function Crear() {
   const router = useRouter();
-
-  const crearContacto = useMutation({
-    mutationFn: async (data: CrearContacto) => {
-      await axios.post('https://api-base-de-datos.vercel.app/contactos/', data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      router.push('/contactos');
-    },
-    onError: (error: ApiError) => {
-      if (error.response?.status === 409) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
 
   const {
     register,
@@ -56,17 +24,23 @@ export default function Editar() {
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     toast.promise(
-      () =>
-        crearContacto.mutateAsync({
-          nombre: data.nombre,
-          telefono: `${data.extension} ${data.numero}`,
-          correo: data.correo,
-        }),
+      CrearContacto({
+        nombre: data.nombre,
+        telefono: `${data.extension} ${data.numero}`,
+        correo: data.correo,
+      }),
       {
         loading: 'Creando contacto...',
-        success: 'Contacto creado correctamente',
+        success: (res) => {
+          if (!res.ok) throw new Error(res.message);
+          router.push('/contactos')
+          return res.message
+        },
+        error: (err) => {
+          return err.message || 'Error al crear contacto';
+        },
       },
     );
   };

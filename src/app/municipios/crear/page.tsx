@@ -5,47 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MunicipiosSchema } from '../../../schemas/MunicipiosSchema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { CrearMunicipio } from '@/actions/Municipios';
 import { toast } from 'sonner';
 type Inputs = z.infer<typeof MunicipiosSchema>;
 
-type CrearMunicipio = {
-  cod_munic: number;
-  departamento: string;
-  zona: string;
-  municipio: string;
-};
 
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
-export default function CrearMunicipio() {
-  const queryCliente = useQueryClient();
+export default function CrearMuni() {
   const router = useRouter();
-
-  const CrearMunicipio = useMutation({
-    mutationFn: async (data: CrearMunicipio) => {
-      await axios.post('https://api-base-de-datos.vercel.app/municipios', data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['municipios'] });
-      router.back();
-    },
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
 
   const {
     register,
@@ -58,17 +24,23 @@ export default function CrearMunicipio() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     toast.promise(
-      () =>
-        CrearMunicipio.mutateAsync({
-          cod_munic: Number(data.cod_munic),
-          departamento: data.departamento,
-          zona: data.zona,
-          municipio: data.municipio,
-        }),
-      {
-        loading: 'Creando producto...',
-        success: 'Producto creado correctamente',
-      },
+      CrearMunicipio({
+        departamento: data.departamento,
+        municipio: data.municipio,
+        zona: data.zona,
+        cod_munic: Number(data.cod_munic)
+      }), {
+        loading: 'Creando Municipio',
+        success: (res) => {
+          if (!res?.ok) throw new Error(res?.message);
+          router.refresh()
+          router.back()
+          return res.message
+        },
+        error: (err) => {
+          return err.message || "Error al crear Municipio"
+        }
+      }
     );
   };
 

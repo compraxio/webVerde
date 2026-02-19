@@ -5,63 +5,17 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contacEditarSchema } from '@/schemas/contactSchema';
 import { z } from 'zod';
 import { useRouter, useParams } from 'next/navigation';
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import type { ContactosEliminar } from '@/types/contactosType';
+
 import { toast } from 'sonner';
+import { ConseguirContacto, EditarContacto } from '@/actions/Contactos';
+import { useEffect } from 'react';
 
 type Inputs = z.infer<typeof contacEditarSchema>;
 
-type CrearContacto = {
-  nombre: string;
-  telefono: string;
-  correo?: string;
-};
-
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
-export default function EditarContacto() {
-  const queryCliente = useQueryClient();
+export default function EditarCon() {
   const router = useRouter();
-
   const params = useParams();
-  const id_contacto = params.id;
-
-  const { data, isPending } = useQuery<ContactosEliminar>({
-    queryKey: ['actualizarContacto', id_contacto, 'contactos'],
-    queryFn: async () => {
-      const res = await axios(`https://api-base-de-datos.vercel.app/contactos/${id_contacto}`);
-      return res.data;
-    },
-    enabled: !!id_contacto,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
-
-  const crearContacto = useMutation({
-    mutationFn: async (data: CrearContacto) => {
-      await axios.put(`https://api-base-de-datos.vercel.app/contactos/${id_contacto}`, data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      router.replace('/contactos');
-    },
-
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
+  const id_contacto = Number(params.id);
 
   const {
     register,
@@ -73,21 +27,40 @@ export default function EditarContacto() {
     mode: 'onChange',
   });
 
-  setValue('nombre', `${data?.data.nombre}`);
-  setValue('numero', `${data?.data.telefono}`);
-  setValue('correo', `${data?.data.correo}`);
+  useEffect(() => {
+    async function cargarContacto() {
+      const contacto = await ConseguirContacto(id_contacto);
+
+      if (!contacto) {
+        toast.error('Contacto no encontrado');
+        router.push('/contactos');
+      }
+
+      setValue('nombre', contacto?.nombre ?? '');
+      setValue('numero', contacto?.telefono ?? '');
+      setValue('correo', contacto?.correo ?? '');
+    }
+    cargarContacto();
+  }, [id_contacto, setValue, router]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     toast.promise(
-      () =>
-        crearContacto.mutateAsync({
+      async () => {
+        const res = await EditarContacto(id_contacto, {
           nombre: data.nombre,
-          telefono: `${data.numero}`,
+          telefono: data.numero,
           correo: data.correo,
-        }),
+        });
+        if (!res.ok) throw new Error(res.message);
+        return res.message;
+      },
       {
-        loading: 'Actualizando contacto...',
-        success: 'Contacto Actualizado correctamente',
+        loading: 'Actualizando contacto....',
+        success: (msg) => {
+          router.push('/contactos');
+          return msg;
+        },
+        error: (err) => err.message,
       },
     );
   };
@@ -149,7 +122,7 @@ export default function EditarContacto() {
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="text"
-            placeholder={isPending ? 'cargando...' : 'María Fernanda González'}
+            placeholder={'María Fernanda González'}
             id="Nombre"
             {...register('nombre')}
           />
@@ -166,7 +139,7 @@ export default function EditarContacto() {
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="tel"
-              placeholder={isPending ? 'cargando...' : '300 123 4567'}
+              placeholder={'300 123 4567'}
               {...register('numero')}
             />
           </div>
@@ -182,7 +155,7 @@ export default function EditarContacto() {
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="email"
-            placeholder={isPending ? 'cargando....' : 'contacto@campoverde.eco'}
+            placeholder={'contacto@campoverde.eco'}
             id="Correo"
             {...register('correo')}
           />

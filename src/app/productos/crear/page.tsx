@@ -15,48 +15,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ProductoSchema } from '../../../schemas/productosSchema';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { toast } from 'sonner';
 
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginFileValidateType);
+import { toast } from 'sonner';
+import { CrearProducto } from '@/actions/Productos';
+
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType,
+);
 
 type Inputs = z.infer<typeof ProductoSchema>;
 
-
-
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
 /**/
-export default function CrearProducto() {
+export default function CrearProduc() {
   const [files, setFiles] = useState<any[]>([]);
-  const queryCliente = useQueryClient();
   const router = useRouter();
-
-  const CrearProducto = useMutation({
-    mutationFn: async (data: FormData) => {
-      await axios.post('https://api-base-de-datos.vercel.app/productos/', data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['productos'] });
-      router.back();
-    },
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    }
-
-  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const formData = new FormData();
@@ -67,10 +41,22 @@ export default function CrearProducto() {
       formData.append('img_prodcto', files[0].file);
     }
     //*Ponerse atento a esto
-    toast.promise(() => CrearProducto.mutateAsync(formData), {
-      loading: 'Creando producto...',
-      success: 'Producto creado correctamente',
-    });
+    toast.promise(
+      (async () => {
+        const res = await CrearProducto(formData);
+        if (!res.ok) {
+          throw new Error(res.message);
+        }
+        router.refresh();
+        router.push('/productos');
+        return res.message;
+      })(),
+      {
+        loading: 'Creando producto....',
+        success: (msg) => msg,
+        error: (err) => err.message,
+      },
+    );
   };
 
   const {

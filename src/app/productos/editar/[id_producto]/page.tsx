@@ -5,77 +5,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ProductoEditarSchema } from '../../../../schemas/productosSchema';
 import { z } from 'zod';
 import { useParams, useRouter } from 'next/navigation';
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'sonner';
-import type { ProductosEditar } from '@/types/productosType';
+import { useEffect } from 'react';
+import { ConseguirProducto, EditarProducto } from '@/actions/Productos';
 
 type Inputs = z.infer<typeof ProductoEditarSchema>;
 
-type EditarProducto = {
-  nombre: string;
-  descripcion: string;
-  precio: number;
-};
-
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
 export default function ActualizarProducto() {
-  const queryCliente = useQueryClient();
   const params = useParams();
   const router = useRouter();
-
-  const id_producto = params.id_producto;
-
-  const { data } = useQuery<ProductosEditar>({
-    queryKey: ['productos', 'ActualizarProducto', id_producto],
-    queryFn: async () => {
-      const res = await axios(`https://api-base-de-datos.vercel.app/productos/${id_producto}`);
-      return res.data;
-    },
-    enabled: !!id_producto,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
-
-  const ActualizarProducto = useMutation({
-    mutationFn: async (data: EditarProducto) => {
-      await axios.put(`https://api-base-de-datos.vercel.app/productos/${id_producto}`, data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['productos'] });
-      router.back();
-    },
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    toast.promise(
-      () =>
-        ActualizarProducto.mutateAsync({
-          nombre: data.nombre,
-          descripcion: data.descripcion,
-          precio: Number(data.precio),
-        }),
-      {
-        loading: 'Actualizando producto...',
-        success: 'Producto Actualizado correctamente',
-      },
-    );
-  };
+  const id_producto = Number(params.id_producto);
 
   const {
     register,
@@ -86,12 +25,43 @@ export default function ActualizarProducto() {
     resolver: zodResolver(ProductoEditarSchema),
     mode: 'onChange',
   });
-  setValue('nombre', `${ActualizarProducto.isPending ? 'cargando...' : data?.data.nombre}`);
-  setValue(
-    'descripcion',
-    `${ActualizarProducto.isPending ? 'cargando...' : data?.data.descripcion}`,
-  );
-  setValue('precio', `${ActualizarProducto.isPending ? 'cargando...' : data?.data.precio}`);
+
+  useEffect(() => {
+    async function cargarProducto() {
+      const producto = await ConseguirProducto(id_producto);
+      if (!producto) {
+        toast.error('Producto no encontrado');
+        router.refresh();
+        router.back();
+      }
+      setValue('nombre', `${producto?.nombre}`);
+      setValue('descripcion', `${producto?.descripcion}`);
+      setValue('precio', `${producto?.precio}`);
+    }
+    cargarProducto()
+  }, [id_producto, setValue, router]);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    toast.promise(
+      async () => {
+        const res = await EditarProducto(
+          id_producto,
+          data.nombre,
+          data.descripcion,
+          Number(data.precio),
+        );
+        return res;
+      },
+      {
+        loading: 'Actualizando producto',
+        success: (msg) => {
+          router.push('/productos');
+          return msg;
+        },
+        error: (err) => err.message,
+      },
+    );
+  };
 
   return (
     <form

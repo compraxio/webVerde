@@ -107,10 +107,10 @@ model municipios {
 
 model productos {
   id_prodcucto Int     @id @default(autoincrement())
-  nombre       String?
+  nombre       String
   descripcion  String?
-  img_prodcto  String?
-  precio       Int?
+  img_prodcto  String
+  precio       Int
 }
 
 model videos {

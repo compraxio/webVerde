@@ -5,64 +5,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MunicipiosEditarSchema } from '../../../../schemas/MunicipiosSchema';
 import { z } from 'zod';
 import { useRouter, useParams } from 'next/navigation';
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { toast } from 'sonner';
-import { MunicipiosEditar } from '@/types/municipiosType';
-
+import { ConseguirMunicipio, EditarMunicipio } from '@/actions/Municipios';
+import { useEffect } from 'react';
 type Inputs = z.infer<typeof MunicipiosEditarSchema>;
 
-type EditarMunicipio = {
-  cod_munic: number;
-  departamento: string;
-  zona: string;
-  municipio: string;
-};
 
-type ApiError = {
-  response?: {
-    status: number;
-    data: {
-      success: boolean;
-      message: string;
-    };
-  };
-};
-
-export default function EditarMunicipio() {
-  const queryCliente = useQueryClient();
+export default function EditarMuni() {
   const router = useRouter();
-
   const params = useParams();
-  const cod_munic = params.cod_munic;
-
-  const { data, isPending } = useQuery<MunicipiosEditar>({
-    queryKey: ['actualizarContacto', cod_munic],
-    queryFn: async () => {
-      const res = await axios(`https://api-base-de-datos.vercel.app/municipios/${cod_munic}`);
-      return res.data;
-    },
-    enabled: !!cod_munic,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
-
-  const crearContacto = useMutation({
-    mutationFn: async (data: EditarMunicipio) => {
-      await axios.put(`https://api-base-de-datos.vercel.app/municipios/${cod_munic}`, data);
-    },
-
-    onSuccess: () => {
-      queryCliente.invalidateQueries({ queryKey: ['contactos'] });
-      router.back();
-    },
-
-    onError: (error: ApiError) => {
-      if (error?.response) {
-        toast.error(error.response.data.message);
-      }
-    },
-  });
+  const cod_munic = Number(params.cod_munic);
 
   const {
     register,
@@ -74,23 +26,41 @@ export default function EditarMunicipio() {
     mode: 'onChange',
   });
 
-  setValue('cod_munic', `${data?.data.cod_munic}`);
-  setValue('departamento', `${data?.data.departamento}`);
-  setValue('zona', (data?.data?.zona ?? 'NORTE') as 'NORTE' | 'SUR' | 'CENTRO');
-  setValue('municipio', `${data?.data.municipio}`);
+  useEffect(() => {
+    async function cargarMunicipio() {
+      const municipio = await ConseguirMunicipio(cod_munic)
+      if (!municipio) {
+        toast.error('Municipio no encontrado');
+        router.refresh()
+        router.back()
+      }
+      setValue('cod_munic', `${municipio?.cod_munic}`);
+      setValue('departamento', `${municipio?.departamento}`);
+      setValue('zona', (municipio?.zona ?? 'NORTE') as 'NORTE' | 'SUR' | 'CENTRO');
+      setValue('municipio', `${municipio?.municipio}`);
+    }
+    cargarMunicipio()
+  }, [cod_munic, setValue, router])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     toast.promise(
-      () =>
-        crearContacto.mutateAsync({
-          cod_munic: Number(data.cod_munic),
+      async () => {
+        const res = await EditarMunicipio(cod_munic, {
           departamento: data.departamento,
-          zona: data.zona,
           municipio: data.municipio,
-        }),
+          zona: data.zona,
+          codigo_muni: Number(data.cod_munic),
+        });
+        if (!res.ok) throw new Error(res.message);
+        return res.message;
+      },
       {
-        loading: 'Actualizando municipio...',
-        success: 'Municipio Actualizado correctamente',
+        loading: 'Actualizando municipio....',
+        success: (msg) => {
+          router.back();
+          return msg;
+        },
+        error: (err) => err.message,
       },
     );
   };
@@ -152,7 +122,7 @@ export default function EditarMunicipio() {
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="number"
-            placeholder={isPending ? 'cargando...' : '13006'}
+            placeholder={'13006'}
             id="cod_munic"
             {...register('cod_munic')}
           />
@@ -169,7 +139,7 @@ export default function EditarMunicipio() {
             <input
               className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               type="text"
-              placeholder={isPending ? 'cargando...' : 'BOLIVAR'}
+              placeholder={'BOLIVAR'}
               id="departamento"
               {...register('departamento')}
             />
@@ -205,7 +175,7 @@ export default function EditarMunicipio() {
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
             type="text"
-            placeholder={isPending ? 'cargando....' : 'ACHI'}
+            placeholder={'ACHI'}
             id="municipio"
             {...register('municipio')}
           />
