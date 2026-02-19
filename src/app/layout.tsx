@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import './globals.css';
 import Link from 'next/link';
 import { ModeToggle } from '@/components/mode-toggle';
@@ -189,7 +191,6 @@ export default function RootLayout({
           </aside>
           <main className="lg:ml-64 min-h-screen da">
             <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b border-slate-200 dark:border-zinc-800">
-
               <div className="flex items-center gap-4">
                 <ModeToggle />
                 <button className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-slate-400 relative">
