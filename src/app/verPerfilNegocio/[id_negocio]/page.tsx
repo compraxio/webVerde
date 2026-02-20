@@ -316,7 +316,13 @@ export default async function usePerfilNegocio({
                 <h3 className="text-[10px] dark:text-primary text-white font-black uppercase tracking-widest">
                   Año de Verificación
                 </h3>
-                <p className="text-2xl font-black">{negocio?.a_o_verificacion}</p>
+                <p className="text-2xl font-black">
+                  {negocio?.a_o_verificacion.toLocaleDateString('es-CO', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
               </div>
               <div>
                 <h3 className="text-xs text-leaf/80 font-bold uppercase tracking-tighter">

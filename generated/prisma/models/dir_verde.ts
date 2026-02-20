@@ -30,14 +30,12 @@ export type Dir_verdeAvgAggregateOutputType = {
   id_negocio: number | null
   id_grupo: number | null
   id_fase: number | null
-  a_o_verificacion: number | null
 }
 
 export type Dir_verdeSumAggregateOutputType = {
   id_negocio: number | null
   id_grupo: number | null
   id_fase: number | null
-  a_o_verificacion: number | null
 }
 
 export type Dir_verdeMinAggregateOutputType = {
@@ -63,7 +61,7 @@ export type Dir_verdeMinAggregateOutputType = {
   pos_gps: string | null
   id_fase: number | null
   estado: string | null
-  a_o_verificacion: number | null
+  a_o_verificacion: Date | null
   autorizado_por: string | null
 }
 
@@ -90,7 +88,7 @@ export type Dir_verdeMaxAggregateOutputType = {
   pos_gps: string | null
   id_fase: number | null
   estado: string | null
-  a_o_verificacion: number | null
+  a_o_verificacion: Date | null
   autorizado_por: string | null
 }
 
@@ -127,14 +125,12 @@ export type Dir_verdeAvgAggregateInputType = {
   id_negocio?: true
   id_grupo?: true
   id_fase?: true
-  a_o_verificacion?: true
 }
 
 export type Dir_verdeSumAggregateInputType = {
   id_negocio?: true
   id_grupo?: true
   id_fase?: true
-  a_o_verificacion?: true
 }
 
 export type Dir_verdeMinAggregateInputType = {
@@ -328,7 +324,7 @@ export type Dir_verdeGroupByOutputType = {
   pos_gps: string | null
   id_fase: number | null
   estado: string | null
-  a_o_verificacion: number | null
+  a_o_verificacion: Date | null
   autorizado_por: string | null
   _count: Dir_verdeCountAggregateOutputType | null
   _avg: Dir_verdeAvgAggregateOutputType | null
@@ -378,7 +374,7 @@ export type dir_verdeWhereInput = {
   pos_gps?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   id_fase?: Prisma.IntNullableFilter<"dir_verde"> | number | null
   estado?: Prisma.StringNullableFilter<"dir_verde"> | string | null
-  a_o_verificacion?: Prisma.IntNullableFilter<"dir_verde"> | number | null
+  a_o_verificacion?: Prisma.DateTimeNullableFilter<"dir_verde"> | Date | string | null
   autorizado_por?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   grupos?: Prisma.XOR<Prisma.GruposScalarRelationFilter, Prisma.gruposWhereInput>
   dir_verde_vs_criterios?: Prisma.Dir_verde_vs_criteriosListRelationFilter
@@ -441,7 +437,7 @@ export type dir_verdeWhereUniqueInput = Prisma.AtLeast<{
   pos_gps?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   id_fase?: Prisma.IntNullableFilter<"dir_verde"> | number | null
   estado?: Prisma.StringNullableFilter<"dir_verde"> | string | null
-  a_o_verificacion?: Prisma.IntNullableFilter<"dir_verde"> | number | null
+  a_o_verificacion?: Prisma.DateTimeNullableFilter<"dir_verde"> | Date | string | null
   autorizado_por?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   grupos?: Prisma.XOR<Prisma.GruposScalarRelationFilter, Prisma.gruposWhereInput>
   dir_verde_vs_criterios?: Prisma.Dir_verde_vs_criteriosListRelationFilter
@@ -506,7 +502,7 @@ export type dir_verdeScalarWhereWithAggregatesInput = {
   pos_gps?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   id_fase?: Prisma.IntNullableWithAggregatesFilter<"dir_verde"> | number | null
   estado?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
-  a_o_verificacion?: Prisma.IntNullableWithAggregatesFilter<"dir_verde"> | number | null
+  a_o_verificacion?: Prisma.DateTimeNullableWithAggregatesFilter<"dir_verde"> | Date | string | null
   autorizado_por?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
 }
 
@@ -531,7 +527,7 @@ export type dir_verdeCreateInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   grupos: Prisma.gruposCreateNestedOneWithoutDir_verdeInput
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosCreateNestedManyWithoutDir_verdeInput
@@ -561,7 +557,7 @@ export type dir_verdeUncheckedCreateInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedCreateNestedManyWithoutDir_verdeInput
   fotografias?: Prisma.fotografiasUncheckedCreateNestedManyWithoutDir_verdeInput
@@ -588,7 +584,7 @@ export type dir_verdeUpdateInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grupos?: Prisma.gruposUpdateOneRequiredWithoutDir_verdeNestedInput
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUpdateManyWithoutDir_verdeNestedInput
@@ -618,7 +614,7 @@ export type dir_verdeUncheckedUpdateInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedUpdateManyWithoutDir_verdeNestedInput
   fotografias?: Prisma.fotografiasUncheckedUpdateManyWithoutDir_verdeNestedInput
@@ -647,7 +643,7 @@ export type dir_verdeCreateManyInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
 }
 
@@ -672,7 +668,7 @@ export type dir_verdeUpdateManyMutationInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -699,7 +695,7 @@ export type dir_verdeUncheckedUpdateManyInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -734,7 +730,6 @@ export type dir_verdeAvgOrderByAggregateInput = {
   id_negocio?: Prisma.SortOrder
   id_grupo?: Prisma.SortOrder
   id_fase?: Prisma.SortOrder
-  a_o_verificacion?: Prisma.SortOrder
 }
 
 export type dir_verdeMaxOrderByAggregateInput = {
@@ -795,7 +790,6 @@ export type dir_verdeSumOrderByAggregateInput = {
   id_negocio?: Prisma.SortOrder
   id_grupo?: Prisma.SortOrder
   id_fase?: Prisma.SortOrder
-  a_o_verificacion?: Prisma.SortOrder
 }
 
 export type Dir_verdeScalarRelationFilter = {
@@ -819,6 +813,10 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type dir_verdeCreateNestedOneWithoutDir_verde_vs_criteriosInput = {
@@ -912,7 +910,7 @@ export type dir_verdeCreateWithoutDir_verde_vs_criteriosInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   grupos: Prisma.gruposCreateNestedOneWithoutDir_verdeInput
   fotografias?: Prisma.fotografiasCreateNestedManyWithoutDir_verdeInput
@@ -941,7 +939,7 @@ export type dir_verdeUncheckedCreateWithoutDir_verde_vs_criteriosInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   fotografias?: Prisma.fotografiasUncheckedCreateNestedManyWithoutDir_verdeInput
 }
@@ -983,7 +981,7 @@ export type dir_verdeUpdateWithoutDir_verde_vs_criteriosInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grupos?: Prisma.gruposUpdateOneRequiredWithoutDir_verdeNestedInput
   fotografias?: Prisma.fotografiasUpdateManyWithoutDir_verdeNestedInput
@@ -1012,7 +1010,7 @@ export type dir_verdeUncheckedUpdateWithoutDir_verde_vs_criteriosInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fotografias?: Prisma.fotografiasUncheckedUpdateManyWithoutDir_verdeNestedInput
 }
@@ -1038,7 +1036,7 @@ export type dir_verdeCreateWithoutFotografiasInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   grupos: Prisma.gruposCreateNestedOneWithoutDir_verdeInput
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosCreateNestedManyWithoutDir_verdeInput
@@ -1067,7 +1065,7 @@ export type dir_verdeUncheckedCreateWithoutFotografiasInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedCreateNestedManyWithoutDir_verdeInput
 }
@@ -1109,7 +1107,7 @@ export type dir_verdeUpdateWithoutFotografiasInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grupos?: Prisma.gruposUpdateOneRequiredWithoutDir_verdeNestedInput
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUpdateManyWithoutDir_verdeNestedInput
@@ -1138,7 +1136,7 @@ export type dir_verdeUncheckedUpdateWithoutFotografiasInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedUpdateManyWithoutDir_verdeNestedInput
 }
@@ -1164,7 +1162,7 @@ export type dir_verdeCreateWithoutGruposInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosCreateNestedManyWithoutDir_verdeInput
   fotografias?: Prisma.fotografiasCreateNestedManyWithoutDir_verdeInput
@@ -1192,7 +1190,7 @@ export type dir_verdeUncheckedCreateWithoutGruposInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedCreateNestedManyWithoutDir_verdeInput
   fotografias?: Prisma.fotografiasUncheckedCreateNestedManyWithoutDir_verdeInput
@@ -1250,7 +1248,7 @@ export type dir_verdeScalarWhereInput = {
   pos_gps?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   id_fase?: Prisma.IntNullableFilter<"dir_verde"> | number | null
   estado?: Prisma.StringNullableFilter<"dir_verde"> | string | null
-  a_o_verificacion?: Prisma.IntNullableFilter<"dir_verde"> | number | null
+  a_o_verificacion?: Prisma.DateTimeNullableFilter<"dir_verde"> | Date | string | null
   autorizado_por?: Prisma.StringNullableFilter<"dir_verde"> | string | null
 }
 
@@ -1276,7 +1274,7 @@ export type dir_verdeCreateManyGruposInput = {
   pos_gps?: string | null
   id_fase?: number | null
   estado?: string | null
-  a_o_verificacion?: number | null
+  a_o_verificacion?: Date | string | null
   autorizado_por?: string | null
 }
 
@@ -1301,7 +1299,7 @@ export type dir_verdeUpdateWithoutGruposInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUpdateManyWithoutDir_verdeNestedInput
   fotografias?: Prisma.fotografiasUpdateManyWithoutDir_verdeNestedInput
@@ -1329,7 +1327,7 @@ export type dir_verdeUncheckedUpdateWithoutGruposInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dir_verde_vs_criterios?: Prisma.dir_verde_vs_criteriosUncheckedUpdateManyWithoutDir_verdeNestedInput
   fotografias?: Prisma.fotografiasUncheckedUpdateManyWithoutDir_verdeNestedInput
@@ -1357,7 +1355,7 @@ export type dir_verdeUncheckedUpdateManyWithoutGruposInput = {
   pos_gps?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id_fase?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  a_o_verificacion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  a_o_verificacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   autorizado_por?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -1559,7 +1557,7 @@ export type $dir_verdePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     pos_gps: string | null
     id_fase: number | null
     estado: string | null
-    a_o_verificacion: number | null
+    a_o_verificacion: Date | null
     autorizado_por: string | null
   }, ExtArgs["result"]["dir_verde"]>
   composites: {}
@@ -2009,7 +2007,7 @@ export interface dir_verdeFieldRefs {
   readonly pos_gps: Prisma.FieldRef<"dir_verde", 'String'>
   readonly id_fase: Prisma.FieldRef<"dir_verde", 'Int'>
   readonly estado: Prisma.FieldRef<"dir_verde", 'String'>
-  readonly a_o_verificacion: Prisma.FieldRef<"dir_verde", 'Int'>
+  readonly a_o_verificacion: Prisma.FieldRef<"dir_verde", 'DateTime'>
   readonly autorizado_por: Prisma.FieldRef<"dir_verde", 'String'>
 }
     

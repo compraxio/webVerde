@@ -43,7 +43,7 @@ model dir_verde {
   pos_gps                String?
   id_fase                Int?
   estado                 String?
-  a_o_verificacion       Int?                     @map("año_verificacion")
+  a_o_verificacion       DateTime?                     @map("año_verificacion")
   autorizado_por         String?
   grupos                 grupos                   @relation(fields: [id_grupo], references: [id_grupo])
   dir_verde_vs_criterios dir_verde_vs_criterios[]
