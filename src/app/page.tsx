@@ -17,7 +17,7 @@ export default async function Home() {
         </div>
         <Link
           href="/crearNegocio"
-          className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all"
+          className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex max-lg:hidden items-center gap-2 shadow-lg shadow-primary/20 transition-all"
         >
           <MdAddBusiness size={25} />
           Registrar Negocio
@@ -37,7 +37,7 @@ export default async function Home() {
         </button>
       </div> */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <CuerpoNegocio negocios={ negocios } />
+        <CuerpoNegocio negocios={negocios} />
         <Link
           href="/crearNegocio"
           className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
@@ -51,6 +51,15 @@ export default async function Home() {
               Inicia el proceso de certificación y registro en el directorio.
             </p>
           </div>
+        </Link>
+      </div>
+      {/* Boton add en cel*/}
+      <div className="lg:hidden fixed bottom-6 right-6 z-30">
+        <Link
+          href="/crearNegocio"
+          className="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center"
+        >
+          <MdAddBusiness size={25} />
         </Link>
       </div>
     </div>

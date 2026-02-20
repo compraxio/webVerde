@@ -81,78 +81,7 @@ export default async function Municipio({
           </table>
         </div>
       </section>
-      {/*<aside className="w-80 border-l border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 flex-shrink-0 flex flex-col">
 
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-extrabold text-slate-900 dark:text-white uppercase">
-            CLEMENCIA
-          </h3>
-          <div className="flex gap-1">
-            <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded text-slate-400">
-              <span className="material-symbols-outlined text-sm">chevron_left</span>
-            </button>
-            <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded text-slate-400">
-              <span className="material-symbols-outlined text-sm">chevron_right</span>
-            </button>
-            <button className="p-1.5 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded text-slate-400">
-              <span className="material-symbols-outlined text-sm">close</span>
-            </button>
-          </div>
-        </div>
-        <div className="space-y-6 flex-1 overflow-auto custom-scrollbar">
-          <div className="space-y-4">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                Municipio
-              </span>
-              <span className="text-sm font-medium">CLEMENCIA</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                Código
-              </span>
-              <span className="text-sm font-medium">13.222</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                Departamento
-              </span>
-              <span className="text-sm font-medium">BOLIVAR</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                Zona
-              </span>
-              <span className="text-sm font-medium">NORTE</span>
-            </div>
-          </div>
-          <div className="pt-6 border-t border-slate-100 dark:border-zinc-800">
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                Negocios Verdes Relacionados
-              </h4>
-              <span className="text-[10px] bg-slate-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-slate-500">
-                0
-              </span>
-            </div>
-            <div className="flex flex-col items-center justify-center py-12 border-2 border-dashed border-slate-100 dark:border-zinc-800 rounded-2xl">
-              <span className="material-symbols-outlined text-slate-200 dark:text-zinc-800 text-4xl mb-2">
-                eco
-              </span>
-              <p className="text-xs text-slate-400 italic">No hay negocios registrados</p>
-            </div>
-            <button className="mt-4 w-full flex items-center justify-center gap-2 py-2 text-xs font-semibold text-primary hover:bg-primary/5 rounded-lg border border-primary/20 transition-all">
-              <span className="material-symbols-outlined text-sm">add</span>
-              Vincular Negocio
-            </button>
-          </div>
-        </div>
-        <div className="mt-auto pt-6 border-t border-slate-100 dark:border-zinc-800 flex gap-2">
-          <button className="flex-1 py-2 text-xs font-bold bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 rounded-xl transition-all">
-            Editar Información
-          </button>
-        </div>
-      </aside>*/}
     </div>
   );
 }

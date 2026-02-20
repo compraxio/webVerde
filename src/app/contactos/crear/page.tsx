@@ -35,8 +35,8 @@ export default function Crear() {
         loading: 'Creando contacto...',
         success: (res) => {
           if (!res.ok) throw new Error(res.message);
-          router.push('/contactos')
-          return res.message
+          router.push('/contactos');
+          return res.message;
         },
         error: (err) => {
           return err.message || 'Error al crear contacto';
@@ -51,7 +51,7 @@ export default function Crear() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100 dark:border-zinc-800">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center  gap-3">
           <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ export default function Crear() {
         </div>
         <button
           type="submit"
-          className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md"
+          className="flex items-center max-lg:hidden gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -114,8 +114,8 @@ export default function Crear() {
             htmlFor="extension"
           >
             Numero
-          </label>
-          <div className="flex gap-6 ">
+          </label>  
+          <div className="flex gap-6 max-md:flex-col">
             <select
               id="extension"
               className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
@@ -177,6 +177,26 @@ export default function Crear() {
           />
           {errors.correo?.message && <p>{errors.correo.message}</p>}
         </div>
+        <button
+          type="submit"
+          className="flex md:hidden items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            className="size-6"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0M3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.3 12.3 0 0 1 9.374 21C7.043 21 4.862 20.355 3 19.234Z"
+            />
+          </svg>
+          Guardar Cambios
+        </button>
       </div>
     </form>
   );

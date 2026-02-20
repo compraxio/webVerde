@@ -14,15 +14,42 @@ export default function Productos() {
         </div>
         <Link
           href="/productos/crear"
-          className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all"
+          className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl font-semibold flex max-lg:hidden items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="size-6" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            className="size-6"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
           Agregar Producto
         </Link>
       </div>
       <hr className="mb-8"></hr>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <CuerpoProductos />
+      </div>
+      {/* Boton add en cel*/}
+      <div className="lg:hidden fixed bottom-6 right-6 z-30">
+        <Link
+          href="/productos/crear"
+          className="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            className="size-6"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </Link>
       </div>
     </div>
   );
