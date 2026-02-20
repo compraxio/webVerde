@@ -72,7 +72,7 @@ export default async function Municipio({
                 <th className="px-6 py-4">Zona</th>
                 <th className="px-6 py-4">Departamento</th>
                 <th className="px-6 py-4 text-right">Código</th>
-                <th className="px-6 py-4"></th>
+                {/* <th className="px-6 py-4"></th> */}
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
