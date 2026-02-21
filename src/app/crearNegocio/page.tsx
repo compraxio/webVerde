@@ -114,7 +114,7 @@ export default function CrearNego() {
           formData.append('url_tiktok', getValues('url_tiktok') || '');
           formData.append('estado', getValues('estado'));
           if (getValues('a_o_verificacion')) {
-            formData.append('a_o_verificacion', getValues('a_o_verificacion'));
+            formData.append('a_o_verificacion', getValues('a_o_verificacion') ?? '');
           }
           formData.append('autorizado_por', getValues('autorizado_por') || '');
           if (files[0]?.file) {
