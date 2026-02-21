@@ -9,7 +9,7 @@ import errorImg from './ui/error.png';
 import Link from 'next/link';
 
 import { Prisma } from '../../generated/prisma/client';
-import { EliminarNegocio } from '@/actions/eliminarNegocio';
+import { EliminarNegocio } from '@/actions/Negocio';
 
 type negocios = Prisma.dir_verdeGetPayload<object>;
 
@@ -24,13 +24,21 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
           className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300"
         >
           <div className="relative h-48 overflow-hidden">
-            <Image
-              alt="Honey production"
-              className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
-              src={n?.logo ?? errorImg}
-              height="1508"
-              width="1920"
-            />
+            {n.logo ? (
+              <img
+                src={n.logo}
+                alt={n.negocio}
+                className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
+              />
+            ) : (
+              <Image
+                alt="Honey production"
+                className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
+                src={errorImg}
+                height="1508"
+                width="1920"
+              />
+            )}
             {n.a_o_verificacion ? (
               <div className="absolute top-4 left-4">
                 <span className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
@@ -87,12 +95,12 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
             </p>
             <div className="flex items-center justify-center border-t border-slate-100 dark:border-zinc-800 pt-4">
               <div className="flex items-center gap-2">
-                <button
+                <Link
                   className="p-2 text-slate-400 hover:text-blue-500 transition-colors"
-                  title="Editar"
+                  href={`/editarNegocio/${n.id_negocio}`}
                 >
-                  <MdEditNote size={25}/>
-                </button>
+                  <MdEditNote size={25} />
+                </Link>
                 <button
                   className="p-2 text-slate-400 hover:text-red-500 transition-colors"
                   onClick={() => {
@@ -122,7 +130,10 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                     />
                   </svg>
                 </button>
-                <Link href={`/verPerfilNegocio/${n.id_negocio}`} className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 px-4 py-1.5 rounded-lg text-xs font-semibold">
+                <Link
+                  href={`/verPerfilNegocio/${n.id_negocio}`}
+                  className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 px-4 py-1.5 rounded-lg text-xs font-semibold"
+                >
                   Ver Perfil
                 </Link>
               </div>

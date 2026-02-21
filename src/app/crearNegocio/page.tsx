@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { obtenerTodosGrupos } from '@/actions/Grupos';
 import { obtenerTodosFases } from '@/actions/Fases';
+import { CrearNegocio } from '@/actions/Negocio';
 
 import { FilePond, registerPlugin } from 'react-filepond';
 
@@ -35,6 +36,8 @@ registerPlugin(
 type Inputs = z.infer<typeof DirVerdeSchema>;
 
 import { Prisma } from '../../../generated/prisma/client';
+import { IoMdPhotos } from 'react-icons/io';
+import { AlertImage } from '@/components/alerts/alertImage';
 
 type grupo = Prisma.gruposGetPayload<{
   include: {
@@ -44,11 +47,13 @@ type grupo = Prisma.gruposGetPayload<{
 
 type fase = Prisma.fasesGetPayload<object>;
 
-export default function CrearNegocio() {
+export default function CrearNego() {
   const router = useRouter();
   const [files, setFiles] = useState<any[]>([]);
+  const [fotos, setFotos] = useState<any[]>([]);
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     async function cargarGruposYFases() {
@@ -64,16 +69,15 @@ export default function CrearNegocio() {
     cargarGruposYFases();
   }, [setGrupos, setFases, router]);
 
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const formData = new FormData();
-    formData.append('negocio', `${data.actividad}`);
-  }
+  const onSubmit: SubmitHandler<Inputs> = () => {
+    setOpen(true);
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm<Inputs>({
     resolver: zodResolver(DirVerdeSchema),
     mode: 'onChange',
@@ -83,6 +87,67 @@ export default function CrearNegocio() {
     'w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm';
   return (
     <>
+      <AlertImage
+        open={open}
+        setOpen={setOpen}
+        title="Estas seguro?"
+        descripcion="El logo es obligatorio y ademas de eso luego no podras cambiarlo"
+        funcion={() => {
+          const formData = new FormData();
+          formData.append('negocio', getValues('negocio'));
+          formData.append('id_grupo', String(getValues('id_grupo')));
+          formData.append('id_fase', String(getValues('id_fase')));
+          formData.append('unidad_productiva', getValues('unidad_productiva') || '');
+          formData.append('descripcion', getValues('descripcion'));
+          formData.append('actividad', getValues('actividad'));
+          formData.append('sub_categoria', getValues('sub_categoria') || '');
+          formData.append('zona', getValues('zona'));
+          formData.append('municipio', getValues('municipio'));
+          formData.append('direccion', getValues('direccion'));
+          formData.append('representante', getValues('representante') || '');
+          formData.append('whatsup', getValues('whatsup') || '');
+          formData.append('correo', getValues('correo'));
+          formData.append('url_negocio', getValues('url_negocio') || '');
+          formData.append('url_youtube', getValues('url_youtube') || '');
+          formData.append('url_facebook', getValues('url_facebook') || '');
+          formData.append('url_instagram', getValues('url_instagram') || '');
+          formData.append('url_tiktok', getValues('url_tiktok') || '');
+          formData.append('estado', getValues('estado'));
+          if (getValues('a_o_verificacion')) {
+            formData.append('a_o_verificacion', getValues('a_o_verificacion'));
+          }
+          formData.append('autorizado_por', getValues('autorizado_por') || '');
+          if (files[0]?.file) {
+            formData.append('logo', files[0].file);
+          }
+
+          // Agregar las fotografías (máximo 5)
+          // NOTA: Las fotos se guardan en tabla relacionada, necesitas crear el negocio primero
+          // para obtener el id_negocio y luego crear las fotografías
+          fotos.forEach((foto) => {
+            if (foto.file) {
+              formData.append('fotografias', foto.file);
+            }
+          });
+
+          toast.promise(
+            (async () => {
+              const res = await CrearNegocio(formData);
+              if (!res?.ok) {
+                throw new Error(res?.message);
+              }
+              router.refresh();
+              router.push('/');
+              return res.message;
+            })(),
+            {
+              loading: 'Creando negocio....',
+              success: (msg) => msg,
+              error: (err) => err.message,
+            },
+          );
+        }}
+      />
       <form className="m-6" onSubmit={handleSubmit(onSubmit)}>
         <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm">
           <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100 dark:border-zinc-800">
@@ -92,7 +157,10 @@ export default function CrearNegocio() {
               </div>
               <h3 className="text-lg font-bold">Información del Negocio</h3>
             </div>
-            <button className="flex items-center max-lg:hidden gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md shadow-primary/10">
+            <button
+              type="submit"
+              className="flex items-center max-lg:hidden gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md shadow-primary/10"
+            >
               <MdSaveAlt size={25} />
               Guardar
             </button>
@@ -138,16 +206,11 @@ export default function CrearNegocio() {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold" htmlFor="sub_categoria">
+              <label className="text-sm font-semibold" htmlFor="Actividad">
                 Actividad
               </label>
-              <input
-                className={inputClass}
-                type="text"
-                id="sub_categoria"
-                {...register('sub_categoria')}
-              />
-              {errors.sub_categoria?.message && <p>{errors.sub_categoria.message}</p>}
+              <input className={inputClass} type="text" id="Actividad" {...register('actividad')} />
+              {errors.actividad?.message && <p>{errors.actividad.message}</p>}
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -162,7 +225,18 @@ export default function CrearNegocio() {
               />
               {errors.unidad_productiva?.message && <p>{errors.unidad_productiva.message}</p>}
             </div>
-
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <label className="text-sm font-semibold" htmlFor="sub_categoria">
+                Sub categoria
+              </label>
+              <input
+                className={inputClass}
+                type="text"
+                id="sub_categoria"
+                {...register('sub_categoria')}
+              />
+              {errors.sub_categoria?.message && <p>{errors.sub_categoria.message}</p>}
+            </div>
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-sm font-semibold" htmlFor="descripcion">
                 Descripción
@@ -208,20 +282,6 @@ export default function CrearNegocio() {
               </label>
               <input className={inputClass} type="text" id="direccion" {...register('direccion')} />
               {errors.direccion?.message && <p>{errors.direccion.message}</p>}
-            </div>
-
-            <div className="flex flex-col gap-1.5 md:col-span-2">
-              <label className="text-sm font-semibold" htmlFor="pos_gps">
-                Posición GPS
-              </label>
-              <input
-                className={inputClass}
-                type="text"
-                id="pos_gps"
-                placeholder="Latitud, Longitud"
-                {...register('pos_gps')}
-              />
-              {errors.pos_gps?.message && <p>{errors.pos_gps.message}</p>}
             </div>
           </div>
         </section>
@@ -278,7 +338,7 @@ export default function CrearNegocio() {
                 files={files}
                 onupdatefiles={setFiles}
                 name="files"
-                labelIdle='Arrastra tus imágenes o <span class="filepond--label-action">Selecciona</span>'
+                labelIdle='Arrastra tu imágenen o selecciona o selecciona  <span class="filepond--label-action">Foto obligatoria</span>'
                 acceptedFileTypes={['image/png', 'image/jpeg']}
                 labelFileTypeNotAllowed="Archivo no válido"
                 fileValidateTypeLabelExpectedTypes="Se espera PNG o JPEG"
@@ -355,6 +415,28 @@ export default function CrearNegocio() {
         <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+              <IoMdPhotos size={25} />
+            </div>
+            <h3 className="text-lg font-bold">Fotografias</h3>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <FilePond
+              files={fotos}
+              onupdatefiles={setFotos}
+              allowMultiple={true}
+              maxFiles={5}
+              name="fotos"
+              labelIdle='Arrastra maximo 5 de tus imágenes <span class="filepond--label-action">Foto opcional</span>'
+              acceptedFileTypes={['image/png', 'image/jpeg']}
+              labelFileTypeNotAllowed="Archivo no válido"
+              fileValidateTypeLabelExpectedTypes="Se espera PNG o JPEG"
+            />
+          </div>
+        </section>
+        <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
               <GoVerified size={25} />
             </div>
             <h3 className="text-lg font-bold">Estado y Verificación</h3>
@@ -365,7 +447,10 @@ export default function CrearNegocio() {
               <label className="text-sm font-semibold" htmlFor="estado">
                 Estado
               </label>
-              <input className={inputClass} type="text" id="estado" {...register('estado')} />
+              <select className={inputClass} id="estado" {...register('estado')}>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
               {errors.estado?.message && <p>{errors.estado.message}</p>}
             </div>
 
@@ -377,9 +462,7 @@ export default function CrearNegocio() {
                 className={inputClass}
                 type="date"
                 id="a_o_verificacion"
-                {...register('a_o_verificacion', {
-                  valueAsDate: true,
-                })}
+                {...register('a_o_verificacion')}
               />
               {errors.a_o_verificacion?.message && <p>{errors.a_o_verificacion.message}</p>}
             </div>
@@ -398,14 +481,16 @@ export default function CrearNegocio() {
             </div>
           </div>
         </section>
+        <div className="lg:hidden sticky bottom-6 left-0 right-0 flex justify-center px-4">
+          <button
+            type="submit"
+            className="bg-primary text-white px-8 py-3 rounded-2xl font-bold shadow-2xl flex items-center gap-2"
+          >
+            <MdOutlinePublishedWithChanges size={25} />
+            Publicar Cambios Globales
+          </button>
+        </div>
       </form>
-
-      <div className="lg:hidden sticky bottom-6 left-0 right-0 flex justify-center px-4">
-        <button className="bg-primary text-white px-8 py-3 rounded-2xl font-bold shadow-2xl flex items-center gap-2">
-          <MdOutlinePublishedWithChanges size={25} />
-          Publicar Cambios Globales
-        </button>
-      </div>
     </>
   );
 }

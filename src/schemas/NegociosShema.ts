@@ -1,4 +1,6 @@
 import { z } from 'zod';
+export const estados = ['Activo', 'Inactivo'] as const;
+
 
 export const DirVerdeSchema = z.object({
   negocio: z
@@ -65,20 +67,17 @@ export const DirVerdeSchema = z.object({
 
   url_negocio: z.url('Debe ser una URL válida').optional().or(z.literal('')),
 
-  pos_gps: z.string().optional().or(z.literal('')),
-
   id_fase: z
     .string()
-    .min(1, { message: 'escoga un grupo' })
+    .min(1, { message: 'escoga una fase' })
     .refine((val) => !Number.isNaN(Number(val)), {
-      message: 'La cantidad debe ser un grupo válido',
+      message: 'La cantidad debe ser una fase válida',
     })
     .optional(),
 
-  estado: z.string().max(100, 'El estado es demasiado largo').optional().or(z.literal('')),
+  estado: z.enum(estados, {message: 'coloque un estado valido'}),
 
-  a_o_verificacion: z.date().optional(),
+  a_o_verificacion: z.string().min(9, {message: "Incerta una fecha valida"}).max(10, {message: 'la fecha es muy larga'}),
 
   autorizado_por: z.string().max(150, 'El nombre es demasiado largo').optional().or(z.literal('')),
 });
-

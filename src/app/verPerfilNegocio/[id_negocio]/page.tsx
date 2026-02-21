@@ -26,17 +26,6 @@ export default async function usePerfilNegocio({
       grupos: true,
     },
   });
-  // const params = useParams();
-  // const id_negocio = params.id_negocio;
-
-  // const { data, isPending } = useQuery<DirVerdeInfo>({
-  //   queryKey: ['negocios', id_negocio],
-  //   queryFn: async () => {
-  //     const res = await axios(`https://api-base-de-datos.vercel.app/dir_verde/${id_negocio}`);
-  //     return res.data;
-  //   },
-  //   enabled: !!id_negocio,
-  // });
 
   const fase = (id_fase: number) => {
     if (id_fase === 1) {
@@ -130,7 +119,12 @@ export default async function usePerfilNegocio({
                   <CiEdit size={23} />
                 </button>
               </div> */}
-              {negocio?.url_negocio && <BotonesFormulario url={negocio?.url_negocio ?? ''} />}
+              {negocio?.url_negocio && (
+                <BotonesFormulario
+                  url={negocio?.url_negocio ?? ''}
+                  linkEdit={`/editarNegocio/${negocio.id_negocio}`}
+                />
+              )}
             </div>
           </div>
         </div>
