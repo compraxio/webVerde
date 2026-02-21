@@ -280,6 +280,7 @@ export default function CrearNego() {
               <label className="text-sm font-semibold" htmlFor="direccion">
                 Dirección
               </label>
+              <span className="text-[15px]">Incertar direccion exacta para evitar errores</span>
               <input className={inputClass} type="text" id="direccion" {...register('direccion')} />
               {errors.direccion?.message && <p>{errors.direccion.message}</p>}
             </div>

@@ -50,7 +50,15 @@ export default async function usePerfilNegocio({
         <div className="flex flex-col @[800px]:flex-row gap-8 items-start">
           <div className="relative">
             <div
-              className={`size-32 @[800px]:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${negocio?.a_o_verificacion ? 'border-primary' : 'border-red-500'} overflow-hidden`}
+              className={`size-32 @[800px]:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${
+                negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }) === '31 de diciembre de 1969'
+                  ? 'border-red-500'
+                  : 'border-primary'
+              } overflow-hidden`}
             >
               {negocio?.logo ? (
                 <img alt={negocio?.negocio} className="object-contain p-4" src={negocio.logo} />
@@ -64,14 +72,18 @@ export default async function usePerfilNegocio({
                 />
               )}
             </div>
-            {negocio?.a_o_verificacion ? (
+            {negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }) === '31 de diciembre de 1969' ? (
+              <div className="absolute -bottom-2 -right-2 bg-red-500 text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                NO VERIFICADO
+              </div>
+            ) : (
               <div className="absolute -bottom-2 -right-2 bg-primary text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
                 <CiCircleCheck size={15} />
                 VERIFICADO
-              </div>
-            ) : (
-              <div className="absolute -bottom-2 -right-2 bg-red-500 text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
-                NO VERIFICADO
               </div>
             )}
           </div>
@@ -299,7 +311,13 @@ export default async function usePerfilNegocio({
             )}
           </div>
         </div>
-        {negocio?.a_o_verificacion && (
+        {negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }) === '31 de diciembre de 1969' ? (
+          ''
+        ) : (
           <div className="bg-forest dark:bg-primary/5 bg-primary p-6 rounded-xl shadow-sm @[1000px]:col-span-1 text-white dark:text-forest">
             <div className="flex items-center gap-3 mb-6">
               <GoVerified size={22} />
@@ -311,7 +329,7 @@ export default async function usePerfilNegocio({
                   Año de Verificación
                 </h3>
                 <p className="text-2xl font-black">
-                  {negocio?.a_o_verificacion.toLocaleDateString('es-CO', {
+                  {negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',

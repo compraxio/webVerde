@@ -9,7 +9,11 @@ export async function ConseguirNegocio(id_negocio: number) {
   const negocio = await prisma.dir_verde.findFirst({
     where: {
       id_negocio,
+
     },
+    include: {
+      grupos:true
+    }
   });
   return negocio;
 }

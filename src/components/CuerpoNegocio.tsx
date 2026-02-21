@@ -39,7 +39,17 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                 width="1920"
               />
             )}
-            {n.a_o_verificacion ? (
+            {n.a_o_verificacion?.toLocaleDateString('es-CO', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }) === '31 de diciembre de 1969' ? (
+              <div className="absolute top-4 left-4">
+                <span className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-red-500 flex items-center gap-1 shadow-sm">
+                  No certificado
+                </span>
+              </div>
+            ) : (
               <div className="absolute top-4 left-4">
                 <span className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
                   <svg
@@ -55,12 +65,6 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                     />
                   </svg>
                   Certificado
-                </span>
-              </div>
-            ) : (
-              <div className="absolute top-4 left-4">
-                <span className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary flex items-center gap-1 shadow-sm">
-                  No certificado
                 </span>
               </div>
             )}
