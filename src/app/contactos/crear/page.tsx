@@ -1,5 +1,5 @@
 'use client';
-
+import { useAuthStore } from '@/store/AuthStore';
 import { CrearContacto } from '@/actions/Contactos';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -11,9 +11,19 @@ import { z } from 'zod';
 type Inputs = z.infer<typeof contactSchema>;
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Crear() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   const {
     register,
@@ -23,6 +33,8 @@ export default function Crear() {
     resolver: zodResolver(contactSchema),
     mode: 'onChange',
   });
+
+
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     toast.promise(
@@ -45,6 +57,8 @@ export default function Crear() {
     );
   };
 
+  if (!isAuthenticated) return null;
+  
   return (
     <form
       className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm m-10 flex flex-col"

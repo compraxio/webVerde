@@ -3,7 +3,6 @@
 import { useAuthStore } from '@/store/AuthStore';
 import Link from 'next/link';
 import { MdAddBusiness, MdEditNote } from 'react-icons/md';
-import { CuerpoNegocio, negocios } from '../CuerpoNegocio';
 
 export function BotonAgregarNegocio() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -34,27 +33,24 @@ export function BotonAgregarNegocioCel() {
   );
 }
 
-export function BotonAgregarNegocioTargeta({ negocios }: { negocios: negocios[] }) {
+export function BotonAgregarNegocioTargeta() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   if (!isAuthenticated) return null;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      <CuerpoNegocio negocios={negocios} />
-      <Link
-        href="/crearNegocio"
-        className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
-      >
-        <div className="w-16 h-16 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400 text-3xl">
-          <MdAddBusiness />
-        </div>
-        <div>
-          <p className="font-bold text-slate-800 dark:text-white">Añadir Nueva Empresa</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Inicia el proceso de certificación y registro en el directorio.
-          </p>
-        </div>
-      </Link>
-    </div>
+    <Link
+      href="/crearNegocio"
+      className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
+    >
+      <div className="w-16 h-16 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400 text-3xl">
+        <MdAddBusiness />
+      </div>
+      <div>
+        <p className="font-bold text-slate-800 dark:text-white">Añadir Nueva Empresa</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Inicia el proceso de certificación y registro en el directorio.
+        </p>
+      </div>
+    </Link>
   );
 }
 

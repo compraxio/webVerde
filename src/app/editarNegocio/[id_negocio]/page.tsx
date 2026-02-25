@@ -20,6 +20,7 @@ import { ConseguirNegocio, EditarNegocio } from '@/actions/Negocio';
 type Inputs = z.infer<typeof DirVerdeEditarSchema>;
 
 import { Prisma } from '../../../../generated/prisma/client';
+import { useAuthStore } from '@/store/AuthStore';
 
 type grupo = Prisma.gruposGetPayload<{
   include: {
@@ -30,11 +31,20 @@ type grupo = Prisma.gruposGetPayload<{
 type fase = Prisma.fasesGetPayload<object>;
 
 export default function ActualizarNegocio() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const params = useParams();
   const id_negocio = Number(params.id_negocio);
   const router = useRouter();
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
     async function cargarGruposYFases() {
@@ -141,6 +151,8 @@ export default function ActualizarNegocio() {
   };
   const inputClass =
     'w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm';
+
+  if (!isAuthenticated) return null;
 
   return (
     <>

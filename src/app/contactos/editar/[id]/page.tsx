@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuthStore } from '@/store/AuthStore';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contacEditarSchema } from '@/schemas/contactSchema';
@@ -13,9 +14,18 @@ import { useEffect } from 'react';
 type Inputs = z.infer<typeof contacEditarSchema>;
 
 export default function EditarCon() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const router = useRouter();
   const params = useParams();
   const id_contacto = Number(params.id);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   const {
     register,
@@ -65,6 +75,7 @@ export default function EditarCon() {
     );
   };
 
+  if (!isAuthenticated) return null;
   return (
     <form
       className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 mb-6 shadow-sm m-10 flex flex-col"
@@ -118,7 +129,7 @@ export default function EditarCon() {
             htmlFor="Nombre"
           >
             Nombre de contacto
-            <span className='text-red-500'>*</span>
+            <span className="text-red-500">*</span>
           </label>
           <input
             className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
@@ -135,7 +146,7 @@ export default function EditarCon() {
             htmlFor="extension"
           >
             Numero
-            <span className='text-red-500'>*</span>
+            <span className="text-red-500">*</span>
           </label>
           <div className="flex gap-6 ">
             <input

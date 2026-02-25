@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 
 import 'filepond/dist/filepond.min.css';
@@ -21,20 +21,30 @@ import { toast } from 'sonner';
 
 import { CrearGrupo } from '@/actions/Grupos';
 import { AlertImage } from '@/components/alerts/alertImage';
+import { useAuthStore } from '@/store/AuthStore';
 
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
-  FilePondPluginFileValidateSize
+  FilePondPluginFileValidateSize,
 );
 
 type Inputs = z.infer<typeof GrupoSchema>;
 
 export default function CrearGrup() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const [files, setFiles] = useState<any[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   const onSubmit: SubmitHandler<Inputs> = () => {
     setOpen(true);
@@ -49,6 +59,8 @@ export default function CrearGrup() {
     resolver: zodResolver(GrupoSchema),
     mode: 'onChange',
   });
+
+  if (!isAuthenticated) return null;
 
   return (
     <>

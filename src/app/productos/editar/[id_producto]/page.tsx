@@ -8,13 +8,23 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
 import { ConseguirProducto, EditarProducto } from '@/actions/Productos';
+import { useAuthStore } from '@/store/AuthStore';
 
 type Inputs = z.infer<typeof ProductoEditarSchema>;
 
 export default function ActualizarProducto() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const params = useParams();
   const router = useRouter();
   const id_producto = Number(params.id_producto);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   const {
     register,
@@ -62,6 +72,8 @@ export default function ActualizarProducto() {
       },
     );
   };
+
+  if (!isAuthenticated) return null;
 
   return (
     <form

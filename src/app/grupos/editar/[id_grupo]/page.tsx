@@ -8,14 +8,24 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
 import { ConseguirGrupo, EditarGrupo } from '@/actions/Grupos';
+import { useAuthStore } from '@/store/AuthStore';
 
 type Inputs = z.infer<typeof GrupoEditarSchema>;
 
 export default function ActualizarGrupo() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const params = useParams();
   const router = useRouter();
 
   const id_grupo = Number(params.id_grupo);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   const {
     register,
@@ -58,6 +68,8 @@ export default function ActualizarGrupo() {
       },
     );
   };
+
+  if (!isAuthenticated) return null;
 
   return (
     <form

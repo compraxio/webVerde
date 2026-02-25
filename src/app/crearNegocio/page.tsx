@@ -40,6 +40,7 @@ type Inputs = z.infer<typeof DirVerdeSchema>;
 import { Prisma } from '../../../generated/prisma/client';
 import { IoMdPhotos } from 'react-icons/io';
 import { AlertImage } from '@/components/alerts/alertImage';
+import { useAuthStore } from '@/store/AuthStore';
 
 type grupo = Prisma.gruposGetPayload<{
   include: {
@@ -50,12 +51,21 @@ type grupo = Prisma.gruposGetPayload<{
 type fase = Prisma.fasesGetPayload<object>;
 
 export default function CrearNego() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const router = useRouter();
   const [files, setFiles] = useState<any[]>([]);
   const [fotos, setFotos] = useState<any[]>([]);
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
   const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error('Debes iniciar sesión para crear un contacto');
+      router.push('/auth');
+    }
+  }, [isAuthenticated, router]);
 
   useEffect(() => {
     async function cargarGruposYFases() {
@@ -87,6 +97,8 @@ export default function CrearNego() {
 
   const inputClass =
     'w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm';
+  if (!isAuthenticated) return null;
+
   return (
     <>
       <AlertImage
