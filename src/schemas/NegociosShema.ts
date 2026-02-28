@@ -30,6 +30,7 @@ export const DirVerdeSchema = z.object({
   descripcion: z
     .string()
     .max(500, 'La descripción no puede exceder los 500 caracteres')
+    .optional()
     .or(z.literal('')),
 
   actividad: z
@@ -39,18 +40,27 @@ export const DirVerdeSchema = z.object({
 
   unidad_productiva: z
     .string()
-    .min(2, 'La unidad productiva es obligatoria')
-    .max(150, 'La unidad productiva no puede exceder los 150 caracteres'),
+    .max(150, 'La unidad productiva no puede exceder los 150 caracteres')
+    .optional()
+    .or(z.literal('')),
 
-  direccion: z.string().min(5, 'La dirección es obligatoria'),
+  direccion: z.string().optional().or(z.literal('')),
 
-  latitud: z.string().refine((val) => !Number.isNaN(Number(val)), {
-    message: 'La latitud debe ser un número válido',
-  }),
+  latitud: z
+    .string()
+    .refine((val) => !Number.isNaN(Number(val)), {
+      message: 'La latitud debe ser un número válido',
+    })
+    .optional()
+    .or(z.literal('')),
 
-  longitud: z.string().refine((val) => !Number.isNaN(Number(val)), {
-    message: 'La longitud debe ser un número válido',
-  }),
+  longitud: z
+    .string()
+    .refine((val) => !Number.isNaN(Number(val)), {
+      message: 'La longitud debe ser un número válido',
+    })
+    .optional()
+    .or(z.literal('')),
 
   representante: z
     .string()
@@ -110,15 +120,24 @@ export const DirVerdeEditarSchema = z.object({
   descripcion: z
     .string()
     .max(500, 'La descripción no puede exceder los 500 caracteres')
+    .optional()
     .or(z.literal('')),
 
-  latitud: z.string().refine((val) => !Number.isNaN(Number(val)), {
-    message: 'La latitud debe ser un número válido',
-  }),
+  latitud: z
+    .string()
+    .refine((val) => !Number.isNaN(Number(val)), {
+      message: 'La latitud debe ser un número válido',
+    })
+    .optional()
+    .or(z.literal('')),
 
-  longitud: z.string().refine((val) => !Number.isNaN(Number(val)), {
-    message: 'La longitud debe ser un número válido',
-  }),
+  longitud: z
+    .string()
+    .refine((val) => !Number.isNaN(Number(val)), {
+      message: 'La longitud debe ser un número válido',
+    })
+    .optional()
+    .or(z.literal('')),
 
   actividad: z
     .string()
@@ -127,10 +146,11 @@ export const DirVerdeEditarSchema = z.object({
 
   unidad_productiva: z
     .string()
-    .min(2, 'La unidad productiva es obligatoria')
-    .max(150, 'La unidad productiva no puede exceder los 150 caracteres'),
+    .max(150, 'La unidad productiva no puede exceder los 150 caracteres')
+    .optional()
+    .or(z.literal('')),
 
-  direccion: z.string().min(5, 'La dirección es obligatoria'),
+  direccion: z.string().optional().or(z.literal('')),
 
   representante: z
     .string()

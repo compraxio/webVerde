@@ -18,7 +18,7 @@ import {
   Navigation,
   // Loader2, Clock, Route
 } from 'lucide-react';
-import { ConseguirTodosNegocios } from '@/actions/Negocio';
+import { ConseguirTodosNegociosMapa } from '@/actions/Negocio';
 
 //*marcador
 
@@ -62,7 +62,7 @@ export default function CustomStyleExample() {
 
   useEffect(() => {
     const ConseguirNegocio = async () => {
-      const negocios = await ConseguirTodosNegocios();
+      const negocios = await ConseguirTodosNegociosMapa();
       setNegocios(negocios);
     };
     ConseguirNegocio();

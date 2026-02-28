@@ -126,11 +126,11 @@ export default function ActualizarNegocio() {
         formData.append('id_grupo', String(data.id_grupo));
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
-        formData.append('descripcion', data.descripcion);
+        formData.append('descripcion', data.descripcion || "");
         formData.append('actividad', data.actividad);
         formData.append('sub_categoria', data.sub_categoria || '');
         formData.append('id_municipio', String(data.id_municipio));
-        formData.append('direccion', data.direccion);
+        formData.append('direccion', data.direccion || '');
         formData.append('representante', data.representante || '');
         formData.append('url_negocio', data.url_negocio || '');
         formData.append('url_youtube', data.url_youtube || '');
@@ -138,8 +138,8 @@ export default function ActualizarNegocio() {
         formData.append('url_instagram', data.url_instagram || '');
         formData.append('url_tiktok', data.url_tiktok || '');
         formData.append('estado', data.estado);
-        formData.append('latitud', data.latitud);
-        formData.append('longitud', data.longitud);
+        formData.append('latitud', data.latitud || '');
+        formData.append('longitud', data.longitud || '');
         if (data.a_o_verificacion) {
           formData.append('a_o_verificacion', data.a_o_verificacion);
         }
@@ -241,7 +241,7 @@ export default function ActualizarNegocio() {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="unidad_productiva">
-                Unidad Productiva<span className="text-red-500">*</span>
+                Unidad Productiva
               </label>
               <input
                 className={inputClass}
@@ -307,7 +307,7 @@ export default function ActualizarNegocio() {
 
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-sm font-semibold" htmlFor="direccion">
-                Dirección<span className="text-red-500">*</span>
+                Dirección
               </label>
               <input
                 className={inputClass}
@@ -320,7 +320,7 @@ export default function ActualizarNegocio() {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="direccion">
-                Latitud<span className="text-red-500">*</span>
+                Latitud
               </label>
               <input
                 className={inputClass}
@@ -333,7 +333,7 @@ export default function ActualizarNegocio() {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="longitud">
-                Longitud<span className="text-red-500">*</span>
+                Longitud
               </label>
               <input
                 className={inputClass}

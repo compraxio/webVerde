@@ -122,11 +122,11 @@ export default function CrearNego() {
           formData.append('id_grupo', String(getValues('id_grupo')));
           formData.append('id_fase', String(getValues('id_fase')));
           formData.append('unidad_productiva', getValues('unidad_productiva') || '');
-          formData.append('descripcion', getValues('descripcion'));
+          formData.append('descripcion', getValues('descripcion') || '');
           formData.append('actividad', getValues('actividad'));
           formData.append('sub_categoria', getValues('sub_categoria') || '');
           formData.append('id_municipio', String(getValues('id_municipio')));
-          formData.append('direccion', getValues('direccion'));
+          formData.append('direccion', getValues('direccion') || '');
           formData.append('representante', getValues('representante') || '');
           formData.append('url_negocio', getValues('url_negocio') || '');
           formData.append('url_youtube', getValues('url_youtube') || '');
@@ -243,7 +243,7 @@ export default function CrearNego() {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="unidad_productiva">
-                Unidad Productiva<span className="text-red-500">*</span>
+                Unidad Productiva
               </label>
               <input
                 className={inputClass}
@@ -308,7 +308,7 @@ export default function CrearNego() {
 
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-sm font-semibold" htmlFor="direccion">
-                Dirección<span className="text-red-500">*</span>
+                Dirección
               </label>
               <input
                 className={inputClass}
@@ -321,7 +321,7 @@ export default function CrearNego() {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="direccion">
-                Latitud<span className="text-red-500">*</span>
+                Latitud
               </label>
               <input
                 className={inputClass}
@@ -334,7 +334,7 @@ export default function CrearNego() {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="longitud">
-                Longitud<span className="text-red-500">*</span>
+                Longitud
               </label>
               <input
                 className={inputClass}

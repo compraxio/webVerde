@@ -10,6 +10,17 @@ export async function ConseguirTodosNegocios() {
   return negocios
 }
 
+export async function ConseguirTodosNegociosMapa() {
+  const negocios = await prisma.dir_verde.findMany({
+    where: {
+      pos_gps: {
+        not: null,
+      },
+    },
+  });
+  return negocios;
+}
+
 export async function ConseguirNegocio(id_negocio: number) {
   const negocio = await prisma.dir_verde.findFirst({
     where: {
@@ -54,10 +65,7 @@ export async function CrearNegocio(formData: FormData) {
     !id_grupo ||
     !id_municipio ||
     !actividad ||
-    !direccion ||
-    !logo ||
-    !lat ||
-    !lng
+    !logo
   ) {
     return {
       ok: false,
@@ -88,7 +96,7 @@ export async function CrearNegocio(formData: FormData) {
         url_facebook,
         unidad_productiva,
         representante,
-        pos_gps: `${lat},${lng}`,
+        pos_gps: lat && lng ? `${lat},${lng}` : null,
         logo: blobUrl,
         id_grupo: Number(id_grupo),
         id_fase: Number(id_fase),
@@ -218,10 +226,7 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
     !negocio ||
     !id_grupo ||
     !id_municipio ||
-    !actividad ||
-    !direccion ||
-    !latitud ||
-    !longitud
+    !actividad
   ) {
     return {
       ok: false,
@@ -259,7 +264,7 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
         url_facebook,
         unidad_productiva,
         representante,
-        pos_gps: `${latitud},${longitud}`,
+        pos_gps:  latitud && longitud ? `${latitud},${longitud}` : null,
         id_grupo: Number(id_grupo),
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),

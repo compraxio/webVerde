@@ -27,8 +27,8 @@ model dir_verde {
   sub_categoria          String?
   descripcion            String?
   actividad              String
-  unidad_productiva      String
-  direccion              String
+  unidad_productiva      String?
+  direccion              String?
   representante          String?
   logo                   String?
   url_youtube            String?

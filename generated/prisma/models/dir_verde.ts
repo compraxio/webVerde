@@ -296,8 +296,8 @@ export type Dir_verdeGroupByOutputType = {
   sub_categoria: string | null
   descripcion: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva: string | null
+  direccion: string | null
   representante: string | null
   logo: string | null
   url_youtube: string | null
@@ -343,8 +343,8 @@ export type dir_verdeWhereInput = {
   sub_categoria?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   descripcion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   actividad?: Prisma.StringFilter<"dir_verde"> | string
-  unidad_productiva?: Prisma.StringFilter<"dir_verde"> | string
-  direccion?: Prisma.StringFilter<"dir_verde"> | string
+  unidad_productiva?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -372,8 +372,8 @@ export type dir_verdeOrderByWithRelationInput = {
   sub_categoria?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   actividad?: Prisma.SortOrder
-  unidad_productiva?: Prisma.SortOrder
-  direccion?: Prisma.SortOrder
+  unidad_productiva?: Prisma.SortOrderInput | Prisma.SortOrder
+  direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   representante?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   url_youtube?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -404,8 +404,8 @@ export type dir_verdeWhereUniqueInput = Prisma.AtLeast<{
   sub_categoria?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   descripcion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   actividad?: Prisma.StringFilter<"dir_verde"> | string
-  unidad_productiva?: Prisma.StringFilter<"dir_verde"> | string
-  direccion?: Prisma.StringFilter<"dir_verde"> | string
+  unidad_productiva?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -433,8 +433,8 @@ export type dir_verdeOrderByWithAggregationInput = {
   sub_categoria?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   actividad?: Prisma.SortOrder
-  unidad_productiva?: Prisma.SortOrder
-  direccion?: Prisma.SortOrder
+  unidad_productiva?: Prisma.SortOrderInput | Prisma.SortOrder
+  direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   representante?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   url_youtube?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -465,8 +465,8 @@ export type dir_verdeScalarWhereWithAggregatesInput = {
   sub_categoria?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   actividad?: Prisma.StringWithAggregatesFilter<"dir_verde"> | string
-  unidad_productiva?: Prisma.StringWithAggregatesFilter<"dir_verde"> | string
-  direccion?: Prisma.StringWithAggregatesFilter<"dir_verde"> | string
+  unidad_productiva?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
+  direccion?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
@@ -486,8 +486,8 @@ export type dir_verdeCreateInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -515,8 +515,8 @@ export type dir_verdeUncheckedCreateInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -539,8 +539,8 @@ export type dir_verdeUpdateInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -568,8 +568,8 @@ export type dir_verdeUncheckedUpdateInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -595,8 +595,8 @@ export type dir_verdeCreateManyInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -616,8 +616,8 @@ export type dir_verdeUpdateManyMutationInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -640,8 +640,8 @@ export type dir_verdeUncheckedUpdateManyInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -900,8 +900,8 @@ export type dir_verdeCreateWithoutContactosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -928,8 +928,8 @@ export type dir_verdeUncheckedCreateWithoutContactosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -967,8 +967,8 @@ export type dir_verdeUpdateWithoutContactosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -995,8 +995,8 @@ export type dir_verdeUncheckedUpdateWithoutContactosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1018,8 +1018,8 @@ export type dir_verdeCreateWithoutFotografiasInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1046,8 +1046,8 @@ export type dir_verdeUncheckedCreateWithoutFotografiasInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1085,8 +1085,8 @@ export type dir_verdeUpdateWithoutFotografiasInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1113,8 +1113,8 @@ export type dir_verdeUncheckedUpdateWithoutFotografiasInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1136,8 +1136,8 @@ export type dir_verdeCreateWithoutGruposInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1163,8 +1163,8 @@ export type dir_verdeUncheckedCreateWithoutGruposInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1219,8 +1219,8 @@ export type dir_verdeScalarWhereInput = {
   sub_categoria?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   descripcion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   actividad?: Prisma.StringFilter<"dir_verde"> | string
-  unidad_productiva?: Prisma.StringFilter<"dir_verde"> | string
-  direccion?: Prisma.StringFilter<"dir_verde"> | string
+  unidad_productiva?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -1240,8 +1240,8 @@ export type dir_verdeCreateWithoutMunicipiosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1267,8 +1267,8 @@ export type dir_verdeUncheckedCreateWithoutMunicipiosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1317,8 +1317,8 @@ export type dir_verdeCreateWithoutProductosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1345,8 +1345,8 @@ export type dir_verdeUncheckedCreateWithoutProductosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1384,8 +1384,8 @@ export type dir_verdeUpdateWithoutProductosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1412,8 +1412,8 @@ export type dir_verdeUncheckedUpdateWithoutProductosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1437,8 +1437,8 @@ export type dir_verdeCreateManyGruposInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1458,8 +1458,8 @@ export type dir_verdeUpdateWithoutGruposInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1485,8 +1485,8 @@ export type dir_verdeUncheckedUpdateWithoutGruposInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1511,8 +1511,8 @@ export type dir_verdeUncheckedUpdateManyWithoutGruposInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1534,8 +1534,8 @@ export type dir_verdeCreateManyMunicipiosInput = {
   sub_categoria?: string | null
   descripcion?: string | null
   actividad: string
-  unidad_productiva: string
-  direccion: string
+  unidad_productiva?: string | null
+  direccion?: string | null
   representante?: string | null
   logo?: string | null
   url_youtube?: string | null
@@ -1555,8 +1555,8 @@ export type dir_verdeUpdateWithoutMunicipiosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1582,8 +1582,8 @@ export type dir_verdeUncheckedUpdateWithoutMunicipiosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1608,8 +1608,8 @@ export type dir_verdeUncheckedUpdateManyWithoutMunicipiosInput = {
   sub_categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   actividad?: Prisma.StringFieldUpdateOperationsInput | string
-  unidad_productiva?: Prisma.StringFieldUpdateOperationsInput | string
-  direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  unidad_productiva?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1814,8 +1814,8 @@ export type $dir_verdePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     sub_categoria: string | null
     descripcion: string | null
     actividad: string
-    unidad_productiva: string
-    direccion: string
+    unidad_productiva: string | null
+    direccion: string | null
     representante: string | null
     logo: string | null
     url_youtube: string | null
