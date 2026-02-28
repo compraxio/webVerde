@@ -19,13 +19,6 @@ export default function ActualizarGrupo() {
 
   const id_grupo = Number(params.id_grupo);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      toast.error('Debes iniciar sesión para editar un grupo');
-      router.push('/auth');
-    }
-  }, [isAuthenticated, router]);
-
   const {
     register,
     handleSubmit,
@@ -37,6 +30,12 @@ export default function ActualizarGrupo() {
   });
 
   useEffect(() => {
+    function verificarAutenticacion() {
+      if (!isAuthenticated) {
+        toast.error('Debes iniciar sesión para editar un grupo');
+        router.push('/auth');
+      }
+    }
     async function cargarGrupo() {
       const grupo = await ConseguirGrupo(id_grupo);
       if (!grupo) {
@@ -47,8 +46,9 @@ export default function ActualizarGrupo() {
       setValue('nombre', `${grupo?.actividad.split(':')[0]}`);
       setValue('actividad', `${grupo?.actividad.split(':')[1]}`);
     }
+    verificarAutenticacion();
     cargarGrupo();
-  }, [id_grupo, setValue, router]);
+  }, [id_grupo, setValue, router, isAuthenticated]);
 
   if (!isAuthenticated) return null;
 

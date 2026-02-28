@@ -12,6 +12,10 @@ import { EliminarNegocio } from '@/actions/Negocio';
 import { useState } from 'react';
 import { AlertDelate } from './alerts/alertDelate';
 import { AccionesNegocios } from './Admin/NegociosAuth';
+import { FaFacebook, FaYoutube } from 'react-icons/fa';
+import { AiFillTikTok } from 'react-icons/ai';
+import { FaSquareInstagram } from 'react-icons/fa6';
+import { MdVisibility, MdWeb } from 'react-icons/md';
 
 export type negocios = Prisma.dir_verdeGetPayload<object>;
 
@@ -124,6 +128,50 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
             </p>
             <div className="flex items-center justify-center border-t border-slate-100 dark:border-zinc-800 pt-4">
               <div className="flex items-center gap-2">
+                {n.url_negocio && (
+                  <a href={n.url_negocio ?? ''} target="_blank" rel="noopener noreferrer">
+                    <MdWeb
+                      size={25}
+                      className="text-slate-400 hover:text-sky-500 transition-colors duration-300"
+                    />
+                  </a>
+                )}
+
+                {n.url_instagram && (
+                  <a href={n.url_instagram ?? ''} target="_blank" rel="noopener noreferrer">
+                    <FaSquareInstagram
+                      size={25}
+                      className="text-slate-400 hover:text-pink-500 transition-colors duration-300"
+                    />
+                  </a>
+                )}
+
+                {n.url_youtube && (
+                  <a href={n.url_youtube ?? ''} target="_blank" rel="noopener noreferrer">
+                    <FaYoutube
+                      size={25}
+                      className="text-slate-400 hover:text-red-600 transition-colors duration-300"
+                    />
+                  </a>
+                )}
+
+                {n.url_tiktok && (
+                  <a href={n.url_tiktok ?? ''} target="_blank" rel="noopener noreferrer">
+                    <AiFillTikTok
+                      size={25}
+                      className="text-slate-400 hover:text-black dark:hover:text-white transition-colors duration-300"
+                    />
+                  </a>
+                )}
+
+                {n.url_facebook && (
+                  <a href={n.url_facebook ?? ''} target="_blank" rel="noopener noreferrer">
+                    <FaFacebook
+                      size={25}
+                      className="text-slate-400 hover:text-blue-600 transition-colors duration-300"
+                    />
+                  </a>
+                )}
 
                 <AccionesNegocios
                   id_negocio={n.id_negocio}
@@ -134,9 +182,9 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                 />
                 <Link
                   href={`/verPerfilNegocio/${n.id_negocio}`}
-                  className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 px-4 py-1.5 rounded-lg text-xs font-semibold"
+                  className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 px-2 py-1.5 rounded-lg text-xs font-semibold"
                 >
-                  Ver Perfil
+                  <MdVisibility size={25} />
                 </Link>
               </div>
             </div>

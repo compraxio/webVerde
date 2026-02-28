@@ -58,7 +58,7 @@ export default function EditarCon() {
 
       if (!contacto) {
         toast.error('Contacto no encontrado');
-        router.push('/contactos');
+        router.push('/contactos/0');
       }
 
       setValue('nombre', contacto?.nombre ?? '');
@@ -85,7 +85,7 @@ export default function EditarCon() {
       {
         loading: 'Actualizando contacto....',
         success: (msg) => {
-          router.push('/contactos');
+          router.push('/contactos/0');
           return msg;
         },
         error: (err) => err.message,

@@ -54,7 +54,7 @@ model eventos {
   id_evento        Int     @id @default(autoincrement())
   evento           String
   direccion        String
-  fecha            String?
+  fecha            DateTime?
   hora             String?
   link             String?
   temas            String?

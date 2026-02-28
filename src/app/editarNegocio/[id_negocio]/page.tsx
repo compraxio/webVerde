@@ -109,7 +109,7 @@ export default function ActualizarNegocio() {
       setValue('url_instagram', `${negocio?.url_instagram || ''}`);
       setValue('url_tiktok', `${negocio?.url_tiktok || ''}`);
       setValue('estado', negocio?.estado as 'Activo' | 'Inactivo');
-      setValue('a_o_verificacion', `${negocio?.a_o_verificacion || ''}`);
+      setValue('a_o_verificacion', `${negocio?.a_o_verificacion?.toISOString().split('T')[0] || ''}`);
       setValue('autorizado_por', `${negocio?.autorizado_por || ''}`);
       setValue('latitud', `${negocio?.pos_gps?.split(',')[0] || ''}`);
       setValue('longitud', `${negocio?.pos_gps?.split(',')[1] || ''}`);

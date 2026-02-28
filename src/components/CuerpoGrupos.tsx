@@ -9,7 +9,6 @@ type grupo = Prisma.gruposGetPayload<{
 }>;
 
 import { toast } from 'sonner';
-import Link from 'next/link';
 import { EliminarGrupo } from '@/actions/Grupos';
 import { useState } from 'react';
 import { AlertDelate } from './alerts/alertDelate';

@@ -1,5 +1,4 @@
 import { CuerpoGrupos } from "@/components/CuerpoGrupos";
-import Link from "next/link";
 import { obtenerTodosGrupos } from "@/actions/Grupos";
 import { BotonAgregarGrupo, BotonAgregarGrupoCel } from "@/components/Admin/GruposAuth";
 

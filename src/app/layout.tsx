@@ -1,4 +1,3 @@
-
 export const dynamic = 'force-dynamic';
 
 import './globals.css';
@@ -24,8 +23,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="es" suppressHydrationWarning>
       <body
@@ -206,8 +203,41 @@ export default function RootLayout({
                   className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
                   href="/fotografias"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="size-6" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5m10.5-11.25h.008v.008h-.008zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0"/></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="currentColor"
+                    className="size-6"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5m10.5-11.25h.008v.008h-.008zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0"
+                    />
+                  </svg>
                   Fotos
+                </Link>
+                <Link
+                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  href="/eventos/Activo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="currentColor"
+                    className="size-6"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12zM12 15h.008v.008H12zm0 2.25h.008v.008H12zM9.75 15h.008v.008H9.75zm0 2.25h.008v.008H9.75zM7.5 15h.008v.008H7.5zm0 2.25h.008v.008H7.5zm6.75-4.5h.008v.008h-.008zm0 2.25h.008v.008h-.008zm0 2.25h.008v.008h-.008zm2.25-4.5h.008v.008H16.5zm0 2.25h.008v.008H16.5z"
+                    />
+                  </svg>
+                  Eventos
                 </Link>
               </nav>
               <div className="p-4 mt-auto">
@@ -220,7 +250,10 @@ export default function RootLayout({
               <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-slate-200 dark:border-zinc-800">
                 <div className="flex items-center gap-4">
                   <ModeToggle />
-                  <Link href='/auth' className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-zinc-800">
+                  <Link
+                    href="/auth"
+                    className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-zinc-800"
+                  >
                     <div className="text-right hidden sm:block">
                       <p className="text-sm font-semibold">Admin Cardique</p>
                       <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -258,7 +291,10 @@ export default function RootLayout({
                 <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-slate-200 dark:border-zinc-800">
                   <div className="flex items-center gap-4">
                     <ModeToggle />
-                    <Link href='/auth' className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-zinc-800">
+                    <Link
+                      href="/auth"
+                      className="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-zinc-800"
+                    >
                       <div className="text-right hidden sm:block">
                         <p className="text-sm font-semibold">Admin Cardique</p>
                         <p className="text-xs text-slate-500 dark:text-slate-400">

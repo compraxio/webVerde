@@ -38,7 +38,7 @@ export type EventosMinAggregateOutputType = {
   id_evento: number | null
   evento: string | null
   direccion: string | null
-  fecha: string | null
+  fecha: Date | null
   hora: string | null
   link: string | null
   temas: string | null
@@ -51,7 +51,7 @@ export type EventosMaxAggregateOutputType = {
   id_evento: number | null
   evento: string | null
   direccion: string | null
-  fecha: string | null
+  fecha: Date | null
   hora: string | null
   link: string | null
   temas: string | null
@@ -213,7 +213,7 @@ export type EventosGroupByOutputType = {
   id_evento: number
   evento: string
   direccion: string
-  fecha: string | null
+  fecha: Date | null
   hora: string | null
   link: string | null
   temas: string | null
@@ -249,7 +249,7 @@ export type eventosWhereInput = {
   id_evento?: Prisma.IntFilter<"eventos"> | number
   evento?: Prisma.StringFilter<"eventos"> | string
   direccion?: Prisma.StringFilter<"eventos"> | string
-  fecha?: Prisma.StringNullableFilter<"eventos"> | string | null
+  fecha?: Prisma.DateTimeNullableFilter<"eventos"> | Date | string | null
   hora?: Prisma.StringNullableFilter<"eventos"> | string | null
   link?: Prisma.StringNullableFilter<"eventos"> | string | null
   temas?: Prisma.StringNullableFilter<"eventos"> | string | null
@@ -278,7 +278,7 @@ export type eventosWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.eventosWhereInput | Prisma.eventosWhereInput[]
   evento?: Prisma.StringFilter<"eventos"> | string
   direccion?: Prisma.StringFilter<"eventos"> | string
-  fecha?: Prisma.StringNullableFilter<"eventos"> | string | null
+  fecha?: Prisma.DateTimeNullableFilter<"eventos"> | Date | string | null
   hora?: Prisma.StringNullableFilter<"eventos"> | string | null
   link?: Prisma.StringNullableFilter<"eventos"> | string | null
   temas?: Prisma.StringNullableFilter<"eventos"> | string | null
@@ -312,7 +312,7 @@ export type eventosScalarWhereWithAggregatesInput = {
   id_evento?: Prisma.IntWithAggregatesFilter<"eventos"> | number
   evento?: Prisma.StringWithAggregatesFilter<"eventos"> | string
   direccion?: Prisma.StringWithAggregatesFilter<"eventos"> | string
-  fecha?: Prisma.StringNullableWithAggregatesFilter<"eventos"> | string | null
+  fecha?: Prisma.DateTimeNullableWithAggregatesFilter<"eventos"> | Date | string | null
   hora?: Prisma.StringNullableWithAggregatesFilter<"eventos"> | string | null
   link?: Prisma.StringNullableWithAggregatesFilter<"eventos"> | string | null
   temas?: Prisma.StringNullableWithAggregatesFilter<"eventos"> | string | null
@@ -324,7 +324,7 @@ export type eventosScalarWhereWithAggregatesInput = {
 export type eventosCreateInput = {
   evento: string
   direccion: string
-  fecha?: string | null
+  fecha?: Date | string | null
   hora?: string | null
   link?: string | null
   temas?: string | null
@@ -337,7 +337,7 @@ export type eventosUncheckedCreateInput = {
   id_evento?: number
   evento: string
   direccion: string
-  fecha?: string | null
+  fecha?: Date | string | null
   hora?: string | null
   link?: string | null
   temas?: string | null
@@ -349,7 +349,7 @@ export type eventosUncheckedCreateInput = {
 export type eventosUpdateInput = {
   evento?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
-  fecha?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hora?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   temas?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -362,7 +362,7 @@ export type eventosUncheckedUpdateInput = {
   id_evento?: Prisma.IntFieldUpdateOperationsInput | number
   evento?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
-  fecha?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hora?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   temas?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -375,7 +375,7 @@ export type eventosCreateManyInput = {
   id_evento?: number
   evento: string
   direccion: string
-  fecha?: string | null
+  fecha?: Date | string | null
   hora?: string | null
   link?: string | null
   temas?: string | null
@@ -387,7 +387,7 @@ export type eventosCreateManyInput = {
 export type eventosUpdateManyMutationInput = {
   evento?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
-  fecha?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hora?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   temas?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -400,7 +400,7 @@ export type eventosUncheckedUpdateManyInput = {
   id_evento?: Prisma.IntFieldUpdateOperationsInput | number
   evento?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
-  fecha?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hora?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   temas?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -519,7 +519,7 @@ export type $eventosPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id_evento: number
     evento: string
     direccion: string
-    fecha: string | null
+    fecha: Date | null
     hora: string | null
     link: string | null
     temas: string | null
@@ -952,7 +952,7 @@ export interface eventosFieldRefs {
   readonly id_evento: Prisma.FieldRef<"eventos", 'Int'>
   readonly evento: Prisma.FieldRef<"eventos", 'String'>
   readonly direccion: Prisma.FieldRef<"eventos", 'String'>
-  readonly fecha: Prisma.FieldRef<"eventos", 'String'>
+  readonly fecha: Prisma.FieldRef<"eventos", 'DateTime'>
   readonly hora: Prisma.FieldRef<"eventos", 'String'>
   readonly link: Prisma.FieldRef<"eventos", 'String'>
   readonly temas: Prisma.FieldRef<"eventos", 'String'>
