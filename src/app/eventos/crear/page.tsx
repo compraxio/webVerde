@@ -81,23 +81,22 @@ export default function CrearEventoPage() {
             formData.append('imagen', files[0].file);
           }
           //*Ponerse atento a esto
-            toast.promise(
-              (async () => {
-                const res = await CrearEvento(formData);
-                if (!res.ok) {
-                  throw new Error(res.message);
-                }
-                router.refresh();
-                router.push(`/eventos/${getValues('estado')}`);
-                return res.message;
-              })(),
-              {
-                loading: 'Creando evento...',
-                success: (msg) => msg,
-                error: (err) => err.message,
-              },
-            );
-
+          toast.promise(
+            (async () => {
+              const res = await CrearEvento(formData);
+              if (!res.ok) {
+                throw new Error(res.message);
+              }
+              router.refresh();
+              router.push(`/eventos/${getValues('estado')}`);
+              return res.message;
+            })(),
+            {
+              loading: 'Creando evento...',
+              success: (msg) => msg,
+              error: (err) => err.message,
+            },
+          );
         }}
       />
 
@@ -214,7 +213,7 @@ export default function CrearEventoPage() {
                 className="text-sm font-semibold text-slate-700 dark:text-slate-300"
                 htmlFor="tema"
               >
-                tema del evento
+                temas del evento<span className="text-red-500">*</span>
               </label>
               <input
                 className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
@@ -229,7 +228,7 @@ export default function CrearEventoPage() {
                 className="text-sm font-semibold text-slate-700 dark:text-slate-300"
                 htmlFor="tipo"
               >
-                tipo de evento
+                tipo de evento<span className="text-red-500">*</span>
               </label>
               <input
                 className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <title>Negocios Verdes - Event Details</title>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+    <div class="relative flex h-screen w-full overflow-hidden">
+        <!-- Sidebar -->
+        <aside
+            class="flex h-full w-64 flex-col border-r border-primary/10 bg-white dark:bg-background-dark p-4 shrink-0">
+            <div class="flex items-center gap-3 mb-8 px-2">
+                <div class="flex flex-col">
+                    <h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">Negocios Verdes</h1>
+                    <p class="text-primary text-xs font-medium uppercase tracking-wider mt-1">Admin Portal</p>
+                </div>
+            </div>
+            <nav class="flex flex-col gap-2 flex-1">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span class="text-sm font-medium">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <span class="text-sm font-medium">Events</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">forest</span>
+                    <span class="text-sm font-medium">Businesses</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">bar_chart</span>
+                    <span class="text-sm font-medium">Reports</span>
+                </a>
+                <div class="mt-auto">
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors"
+                        href="#">
+                        <span class="material-symbols-outlined">settings</span>
+                        <span class="text-sm font-medium">Settings</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header
+                class="flex items-center justify-between border-b border-primary/10 bg-white dark:bg-background-dark px-8 py-4 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button
+                        class="flex items-center justify-center p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h2 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight">Eco-Fair Amazonia
+                        Details</h2>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="relative max-w-md hidden md:block">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                        <input
+                            class="w-64 pl-10 pr-4 py-2 rounded-lg border-none bg-slate-100 dark:bg-slate-800 focus:ring-2 focus:ring-primary text-sm"
+                            placeholder="Search events..." type="text" />
+                    </div>
+                    <div class="flex items-center gap-2 border-l border-primary/10 pl-6">
+                        <button
+                            class="p-2 text-slate-600 dark:text-slate-400 hover:text-primary relative transition-colors">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span
+                                class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 p-1 pl-3 rounded-full bg-slate-100 dark:bg-slate-800 border border-primary/5">
+                            <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Admin User</span>
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold text-sm">
+                                AU</div>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto bg-slate-50/50 dark:bg-background-dark/50">
+                <div class="max-w-6xl mx-auto p-8">
+                    <!-- Navigation / Actions Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <nav class="flex items-center gap-2 text-sm">
+                            <a class="text-primary hover:underline font-medium" href="#">Dashboard</a>
+                            <span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+                            <a class="text-primary hover:underline font-medium" href="#">Events</a>
+                            <span class="material-symbols-outlined text-xs text-slate-400">chevron_right</span>
+                            <span class="text-slate-500">Eco-Fair Amazonia</span>
+                        </nav>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 transition-colors font-semibold text-sm">
+                                <span class="material-symbols-outlined text-lg">edit</span>
+                                Edit Event
+                            </button>
+                            <button
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800/30 text-red-600 dark:text-red-400 hover:bg-red-100 transition-colors font-semibold text-sm">
+                                <span class="material-symbols-outlined text-lg">delete</span>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Hero Banner -->
+                    <div class="relative w-full h-[400px] rounded-2xl overflow-hidden mb-8 shadow-xl">
+                        <img alt="Lush rainforest landscape" class="w-full h-full object-cover"
+                            data-alt="Panoramic view of dense tropical rainforest with mist"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqtd5LLyK5M1yvZeQ0j7kR5i0SuiTOBKy-isk6nt-BaPD3YdmWHcloGvTtA6VZ8xHuZWb5HPdb1hKneIIrIkbDRkIAJbnJyXnp6UsjuyhEZF6U4FNGiw94vJ1OzSFB80lWVpXYE5qizt4CR9R7xo2dGUJQIn-NaTsdVC2bYzmada2iD0y_j8cH68b-CekFrKMnHoH6alAz0oG6wVarn8UfjcpVotCbzqSzfhugkLKEOmMyi7IBp5PDJVteea-MwfaF8m2eYrsuuEbX" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-background-dark/20 to-transparent">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 p-8 flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
+                            <div>
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                    Active Event
+                                </span>
+                                <h1 class="text-white text-5xl font-black tracking-tight leading-none mb-3">Eco-Fair
+                                    Amazonia</h1>
+                                <p class="text-slate-300 text-lg max-w-2xl font-medium">Celebrating sustainable
+                                    innovation and rainforest conservation through community-led green trade
+                                    initiatives.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left Column: Description & Details -->
+                        <div class="lg:col-span-2 space-y-8">
+                            <!-- About Section -->
+                            <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-primary/5 shadow-sm">
+                                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary">description</span>
+                                    About the Event
+                                </h3>
+                                <div class="text-slate-600 dark:text-slate-400 leading-relaxed space-y-4">
+                                    <p>The Eco-Fair Amazonia is a premier gathering of eco-conscious entrepreneurs,
+                                        conservationists, and sustainable business leaders dedicated to the preservation
+                                        of the Amazon basin. This event showcases groundbreaking green technologies,
+                                        artisanal forest products, and sustainable agriculture techniques that prove
+                                        economic prosperity can go hand-in-hand with environmental stewardship.</p>
+                                    <p>Join us for three days of interactive workshops, business matchmaking sessions,
+                                        and the celebrated 'Green Marketplace' where local communities present their
+                                        non-timber forest products to international buyers. Our mission is to strengthen
+                                        the 'Green Economy' network across the Pan-Amazon region.</p>
+                                </div>
+                                <div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+                                    <h4 class="font-bold mb-4">Event Highlights</h4>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div
+                                            class="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
+                                            <span class="material-symbols-outlined text-primary">psychology</span>
+                                            <span class="text-sm font-medium">Innovation Workshops</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
+                                            <span class="material-symbols-outlined text-primary">diversity_3</span>
+                                            <span class="text-sm font-medium">Networking Hub</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
+                                            <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                                            <span class="text-sm font-medium">Green Marketplace</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-3 p-3 rounded-xl bg-primary/5 border border-primary/10">
+                                            <span
+                                                class="material-symbols-outlined text-primary">workspace_premium</span>
+                                            <span class="text-sm font-medium">Eco-Awards Ceremony</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Gallery Section -->
+                            <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-primary/5 shadow-sm">
+                                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary">collections</span>
+                                    Event Gallery
+                                </h3>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <img alt="Sustainable crafts"
+                                        class="w-full aspect-square object-cover rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                        data-alt="Close up of sustainable handmade artisanal products"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDee4D4SXgViJ33l-NzzG5zsIEa4b__G2xiYcqz5Xscu3S3o5s2Mc90wyQudWoVpCkbDJLCl8e88IkysFZUSFEDM9vTtXarBdMUtJ8qZWr7dQ9BsFpyqswqXKPu8iglgSKsz744OU0Srfswx5W7DVlRVhxdLzzH3ZmdOko0Vkr3ntrzpt50F5DxY79-jwEKtjR4oJI72FtIwP1xwf9wCIdHWE4lUehUvcJ9gxqc1rvOWm0xYnReyt99Dnx41whMPwVTpgcJS6e8xsVG" />
+                                    <img alt="Meeting group"
+                                        class="w-full aspect-square object-cover rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                        data-alt="A group of people sitting around a table in a green business meeting"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc-wmjEs1611J7jJbMDc-t0EmTLFxX3AFDMKANDNnbmll12xznDG9ZIwgbM_HIAlm5Mz4z4WgJ-c0hkdDE1wkIe4NUjC5l_QHzy7OQBYg3uY_N20lbtjSPA8YAOsfec9OJOQhyxDKlhiRLshIgK74UH2caWnlyyeC0X9vq8BkoVmOS7C98NU5VJgmJFy8G3toObK6oLl9iorRKFSZyeXz8mqB_mKi8yxY3HAPDF7ZxUhFTx14_DBTP32e7GpC2kM7UXBuBeHGnt1rp" />
+                                    <img alt="Local marketplace"
+                                        class="w-full aspect-square object-cover rounded-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                        data-alt="Outdoor marketplace with stalls selling local organic food"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnabv_uQpSEdzCtC_GXuNwcUa_lebQCGKt9R4w1AtZ-h4d26HiTFGopFA5tN9n3b127cu1zULPcUn8qZ0vSzeFKkN7ieVnw_AzQT9iwTKDjtXAwuQr7_9sefskatxQdDEA3aElx3N77b1IqXkViNhIejhTPLIJ6xTUCLPoiTjWUxat65_c6DiYshKQj5MVr1eJaP55_sIg-V_TU-tZLgd4VbQYDEZDUxZFddaRd0I168GmEG5unuRP7ZD-Y0GQjHXZ3Okm72HO7qAv" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column: Info Cards -->
+                        <div class="space-y-8">
+                            <!-- Logistics Card -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/5 shadow-sm overflow-hidden">
+                                <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                                    <h3 class="text-lg font-bold">Event Information</h3>
+                                </div>
+                                <div class="p-6 space-y-6">
+                                    <div class="flex gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                            <span class="material-symbols-outlined text-primary">calendar_month</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Date
+                                            </p>
+                                            <p class="text-slate-900 dark:text-white font-semibold">November 24-26, 2024
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                            <span class="material-symbols-outlined text-primary">schedule</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Time
+                                            </p>
+                                            <p class="text-slate-900 dark:text-white font-semibold">08:30 AM - 06:00 PM
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                            <span class="material-symbols-outlined text-primary">location_on</span>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">
+                                                Location</p>
+                                            <p class="text-slate-900 dark:text-white font-semibold">Amazon Convention
+                                                Center</p>
+                                            <p class="text-slate-500 text-sm">Manaus, Amazonas, Brazil</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-6 pb-6">
+                                    <div
+                                        class="w-full h-40 rounded-xl bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
+                                        <!-- Placeholder for Map -->
+                                        <img alt="Map view" class="w-full h-full object-cover opacity-60"
+                                            data-alt="Stylized map showing Manaus city center location"
+                                            data-location="Manaus, Brazil"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbBiW4uP0KtztQMo-VY0RkctSF056kMnPVP6kerlz4ndp3VNmSyO-alj7oqab1G6RqNdeQVGeewjIrIs8zeuWvqKFtttO6sGtoQONJ0fNk0-oQ5c5D0vhp48VQd19xh0AwtjkxFo0LcpTTvPYGZxz8ejXO4GeF0hWUEUaBsuBmrqAIi3E6_zXDMDhjsuaYPr1Hu0oWFHyjhmIMSKHemOaRGGXUJ76etSlsuNhzK3VFhv2ESvpFx2Ob-ZfP5qL6R338-95Yp9fWVcNR" />
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="bg-primary text-background-dark p-2 rounded-full shadow-lg">
+                                                <span class="material-symbols-outlined text-2xl">location_on</span>
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-2 right-2">
+                                            <button
+                                                class="px-3 py-1 bg-white dark:bg-slate-900 text-xs font-bold rounded-lg shadow-sm border border-slate-200 dark:border-slate-700">Open
+                                                in Maps</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Organizer Card -->
+                            <div
+                                class="bg-white dark:bg-slate-900 rounded-2xl border border-primary/5 shadow-sm overflow-hidden">
+                                <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                                    <h3 class="text-lg font-bold">Organizer</h3>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-2 border-primary/10">
+                                            <img alt="Organizer logo" class="w-full h-full object-cover"
+                                                data-alt="Professional logo of Amazon Conservation Association"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhO1VNG90O3qMOkBVd5ed-3n22g6O2QzJXy1IkxjQ0YsM8TBhztl-sgveI0QMWoXd7CBU766UcZV2VZm6smxlVvoeMKNnZHBrihyjoQ80eKgwR-mEfmzNAq5VmWs-Xkzbn_o_iYwvHoSfaM3mbMlsq0m3yiLG0Hp6yvwHRgtPytydOU5cX3qTjw8bszFi8UqrBrmz2pI_ouharKQ4cV0MCzFWp-3vGCeAh97xlJ3SL7trI4EF0MOZ47nL4Q6vmpN5o-OsF3T3FIZiq" />
+                                        </div>
+                                        <div>
+                                            <h4 class="text-slate-900 dark:text-white font-bold leading-tight">Amazon
+                                                Conservation Alliance</h4>
+                                            <p class="text-primary text-xs font-semibold">Verified Organization</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
+                                        A non-profit dedicated to sustainable development through community empowerment.
+                                    </p>
+                                    <button
+                                        class="w-full py-2.5 rounded-xl bg-primary text-background-dark font-bold text-sm hover:brightness-105 transition-all shadow-lg shadow-primary/20">
+                                        Contact Organizer
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Status & Quick Stats -->
+                            <div
+                                class="bg-background-dark text-white rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                                <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl">
+                                </div>
+                                <h3 class="text-lg font-bold mb-4 flex items-center justify-between relative z-10">
+                                    Current Status
+                                    <span
+                                        class="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/30 uppercase tracking-widest font-bold">Live</span>
+                                </h3>
+                                <div class="space-y-4 relative z-10">
+                                    <div class="flex justify-between items-center text-sm">
+                                        <span class="text-slate-400">Registered Exhibitors</span>
+                                        <span class="font-bold">142</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                        <div class="w-[85%] h-full bg-primary rounded-full"></div>
+                                    </div>
+                                    <div class="flex justify-between items-center text-sm pt-2">
+                                        <span class="text-slate-400">Total Capacity</span>
+                                        <span class="font-bold">1,200</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

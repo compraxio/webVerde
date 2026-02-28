@@ -1,7 +1,7 @@
 'use client';
 
 import { Prisma } from '../../../generated/prisma/client';
-
+import { useUbicacion } from '@/hooks/useUbicacion';
 import { useState, useEffect, useRef } from 'react';
 import {
   Map,
@@ -19,6 +19,9 @@ import {
   // Loader2, Clock, Route
 } from 'lucide-react';
 import { ConseguirTodosNegociosMapa } from '@/actions/Negocio';
+import { IoLocationOutline } from 'react-icons/io5';
+import { FaLocationCrosshairs } from 'react-icons/fa6';
+import { toast } from 'sonner';
 
 //*marcador
 
@@ -59,6 +62,7 @@ type Negocios = Prisma.dir_verdeGetPayload<object>;
 
 export default function CustomStyleExample() {
   const [negocio, setNegocios] = useState<Negocios[]>();
+  const { lat, long, error } = useUbicacion();
 
   useEffect(() => {
     const ConseguirNegocio = async () => {
@@ -173,6 +177,14 @@ export default function CustomStyleExample() {
         </MapMarker> */}
 
         {/* marcador */}
+        {lat && long && long ? (
+          <MapMarker longitude={long} latitude={lat}>
+            <MarkerContent>
+              <FaLocationCrosshairs size={25} className="text-accent" />
+              <MarkerLabel position="bottom">Mi ubicacion</MarkerLabel>
+            </MarkerContent>
+          </MapMarker>
+        ) : toast.error(error)}
         {negocio?.map((place) => (
           <MapMarker
             key={place.id_negocio}
@@ -180,8 +192,8 @@ export default function CustomStyleExample() {
             latitude={Number.parseFloat(place.pos_gps?.split(',')[0] ?? '')}
           >
             <MarkerContent>
-              <div className="size-5 rounded-full bg-rose-500 border-2 border-white shadow-lg cursor-pointer hover:scale-110 transition-transform" />
-              <MarkerLabel position="bottom">{place.negocio}</MarkerLabel>
+              <IoLocationOutline size={25} className="text-red-500" />
+              <MarkerLabel position="bottom" >{place.negocio}</MarkerLabel>
             </MarkerContent>
             <MarkerPopup className="p-0 w-62">
               <div className="relative h-32 overflow-hidden rounded-t-md">

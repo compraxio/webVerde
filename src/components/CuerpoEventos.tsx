@@ -9,6 +9,7 @@ import { AlertDelate } from './alerts/alertDelate';
 import { toast } from 'sonner';
 import { EliminarEvento } from '@/actions/eventos';
 import { AccionesEvento } from './Admin/EventosAuth';
+import Link from 'next/link';
 type evento = Prisma.eventosGetPayload<object>;
 
 export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
@@ -73,12 +74,12 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
             </div>
           </div>
           <div className="flex items-center gap-2 pr-2">
-            <button
+            <Link href={`/eventos/verEvento/${evento.id_evento}`}
               className="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-xl transition-all"
               title="Ver"
             >
               <MdVisibility size={25} />
-            </button>
+            </Link>
             <AccionesEvento
               id_evento={evento.id_evento}
               setId_evento={setId_evento}
