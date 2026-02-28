@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model contactos {
+  id_contacto Int     @id @default(autoincrement())
+  id_negocio  Int
+  nombre      String
+  telefono    String
+  correo      String?
+  dir_verde   dir_verde @relation(fields: [id_negocio], references: [id_negocio], onDelete: Cascade)
+  @@unique([telefono, id_negocio])
+  @@index([id_negocio])
+}
+
+model dir_verde {
+  id_negocio             Int                      @id @default(autoincrement())
+  id_grupo               Int
+  id_municipio            Int
+  id_fase                Int?
+  negocio                String
+  sub_categoria          String?
+  descripcion            String?
+  actividad              String
+  unidad_productiva      String
+  direccion              String
+  representante          String?
+  logo                   String?
+  url_youtube            String?
+  url_facebook           String?
+  url_instagram          String?
+  url_tiktok             String?
+  url_negocio            String?
+  pos_gps                String?
+  estado                 String?
+  a_o_verificacion       DateTime?                     @map("año_verificacion")
+  autorizado_por         String?
+  grupos                 grupos                   @relation(fields: [id_grupo], references: [id_grupo])
+  municipios             municipios              @relation(fields: [id_municipio], references: [cod_munic])
+
+  fotografias            fotografias[]
+  contactos              contactos[]
+  productos               productos[]
+  @@index([id_municipio])
+}
+
+
+model eventos {
+  id_evento        Int     @id @default(autoincrement())
+  evento           String
+  direccion        String
+  fecha            String?
+  hora             String?
+  link             String?
+  temas            String?
+  tipo_evento      String?
+  estado           String
+  Img_Presentacion String
+}
+
+model fases {
+  id_fase   Int     @id @default(autoincrement())
+  des_fase  String
+  logo_fase String
+  id_fasex  String?
+}
+
+model fotografias {
+  id_foto    Int       @id @default(autoincrement())
+  id_negocio Int
+  url_foto   String?
+  dir_verde  dir_verde @relation(fields: [id_negocio], references: [id_negocio])
+}
+
+model grupos {
+  id_grupo   Int         @id @default(autoincrement())
+  actividad  String
+  logo_grupo String?
+  dir_verde  dir_verde[]
+}
+
+model municipios {
+  cod_munic    Int    @id @default(autoincrement())
+  departamento String
+  zona         String
+  municipio    String
+  dir_verde     dir_verde[]
+}
+
+model productos {
+  id_prodcucto Int     @id @default(autoincrement())
+  id_negocio   Int
+  nombre       String
+  descripcion  String?
+  img_prodcto  String
+  precio       Int
+  dir_verde    dir_verde @relation(fields: [id_negocio], references: [id_negocio], onDelete: Cascade)
+  @@index([id_negocio])
+}
