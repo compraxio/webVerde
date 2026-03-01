@@ -1,35 +1,9 @@
 import prisma from '@/lib/prisma';
-import Link from 'next/link';
 
-// import type { Fase } from '@/types/faseType';
-// import { useQuery } from '@tanstack/react-query';
-// import { Skeleton } from '../../components/ui/skeleton';
-// import axios from 'axios';
 
 export default async function Fase() {
   const fases = await prisma.fases.findMany();
-  // const { data, isPending } = useQuery<Fase>({
-  //   queryKey: ['fase'],
-  //   queryFn: async () => {
-  //     const res = await axios('https://api-base-de-datos.vercel.app/fases/');
-  //     return res.data;
-  //   },
-  // });
 
-  // if (isPending) {
-  //     return (
-  //       <div className="p-6 lg:p-10 max-w-7xl mx-auto">
-  //         <div className="space-y-4">
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //           <Skeleton className="rounded-2xl min-h-26.5 min-w-193.25" />
-  //         </div>
-  //       </div>
-  //     );
-  // }
   return (
     <>
       <div className="p-6 lg:p-10 max-w-7xl mx-auto">

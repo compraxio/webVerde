@@ -60,6 +60,8 @@ export async function CrearNegocio(formData: FormData) {
   const lat = formData.get('latitud') as string;
   const lng = formData.get('longitud') as string;
 
+  const fechaVerificacion = a_o_verificacion ? new Date(a_o_verificacion) : null;
+
   if (
     !negocio ||
     !id_grupo ||
@@ -86,7 +88,7 @@ export async function CrearNegocio(formData: FormData) {
         actividad,
         sub_categoria,
         direccion,
-        a_o_verificacion: new Date(a_o_verificacion),
+        a_o_verificacion: fechaVerificacion,
         autorizado_por,
         descripcion,
         url_youtube,
@@ -221,6 +223,8 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
   const latitud = formData.get('latitud') as string;
   const longitud = formData.get('longitud') as string;
 
+  const fechaVerificacion = a_o_verificacion ? new Date(a_o_verificacion) : null;
+
   if (
     !id_negocio ||
     !negocio ||
@@ -254,7 +258,7 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
         actividad,
         sub_categoria,
         direccion,
-        a_o_verificacion: new Date(a_o_verificacion),
+        a_o_verificacion: fechaVerificacion,
         autorizado_por,
         descripcion,
         url_youtube,

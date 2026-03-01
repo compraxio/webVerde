@@ -49,6 +49,8 @@ export default async function usePerfilNegocio({
       return 'notiene';
     }
   };
+  const showVerification = !!negocio?.a_o_verificacion;
+
   return (
     <div className="p-4 md:p-8 max-w-6xl mx-auto w-full">
       <div className="bg-white dark:bg-background-dark rounded-xl shadow-sm border border-amber-50/10 p-6 mb-8">
@@ -56,13 +58,7 @@ export default async function usePerfilNegocio({
           <div className="relative">
             <div
               className={`size-32 md:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${
-                negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }) === '31 de diciembre de 1969'
-                  ? 'border-red-500'
-                  : 'border-primary'
+                showVerification ? 'border-primary' : 'border-red-500'
               } overflow-hidden`}
             >
               {negocio?.logo ? (
@@ -77,18 +73,14 @@ export default async function usePerfilNegocio({
                 />
               )}
             </div>
-            {negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }) === '31 de diciembre de 1969' ? (
-              <div className="absolute -bottom-2 -right-2 bg-red-500 text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
-                NO VERIFICADO
-              </div>
-            ) : (
+            {showVerification ? (
               <div className="absolute -bottom-2 -right-2 bg-primary text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
                 <CiCircleCheck size={15} />
                 VERIFICADO
+              </div>
+            ) : (
+              <div className="absolute -bottom-2 -right-2 bg-red-500 text-forest px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                NO VERIFICADO
               </div>
             )}
           </div>
@@ -224,30 +216,30 @@ export default async function usePerfilNegocio({
             <h2 className="font-bold text-lg">Ubicación y Contacto</h2>
           </div>
           <div className="space-y-4">
-            <div>
+            {negocio?.municipios && <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Municipio / Zona
               </h3>
               <p className="text-forest dark:text-white font-medium">
                 {`${negocio?.municipios.municipio} | ${negocio?.municipios.zona}`}
               </p>
-            </div>
-            <div>
+            </div>}
+            {negocio?.direccion && <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Dirección</h3>
               <p className="text-forest dark:text-white font-medium">{negocio?.direccion}</p>
-            </div>
-            <div>
+            </div>}
+            {negocio?.pos_gps && <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Latitud y Longitud
               </h3>
               <p className="text-forest dark:text-white font-medium">{negocio?.pos_gps}</p>
-            </div>
-            <div>
+            </div>}
+            {negocio?.representante && <div>
               <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
                 Representante Legal
               </h3>
               <p className="text-forest dark:text-white font-medium">{negocio?.representante}</p>
-            </div>
+            </div>}
           </div>
         </div>
         {negocio?.url_youtube || negocio?.url_facebook || negocio?.url_instagram || negocio?.url_tiktok ? (
@@ -317,13 +309,7 @@ export default async function usePerfilNegocio({
             )}
           </div>
         </div>) : null}
-        {negocio?.a_o_verificacion?.toLocaleDateString('es-CO', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }) === '31 de diciembre de 1969' ? (
-          ''
-        ) : (
+        {showVerification && (
           <div className="bg-forest dark:bg-primary/5 bg-primary p-6 rounded-xl shadow-sm lg:col-span-1 text-white dark:text-forest">
             <div className="flex items-center gap-3 mb-6">
               <GoVerified size={22} />
@@ -342,12 +328,12 @@ export default async function usePerfilNegocio({
                   })}
                 </p>
               </div>
-              <div>
+              {negocio?.autorizado_por && <div>
                 <h3 className="text-xs text-leaf/80 font-bold uppercase tracking-tighter">
                   Autorizado Por
                 </h3>
                 <p className="font-bold text-white dark:text-white">{negocio?.autorizado_por}</p>
-              </div>
+              </div>}
             </div>
           </div>
         )}

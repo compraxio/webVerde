@@ -177,14 +177,14 @@ export default function CustomStyleExample() {
         </MapMarker> */}
 
         {/* marcador */}
-        {lat && long && long ? (
+        {lat && long &&
           <MapMarker longitude={long} latitude={lat}>
             <MarkerContent>
               <FaLocationCrosshairs size={25} className="text-accent" />
               <MarkerLabel position="bottom">Mi ubicacion</MarkerLabel>
             </MarkerContent>
           </MapMarker>
-        ) : toast.error(error)}
+        }
         {negocio?.map((place) => (
           <MapMarker
             key={place.id_negocio}

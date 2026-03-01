@@ -1,7 +1,11 @@
 import { BotonAgregarProducto, BotonAgregarProductoCel } from '@/components/Admin/ProductosAuth';
 import { CuerpoProductos } from '@/components/CuerpoProductos';
+import { CuerpoProductosEsqueleto } from '@/components/esqueletons/CuerpoProductosEsqueleto';
+import { Suspense } from 'react';
 
-export default async function Productos({ params }: Readonly<{ params: Promise<{ id_negocio: string }> }>) {
+export default async function Productos({
+  params,
+}: Readonly<{ params: Promise<{ id_negocio: string }> }>) {
   const { id_negocio } = await params;
   const negocio = Number(id_negocio);
   return (
@@ -17,7 +21,9 @@ export default async function Productos({ params }: Readonly<{ params: Promise<{
       </div>
       <hr className="mb-8"></hr>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <CuerpoProductos negocio={negocio} />
+        <Suspense fallback={<CuerpoProductosEsqueleto/>}>
+          <CuerpoProductos negocio={negocio} />
+        </Suspense>
       </div>
       {/* Boton add en cel*/}
       <BotonAgregarProductoCel />

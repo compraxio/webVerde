@@ -1,5 +1,7 @@
 import { CuerpoContactos } from '@/components/CuerpoContactos';
 import { BotonAgregar, SeccionAcciones } from '@/components/Admin/ContactosAuth';
+import { Suspense } from 'react';
+import { CuerpoContactosEsqueleto } from '@/components/esqueletons/CuerpoContactosEsqueleto';
 
 export default async function Contactos({
   params,
@@ -44,7 +46,10 @@ export default async function Contactos({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <Suspense fallback={<CuerpoContactosEsqueleto/>}>
+
               <CuerpoContactos negocio={negocio} />
+              </Suspense>
             </tbody>
           </table>
         </div>

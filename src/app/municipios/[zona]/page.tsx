@@ -4,6 +4,8 @@ import {
   SeccionAccionesMunicipiosTabla,
 } from '@/components/Admin/MunicipiosAuth';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { CuerpoMunicipiosEsqueleto } from '@/components/esqueletons/CuerpoMunicipiosEsqueleto';
 export default async function Municipio({
   params,
 }: Readonly<{ params: Promise<{ zona: string }> }>) {
@@ -65,7 +67,9 @@ export default async function Municipio({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-zinc-800">
-              <CuerpoMunicipios zona={zonaMayus} />
+              <Suspense fallback={<CuerpoMunicipiosEsqueleto />}>
+                <CuerpoMunicipios zona={zonaMayus} />
+              </Suspense>
             </tbody>
           </table>
         </div>

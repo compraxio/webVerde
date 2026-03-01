@@ -40,8 +40,6 @@ export default function ActualizarNegocio() {
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
   const [municipios, setMunicipios] = useState<municipio[]>([]);
-  const [grupoSeleccionado, setGrupoSeleccionado] = useState<string | null>(null);
-  const [municipioSeleccionado, setMunicipioSeleccionado] = useState<string | null>(null);
 
 
 
@@ -84,9 +82,8 @@ export default function ActualizarNegocio() {
 
   useEffect(() => {
     async function cargarNegocio() {
+      if(!grupos || !fases || municipios.length === 0) return
       const negocio = await ConseguirNegocio(id_negocio);
-      setGrupoSeleccionado(negocio?.grupos.actividad.split(':')[0] ?? '');
-      setMunicipioSeleccionado(negocio?.municipios.municipio ?? '');
 
       if (!negocio) {
         toast.error('Negocio no encontrado');
@@ -115,7 +112,7 @@ export default function ActualizarNegocio() {
       setValue('longitud', `${negocio?.pos_gps?.split(',')[1] || ''}`);
     }
     cargarNegocio();
-  }, [id_negocio, setValue, router]);
+  }, [id_negocio, setValue, fases, grupos, municipios, router]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     toast.promise(
@@ -123,7 +120,7 @@ export default function ActualizarNegocio() {
         const formData = new FormData();
 
         formData.append('negocio', data.negocio);
-        formData.append('id_grupo', String(data.id_grupo));
+        formData.append('id_grupo', data.id_grupo);
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
         formData.append('descripcion', data.descripcion || "");
@@ -196,8 +193,6 @@ export default function ActualizarNegocio() {
               <label className="text-sm font-semibold" htmlFor="id_grupo">
                 Grupo<span className="text-red-500">*</span>
               </label>
-              <span className="text-[15px]">Grupo anterior: {grupoSeleccionado}</span>
-
               <select className={inputClass} id="id_grupo" {...register('id_grupo')}>
                 <option value="">Selecciona un grupo</option>
                 {grupos?.map((g) => (
@@ -213,7 +208,6 @@ export default function ActualizarNegocio() {
               <label className="text-sm font-semibold" htmlFor="id_fase">
                 Fase<span className="text-red-500">*</span>
               </label>
-              <span className="text-[15px]">Incertar otra vez la fase</span>
               <select className={inputClass} id="id_fase" {...register('id_fase')}>
                 <option value="">Selecciona una fase</option>
                 {fases?.map((f) => (
@@ -293,7 +287,7 @@ export default function ActualizarNegocio() {
               <label className="text-sm font-semibold" htmlFor="municipio">
                 Municipio<span className="text-red-500">*</span>
               </label>
-              <span className="text-[15px]">Municipio anterior: {municipioSeleccionado}</span>
+
               <select className={inputClass} id="municipio" {...register('id_municipio')}>
                 <option value="">Selecciona un municipio</option>
                 {municipios.map((municipio) => (
@@ -481,7 +475,6 @@ export default function ActualizarNegocio() {
                 id="a_o_verificacion"
                 {...register('a_o_verificacion')}
               />
-              <span className="text-[15px]">Incertar otra vez el año</span>
               {errors.a_o_verificacion?.message && <p>{errors.a_o_verificacion.message}</p>}
             </div>
 
