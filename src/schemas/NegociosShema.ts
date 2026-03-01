@@ -27,6 +27,12 @@ export const DirVerdeSchema = z.object({
     .optional()
     .or(z.literal('')),
 
+  whatsup: z
+    .string()
+    .max(15, { message: 'numero de whatsaup muy largo' })
+    .optional()
+    .or(z.literal('')),
+
   descripcion: z
     .string()
     .max(500, 'La descripción no puede exceder los 500 caracteres')
@@ -120,6 +126,12 @@ export const DirVerdeEditarSchema = z.object({
   descripcion: z
     .string()
     .max(500, 'La descripción no puede exceder los 500 caracteres')
+    .optional()
+    .or(z.literal('')),
+
+  whatsup: z
+    .string()
+    .max(15, { message: 'numero de whatsup muy largo' })
     .optional()
     .or(z.literal('')),
 

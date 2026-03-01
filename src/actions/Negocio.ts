@@ -38,6 +38,7 @@ export async function ConseguirNegocio(id_negocio: number) {
 export async function CrearNegocio(formData: FormData) {
 
   const negocio = formData.get('negocio') as string;
+  const whatsup = formData.get('whatsup') as string;
   const id_grupo = formData.get('id_grupo') as unknown;
   const id_municipio = formData.get('id_municipio') as unknown;
   const id_fase = formData.get('id_fase') as unknown;
@@ -104,6 +105,7 @@ export async function CrearNegocio(formData: FormData) {
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),
         estado,
+        whatsup: whatsup
       },
     });
 
@@ -203,6 +205,7 @@ export async function EliminarNegocio(id_negocio: number, url: string) {
 export async function EditarNegocio(formData: FormData, id_negocio:number) {
 
   const negocio = formData.get('negocio') as string;
+  const whatsup = formData.get('whatsup') as string;
   const id_grupo = formData.get('id_grupo') as unknown;
   const id_municipio = formData.get('id_municipio') as unknown;
   const id_fase = formData.get('id_fase') as unknown;
@@ -273,6 +276,7 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),
         estado,
+        whatsup
       },
     });
 

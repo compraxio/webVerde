@@ -21,7 +21,6 @@ import {
 import { ConseguirTodosNegociosMapa } from '@/actions/Negocio';
 import { IoLocationOutline } from 'react-icons/io5';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
-import { toast } from 'sonner';
 
 //*marcador
 
@@ -62,7 +61,7 @@ type Negocios = Prisma.dir_verdeGetPayload<object>;
 
 export default function CustomStyleExample() {
   const [negocio, setNegocios] = useState<Negocios[]>();
-  const { lat, long, error } = useUbicacion();
+  const { lat, long } = useUbicacion();
 
   useEffect(() => {
     const ConseguirNegocio = async () => {
@@ -177,14 +176,14 @@ export default function CustomStyleExample() {
         </MapMarker> */}
 
         {/* marcador */}
-        {lat && long &&
+        {lat && long && (
           <MapMarker longitude={long} latitude={lat}>
             <MarkerContent>
               <FaLocationCrosshairs size={25} className="text-accent" />
               <MarkerLabel position="bottom">Mi ubicacion</MarkerLabel>
             </MarkerContent>
           </MapMarker>
-        }
+        )}
         {negocio?.map((place) => (
           <MapMarker
             key={place.id_negocio}
@@ -193,7 +192,7 @@ export default function CustomStyleExample() {
           >
             <MarkerContent>
               <IoLocationOutline size={25} className="text-red-500" />
-              <MarkerLabel position="bottom" >{place.negocio}</MarkerLabel>
+              <MarkerLabel position="bottom">{place.negocio}</MarkerLabel>
             </MarkerContent>
             <MarkerPopup className="p-0 w-62">
               <div className="relative h-32 overflow-hidden rounded-t-md">
@@ -271,6 +270,16 @@ export default function CustomStyleExample() {
           <option value="openstreetmap">OSM</option>
           <option value="openstreetmap3d">3D</option>
         </select>
+      </div>
+      <div className="absolute top-8 right-2 z-10 sm:top-12 sm:right-3">
+        <Button
+          variant="default"
+          size="sm"
+          className="justify-start gap-3 bg-background/90 hover:bg-background/90"
+          onClick={() => console.log('holaaa')}
+        >
+          Mostrar ruta
+        </Button>
       </div>
     </div>
   );

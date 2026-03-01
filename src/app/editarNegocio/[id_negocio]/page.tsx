@@ -91,6 +91,7 @@ export default function ActualizarNegocio() {
         router.back();
       }
       setValue('negocio', `${negocio?.negocio}`);
+      setValue('whatsup', `${negocio?.whatsup}`);
       setValue('id_grupo', negocio?.id_grupo ? String(negocio.id_grupo) : '');
       setValue('id_fase', negocio?.id_fase ? String(negocio.id_fase) : '');
       setValue('id_municipio', negocio?.id_municipio ? String(negocio.id_municipio) : '');
@@ -121,6 +122,7 @@ export default function ActualizarNegocio() {
 
         formData.append('negocio', data.negocio);
         formData.append('id_grupo', data.id_grupo);
+        formData.append('whatsup', data.whatsup || '');
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
         formData.append('descripcion', data.descripcion || "");
@@ -246,7 +248,7 @@ export default function ActualizarNegocio() {
               />
               {errors.unidad_productiva?.message && <p>{errors.unidad_productiva.message}</p>}
             </div>
-            <div className="flex flex-col gap-1.5 md:col-span-2">
+            <div className="flex flex-col gap-1.5 ">
               <label className="text-sm font-semibold" htmlFor="sub_categoria">
                 Sub categoria
               </label>
@@ -258,6 +260,19 @@ export default function ActualizarNegocio() {
                 {...register('sub_categoria')}
               />
               {errors.sub_categoria?.message && <p>{errors.sub_categoria.message}</p>}
+            </div>
+            <div className="flex flex-col gap-1.5 ">
+              <label className="text-sm font-semibold" htmlFor="whatsup">
+                whatsup
+              </label>
+              <input
+                className={inputClass}
+                type="text"
+                id="whatsup"
+                placeholder="Ej: Artesanías, Comida, Servicios"
+                {...register('whatsup')}
+              />
+              {errors.whatsup?.message && <p>{errors.whatsup.message}</p>}
             </div>
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-sm font-semibold" htmlFor="descripcion">

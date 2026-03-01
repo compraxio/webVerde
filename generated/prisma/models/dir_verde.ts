@@ -53,6 +53,7 @@ export type Dir_verdeMinAggregateOutputType = {
   direccion: string | null
   representante: string | null
   logo: string | null
+  whatsup: string | null
   url_youtube: string | null
   url_facebook: string | null
   url_instagram: string | null
@@ -77,6 +78,7 @@ export type Dir_verdeMaxAggregateOutputType = {
   direccion: string | null
   representante: string | null
   logo: string | null
+  whatsup: string | null
   url_youtube: string | null
   url_facebook: string | null
   url_instagram: string | null
@@ -101,6 +103,7 @@ export type Dir_verdeCountAggregateOutputType = {
   direccion: number
   representante: number
   logo: number
+  whatsup: number
   url_youtube: number
   url_facebook: number
   url_instagram: number
@@ -141,6 +144,7 @@ export type Dir_verdeMinAggregateInputType = {
   direccion?: true
   representante?: true
   logo?: true
+  whatsup?: true
   url_youtube?: true
   url_facebook?: true
   url_instagram?: true
@@ -165,6 +169,7 @@ export type Dir_verdeMaxAggregateInputType = {
   direccion?: true
   representante?: true
   logo?: true
+  whatsup?: true
   url_youtube?: true
   url_facebook?: true
   url_instagram?: true
@@ -189,6 +194,7 @@ export type Dir_verdeCountAggregateInputType = {
   direccion?: true
   representante?: true
   logo?: true
+  whatsup?: true
   url_youtube?: true
   url_facebook?: true
   url_instagram?: true
@@ -300,6 +306,7 @@ export type Dir_verdeGroupByOutputType = {
   direccion: string | null
   representante: string | null
   logo: string | null
+  whatsup: string | null
   url_youtube: string | null
   url_facebook: string | null
   url_instagram: string | null
@@ -347,6 +354,7 @@ export type dir_verdeWhereInput = {
   direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  whatsup?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_facebook?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_instagram?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -376,6 +384,7 @@ export type dir_verdeOrderByWithRelationInput = {
   direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   representante?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsup?: Prisma.SortOrderInput | Prisma.SortOrder
   url_youtube?: Prisma.SortOrderInput | Prisma.SortOrder
   url_facebook?: Prisma.SortOrderInput | Prisma.SortOrder
   url_instagram?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -408,6 +417,7 @@ export type dir_verdeWhereUniqueInput = Prisma.AtLeast<{
   direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  whatsup?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_facebook?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_instagram?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -437,6 +447,7 @@ export type dir_verdeOrderByWithAggregationInput = {
   direccion?: Prisma.SortOrderInput | Prisma.SortOrder
   representante?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsup?: Prisma.SortOrderInput | Prisma.SortOrder
   url_youtube?: Prisma.SortOrderInput | Prisma.SortOrder
   url_facebook?: Prisma.SortOrderInput | Prisma.SortOrder
   url_instagram?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -469,6 +480,7 @@ export type dir_verdeScalarWhereWithAggregatesInput = {
   direccion?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
+  whatsup?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   url_facebook?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
   url_instagram?: Prisma.StringNullableWithAggregatesFilter<"dir_verde"> | string | null
@@ -490,6 +502,7 @@ export type dir_verdeCreateInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -519,6 +532,7 @@ export type dir_verdeUncheckedCreateInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -543,6 +557,7 @@ export type dir_verdeUpdateInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -572,6 +587,7 @@ export type dir_verdeUncheckedUpdateInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -599,6 +615,7 @@ export type dir_verdeCreateManyInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -620,6 +637,7 @@ export type dir_verdeUpdateManyMutationInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -644,6 +662,7 @@ export type dir_verdeUncheckedUpdateManyInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -673,6 +692,7 @@ export type dir_verdeCountOrderByAggregateInput = {
   direccion?: Prisma.SortOrder
   representante?: Prisma.SortOrder
   logo?: Prisma.SortOrder
+  whatsup?: Prisma.SortOrder
   url_youtube?: Prisma.SortOrder
   url_facebook?: Prisma.SortOrder
   url_instagram?: Prisma.SortOrder
@@ -704,6 +724,7 @@ export type dir_verdeMaxOrderByAggregateInput = {
   direccion?: Prisma.SortOrder
   representante?: Prisma.SortOrder
   logo?: Prisma.SortOrder
+  whatsup?: Prisma.SortOrder
   url_youtube?: Prisma.SortOrder
   url_facebook?: Prisma.SortOrder
   url_instagram?: Prisma.SortOrder
@@ -728,6 +749,7 @@ export type dir_verdeMinOrderByAggregateInput = {
   direccion?: Prisma.SortOrder
   representante?: Prisma.SortOrder
   logo?: Prisma.SortOrder
+  whatsup?: Prisma.SortOrder
   url_youtube?: Prisma.SortOrder
   url_facebook?: Prisma.SortOrder
   url_instagram?: Prisma.SortOrder
@@ -904,6 +926,7 @@ export type dir_verdeCreateWithoutContactosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -932,6 +955,7 @@ export type dir_verdeUncheckedCreateWithoutContactosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -971,6 +995,7 @@ export type dir_verdeUpdateWithoutContactosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -999,6 +1024,7 @@ export type dir_verdeUncheckedUpdateWithoutContactosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1022,6 +1048,7 @@ export type dir_verdeCreateWithoutFotografiasInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1050,6 +1077,7 @@ export type dir_verdeUncheckedCreateWithoutFotografiasInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1089,6 +1117,7 @@ export type dir_verdeUpdateWithoutFotografiasInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1117,6 +1146,7 @@ export type dir_verdeUncheckedUpdateWithoutFotografiasInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1140,6 +1170,7 @@ export type dir_verdeCreateWithoutGruposInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1167,6 +1198,7 @@ export type dir_verdeUncheckedCreateWithoutGruposInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1223,6 +1255,7 @@ export type dir_verdeScalarWhereInput = {
   direccion?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   representante?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   logo?: Prisma.StringNullableFilter<"dir_verde"> | string | null
+  whatsup?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_youtube?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_facebook?: Prisma.StringNullableFilter<"dir_verde"> | string | null
   url_instagram?: Prisma.StringNullableFilter<"dir_verde"> | string | null
@@ -1244,6 +1277,7 @@ export type dir_verdeCreateWithoutMunicipiosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1271,6 +1305,7 @@ export type dir_verdeUncheckedCreateWithoutMunicipiosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1321,6 +1356,7 @@ export type dir_verdeCreateWithoutProductosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1349,6 +1385,7 @@ export type dir_verdeUncheckedCreateWithoutProductosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1388,6 +1425,7 @@ export type dir_verdeUpdateWithoutProductosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1416,6 +1454,7 @@ export type dir_verdeUncheckedUpdateWithoutProductosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1441,6 +1480,7 @@ export type dir_verdeCreateManyGruposInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1462,6 +1502,7 @@ export type dir_verdeUpdateWithoutGruposInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1489,6 +1530,7 @@ export type dir_verdeUncheckedUpdateWithoutGruposInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1515,6 +1557,7 @@ export type dir_verdeUncheckedUpdateManyWithoutGruposInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1538,6 +1581,7 @@ export type dir_verdeCreateManyMunicipiosInput = {
   direccion?: string | null
   representante?: string | null
   logo?: string | null
+  whatsup?: string | null
   url_youtube?: string | null
   url_facebook?: string | null
   url_instagram?: string | null
@@ -1559,6 +1603,7 @@ export type dir_verdeUpdateWithoutMunicipiosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1586,6 +1631,7 @@ export type dir_verdeUncheckedUpdateWithoutMunicipiosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1612,6 +1658,7 @@ export type dir_verdeUncheckedUpdateManyWithoutMunicipiosInput = {
   direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   representante?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_youtube?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_facebook?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url_instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1685,6 +1732,7 @@ export type dir_verdeSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   direccion?: boolean
   representante?: boolean
   logo?: boolean
+  whatsup?: boolean
   url_youtube?: boolean
   url_facebook?: boolean
   url_instagram?: boolean
@@ -1715,6 +1763,7 @@ export type dir_verdeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   direccion?: boolean
   representante?: boolean
   logo?: boolean
+  whatsup?: boolean
   url_youtube?: boolean
   url_facebook?: boolean
   url_instagram?: boolean
@@ -1741,6 +1790,7 @@ export type dir_verdeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   direccion?: boolean
   representante?: boolean
   logo?: boolean
+  whatsup?: boolean
   url_youtube?: boolean
   url_facebook?: boolean
   url_instagram?: boolean
@@ -1767,6 +1817,7 @@ export type dir_verdeSelectScalar = {
   direccion?: boolean
   representante?: boolean
   logo?: boolean
+  whatsup?: boolean
   url_youtube?: boolean
   url_facebook?: boolean
   url_instagram?: boolean
@@ -1778,7 +1829,7 @@ export type dir_verdeSelectScalar = {
   autorizado_por?: boolean
 }
 
-export type dir_verdeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_negocio" | "id_grupo" | "id_municipio" | "id_fase" | "negocio" | "sub_categoria" | "descripcion" | "actividad" | "unidad_productiva" | "direccion" | "representante" | "logo" | "url_youtube" | "url_facebook" | "url_instagram" | "url_tiktok" | "url_negocio" | "pos_gps" | "estado" | "a_o_verificacion" | "autorizado_por", ExtArgs["result"]["dir_verde"]>
+export type dir_verdeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_negocio" | "id_grupo" | "id_municipio" | "id_fase" | "negocio" | "sub_categoria" | "descripcion" | "actividad" | "unidad_productiva" | "direccion" | "representante" | "logo" | "whatsup" | "url_youtube" | "url_facebook" | "url_instagram" | "url_tiktok" | "url_negocio" | "pos_gps" | "estado" | "a_o_verificacion" | "autorizado_por", ExtArgs["result"]["dir_verde"]>
 export type dir_verdeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   grupos?: boolean | Prisma.gruposDefaultArgs<ExtArgs>
   municipios?: boolean | Prisma.municipiosDefaultArgs<ExtArgs>
@@ -1818,6 +1869,7 @@ export type $dir_verdePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     direccion: string | null
     representante: string | null
     logo: string | null
+    whatsup: string | null
     url_youtube: string | null
     url_facebook: string | null
     url_instagram: string | null
@@ -2267,6 +2319,7 @@ export interface dir_verdeFieldRefs {
   readonly direccion: Prisma.FieldRef<"dir_verde", 'String'>
   readonly representante: Prisma.FieldRef<"dir_verde", 'String'>
   readonly logo: Prisma.FieldRef<"dir_verde", 'String'>
+  readonly whatsup: Prisma.FieldRef<"dir_verde", 'String'>
   readonly url_youtube: Prisma.FieldRef<"dir_verde", 'String'>
   readonly url_facebook: Prisma.FieldRef<"dir_verde", 'String'>
   readonly url_instagram: Prisma.FieldRef<"dir_verde", 'String'>

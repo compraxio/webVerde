@@ -119,6 +119,7 @@ export default function CrearNego() {
         funcion={() => {
           const formData = new FormData();
           formData.append('negocio', getValues('negocio'));
+          formData.append('whatsup', getValues('whatsup') || '');
           formData.append('id_grupo', String(getValues('id_grupo')));
           formData.append('id_fase', String(getValues('id_fase')));
           formData.append('unidad_productiva', getValues('unidad_productiva') || '');
@@ -254,7 +255,7 @@ export default function CrearNego() {
               />
               {errors.unidad_productiva?.message && <p>{errors.unidad_productiva.message}</p>}
             </div>
-            <div className="flex flex-col gap-1.5 md:col-span-2">
+            <div className="flex flex-col gap-1.5 ">
               <label className="text-sm font-semibold" htmlFor="sub_categoria">
                 Sub categoria
               </label>
@@ -266,6 +267,19 @@ export default function CrearNego() {
                 {...register('sub_categoria')}
               />
               {errors.sub_categoria?.message && <p>{errors.sub_categoria.message}</p>}
+            </div>
+            <div className="flex flex-col gap-1.5 ">
+              <label className="text-sm font-semibold" htmlFor="whatsup">
+                whatsup
+              </label>
+              <input
+                className={inputClass}
+                type="text"
+                id="whatsup"
+                placeholder="Ej: Artesanías, Comida, Servicios"
+                {...register('whatsup')}
+              />
+              {errors.whatsup?.message && <p>{errors.whatsup.message}</p>}
             </div>
             <div className="flex flex-col gap-1.5 md:col-span-2">
               <label className="text-sm font-semibold" htmlFor="descripcion">

@@ -11,7 +11,7 @@ import {
   MdOutlineProductionQuantityLimits,
   MdWeb,
 } from 'react-icons/md';
-import { FaRegIdBadge } from 'react-icons/fa';
+import { FaRegIdBadge, FaWhatsapp } from 'react-icons/fa';
 import { GoVerified } from 'react-icons/go';
 import { BotonesFormulario } from '@/components/botones/BotonesFormulario';
 import Link from 'next/link';
@@ -128,27 +128,36 @@ export default async function usePerfilNegocio({
                   Visitar Sitio Web
                 </a>
               )}
-              {negocio?.url_negocio && (
-                <BotonesFormulario
-                  url={negocio?.url_negocio ?? ''}
-                />
+              {negocio?.whatsup && (
+                <a
+                  className="inline-flex items-center gap-2 bg-primary text-forest px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
+                  href={`https://wa.me/${negocio.whatsup}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaWhatsapp size={25} />
+                  Ver contacto
+                </a>
               )}
+              {negocio?.url_negocio && <BotonesFormulario url={negocio?.url_negocio ?? ''} />}
             </div>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {negocio?.descripcion && <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm lg:col-span-3">
-          <div className="flex items-center gap-3 mb-4">
-            <MdOutlineDescription size={25} />
+        {negocio?.descripcion && (
+          <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm lg:col-span-3">
+            <div className="flex items-center gap-3 mb-4">
+              <MdOutlineDescription size={25} />
 
-            <h2 className="font-bold text-lg">Descripción del Negocio</h2>
+              <h2 className="font-bold text-lg">Descripción del Negocio</h2>
+            </div>
+            <div className="prose prose-sm dark:prose-invert max-w-none text-leaf/80 leading-relaxed">
+              {negocio?.descripcion}
+            </div>
           </div>
-          <div className="prose prose-sm dark:prose-invert max-w-none text-leaf/80 leading-relaxed">
-            {negocio?.descripcion}
-          </div>
-        </div>}
+        )}
         <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <FaRegIdBadge size={25} />
@@ -215,99 +224,117 @@ export default async function usePerfilNegocio({
             <h2 className="font-bold text-lg">Ubicación y Contacto</h2>
           </div>
           <div className="space-y-4">
-            {negocio?.municipios && <div>
-              <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
-                Municipio / Zona
-              </h3>
-              <p className="text-forest dark:text-white font-medium">
-                {`${negocio?.municipios.municipio} | ${negocio?.municipios.zona}`}
-              </p>
-            </div>}
-            {negocio?.direccion && <div>
-              <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">Dirección</h3>
-              <p className="text-forest dark:text-white font-medium">{negocio?.direccion}</p>
-            </div>}
-            {negocio?.pos_gps && <div>
-              <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
-                Latitud y Longitud
-              </h3>
-              <p className="text-forest dark:text-white font-medium">{negocio?.pos_gps}</p>
-            </div>}
-            {negocio?.representante && <div>
-              <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
-                Representante Legal
-              </h3>
-              <p className="text-forest dark:text-white font-medium">{negocio?.representante}</p>
-            </div>}
+            {negocio?.municipios && (
+              <div>
+                <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
+                  Municipio / Zona
+                </h3>
+                <p className="text-forest dark:text-white font-medium">
+                  {`${negocio?.municipios.municipio} | ${negocio?.municipios.zona}`}
+                </p>
+              </div>
+            )}
+            {negocio?.direccion && (
+              <div>
+                <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
+                  Dirección
+                </h3>
+                <p className="text-forest dark:text-white font-medium">{negocio?.direccion}</p>
+              </div>
+            )}
+            {negocio?.pos_gps && (
+              <div>
+                <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
+                  Latitud y Longitud
+                </h3>
+                <p className="text-forest dark:text-white font-medium">{negocio?.pos_gps}</p>
+              </div>
+            )}
+            {negocio?.representante && (
+              <div>
+                <h3 className="text-xs text-leaf font-bold uppercase tracking-tighter">
+                  Representante Legal
+                </h3>
+                <p className="text-forest dark:text-white font-medium">{negocio?.representante}</p>
+              </div>
+            )}
           </div>
         </div>
-        {negocio?.url_youtube || negocio?.url_facebook || negocio?.url_instagram || negocio?.url_tiktok ? (
+        {negocio?.url_youtube ||
+        negocio?.url_facebook ||
+        negocio?.url_instagram ||
+        negocio?.url_tiktok ? (
           <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm lg:col-span-2">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <MdOutlinePublic size={25} />
                 <h2 className="font-bold text-lg">Presencia Social y Digital</h2>
               </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {negocio?.url_youtube && (
+                <a
+                  className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
+                  href={negocio?.url_youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="size-8 rounded flex items-center justify-center bg-red-600 text-white font-bold text-xs">
+                    YT
+                  </span>
+                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                    YouTube
+                  </span>
+                </a>
+              )}
+              {negocio?.url_facebook && (
+                <a
+                  className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
+                  href={negocio?.url_facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="size-8 rounded flex items-center justify-center bg-blue-700 text-white font-bold text-xs">
+                    FB
+                  </span>
+                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                    Facebook
+                  </span>
+                </a>
+              )}
+              {negocio?.url_instagram && (
+                <a
+                  className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
+                  href={negocio?.url_instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="size-8 rounded flex items-center justify-center bg-pink-600 text-white font-bold text-xs">
+                    IG
+                  </span>
+                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                    Instagram
+                  </span>
+                </a>
+              )}
+              {negocio?.url_tiktok && (
+                <a
+                  className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
+                  href={negocio?.url_tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="size-8 rounded flex items-center justify-center bg-black text-white font-bold text-xs">
+                    TK
+                  </span>
+                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                    TikTok
+                  </span>
+                </a>
+              )}
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {negocio?.url_youtube && (
-              <a
-                className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={negocio?.url_youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="size-8 rounded flex items-center justify-center bg-red-600 text-white font-bold text-xs">
-                  YT
-                </span>
-                <span className="text-sm font-bold text-leaf group-hover:text-forest">YouTube</span>
-              </a>
-            )}
-            {negocio?.url_facebook && (
-              <a
-                className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={negocio?.url_facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="size-8 rounded flex items-center justify-center bg-blue-700 text-white font-bold text-xs">
-                  FB
-                </span>
-                <span className="text-sm font-bold text-leaf group-hover:text-forest">
-                  Facebook
-                </span>
-              </a>
-            )}
-            {negocio?.url_instagram && (
-              <a
-                className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={negocio?.url_instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="size-8 rounded flex items-center justify-center bg-pink-600 text-white font-bold text-xs">
-                  IG
-                </span>
-                <span className="text-sm font-bold text-leaf group-hover:text-forest">
-                  Instagram
-                </span>
-              </a>
-            )}
-            {negocio?.url_tiktok && (
-              <a
-                className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
-                href={negocio?.url_tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="size-8 rounded flex items-center justify-center bg-black text-white font-bold text-xs">
-                  TK
-                </span>
-                <span className="text-sm font-bold text-leaf group-hover:text-forest">TikTok</span>
-              </a>
-            )}
-          </div>
-        </div>) : null}
+        ) : null}
         {showVerification && (
           <div className="bg-forest dark:bg-primary/5 bg-primary p-6 rounded-xl shadow-sm lg:col-span-1 text-white dark:text-forest">
             <div className="flex items-center gap-3 mb-6">
@@ -327,12 +354,14 @@ export default async function usePerfilNegocio({
                   })}
                 </p>
               </div>
-              {negocio?.autorizado_por && <div>
-                <h3 className="text-xs text-leaf/80 font-bold uppercase tracking-tighter">
-                  Autorizado Por
-                </h3>
-                <p className="font-bold text-white dark:text-white">{negocio?.autorizado_por}</p>
-              </div>}
+              {negocio?.autorizado_por && (
+                <div>
+                  <h3 className="text-xs text-leaf/80 font-bold uppercase tracking-tighter">
+                    Autorizado Por
+                  </h3>
+                  <p className="font-bold text-white dark:text-white">{negocio?.autorizado_por}</p>
+                </div>
+              )}
             </div>
           </div>
         )}

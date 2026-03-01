@@ -31,6 +31,7 @@ model dir_verde {
   direccion              String?
   representante          String?
   logo                   String?
+  whatsup                String?
   url_youtube            String?
   url_facebook           String?
   url_instagram          String?
