@@ -90,7 +90,7 @@ export function AccionesGrupos({
         </svg>
       </Link>
       <button
-        className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
+        className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all cursor-pointer"
         onClick={() => {
           setOpen(true);
           setId_grupo(id_grupo);

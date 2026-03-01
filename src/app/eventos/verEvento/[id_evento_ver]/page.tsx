@@ -27,8 +27,12 @@ export default async function VerEvento({
           <div className="absolute inset-0 bg-linear-to-t from-background-dark/90 via-background-dark/20 to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-8 flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
             <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md text-primary text-xs font-bold uppercase tracking-wider mb-3">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${evento?.estado === 'Activo' ? 'bg-primary/20 ' : 'bg-red-500/20'} backdrop-blur-md ${evento?.estado === 'Activo' ? 'text-primary ' : 'text-red-500'} text-xs font-bold uppercase tracking-wider mb-3`}
+              >
+                <span
+                  className={`w-2 h-2 rounded-full ${evento?.estado === 'Activo' ? 'bg-primary ' : 'bg-red-500'} animate-pulse`}
+                ></span>
                 {evento?.estado}
               </span>
               <h1 className="text-white text-5xl font-black tracking-tight leading-none mb-3">

@@ -1,9 +1,7 @@
 'use client';
 import { IoMdShare } from 'react-icons/io';
-import { CiEdit} from 'react-icons/ci';
 import { toast } from 'sonner';
-import Link from 'next/link';
-export function BotonesFormulario({url, linkEdit}: Readonly<{url:string, linkEdit:string}>) {
+export function BotonesFormulario({url}: Readonly<{url:string}>) {
 
     const copiarTexto = async () => {
       if (url) {
@@ -21,11 +19,7 @@ export function BotonesFormulario({url, linkEdit}: Readonly<{url:string, linkEdi
       >
         <IoMdShare size={23} />
       </button>
-      <Link
-        href={linkEdit}
-        className="size-10 flex items-center justify-center rounded-lg border border-leaf/20 text-leaf hover:bg-leaf/5">
-        <CiEdit size={23} />
-      </Link>
+
     </div>
   );
 }

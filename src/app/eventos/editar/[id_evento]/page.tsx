@@ -82,7 +82,7 @@ export default function ActualizarEvento() {
       {
         loading: 'Actualizando evento',
         success: (msg) => {
-          router.back();
+          router.push(`/eventos/${getValues('estado')}`);
           return msg;
         },
         error: (err) => err.message,

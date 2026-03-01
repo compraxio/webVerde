@@ -29,6 +29,8 @@ export async function CrearEvento(formData: FormData) {
   const tipo = formData.get('tipo') as string;
   const estado = formData.get('estado') as string;
 
+  const fechaVerificacion = fecha ? new Date(fecha) : null
+
   if (!nombre || !fecha || !hora || !direccion || !imagen) {
     return {
       ok: false,
@@ -46,7 +48,7 @@ export async function CrearEvento(formData: FormData) {
     await prisma.eventos.create({
       data: {
         evento: nombre,
-        fecha: new Date(fecha),
+        fecha: fechaVerificacion,
         hora,
         direccion,
         Img_Presentacion: blobUrl,
@@ -91,6 +93,8 @@ export async function EditarEvento(id_evento: number, formData: FormData) {
   const tipo = formData.get('tipo') as string;
   const estado = formData.get('estado') as string;
 
+  const fechaVerificacion = fecha ? new Date(fecha) : null;
+
   if (!nombre || !fecha || !hora || !direccion) {
     return {
       ok: false,
@@ -103,7 +107,7 @@ export async function EditarEvento(id_evento: number, formData: FormData) {
       where: { id_evento },
       data: {
         evento: nombre,
-        fecha: new Date(fecha),
+        fecha: fechaVerificacion,
         hora,
         direccion,
         link,

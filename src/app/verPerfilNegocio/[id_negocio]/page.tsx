@@ -131,7 +131,6 @@ export default async function usePerfilNegocio({
               {negocio?.url_negocio && (
                 <BotonesFormulario
                   url={negocio?.url_negocio ?? ''}
-                  linkEdit={`/editarNegocio/${negocio.id_negocio}`}
                 />
               )}
             </div>

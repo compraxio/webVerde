@@ -79,7 +79,7 @@ export function AccionesNegocios({
         <MdEditNote size={25} />
       </Link>
       <button
-        className="p-2 text-slate-400 hover:text-red-500 transition-colors"
+        className="p-2 text-slate-400 hover:text-red-500 transition-colors cursor-pointer"
         onClick={() => {
           setOpen(true);
           setId_negocio(id_negocio);
