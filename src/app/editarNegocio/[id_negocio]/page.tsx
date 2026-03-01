@@ -91,7 +91,7 @@ export default function ActualizarNegocio() {
         router.back();
       }
       setValue('negocio', `${negocio?.negocio}`);
-      setValue('whatsup', `${negocio?.whatsup}`);
+      setValue('whatsup', `${negocio?.whatsup?.substring(3)}`);
       setValue('id_grupo', negocio?.id_grupo ? String(negocio.id_grupo) : '');
       setValue('id_fase', negocio?.id_fase ? String(negocio.id_fase) : '');
       setValue('id_municipio', negocio?.id_municipio ? String(negocio.id_municipio) : '');
@@ -122,7 +122,7 @@ export default function ActualizarNegocio() {
 
         formData.append('negocio', data.negocio);
         formData.append('id_grupo', data.id_grupo);
-        formData.append('whatsup', data.whatsup || '');
+        formData.append('whatsup', `+57${data.whatsup}` || '');
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
         formData.append('descripcion', data.descripcion || "");

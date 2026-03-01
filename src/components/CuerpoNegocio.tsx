@@ -24,6 +24,7 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
   const [open, setOpen] = useState<boolean>(false);
   const [id_negocio, setId_negocio] = useState<number>();
   const [url_foto, setUrl_foto] = useState<string>();
+  const [url_catalogo, setUrl_catalogo] = useState<string>();
   return (
     <>
       <AlertDelate
@@ -36,7 +37,7 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
             toast.error('falta el grupo o el logo del grupo');
           }
 
-          toast.promise(EliminarNegocio(Number(id_negocio), url_foto ?? ''), {
+          toast.promise(EliminarNegocio(Number(id_negocio), url_foto ?? '', url_catalogo ?? ''), {
             loading: 'Eliminando negocio...',
             success: (res) => {
               if (!res.ok) throw new Error(res.message);
@@ -175,6 +176,8 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                   setId_negocio={setId_negocio}
                   setUrl_foto={setUrl_foto}
                   logo={n.logo}
+                  setUrl_pdf={setUrl_catalogo}
+                  pdf={n.catalogo}
                 />
                 <Link
                   href={`/verPerfilNegocio/${n.id_negocio}`}

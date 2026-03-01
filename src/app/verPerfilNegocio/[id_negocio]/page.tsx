@@ -11,8 +11,9 @@ import {
   MdOutlineProductionQuantityLimits,
   MdWeb,
 } from 'react-icons/md';
-import { FaRegIdBadge, FaWhatsapp } from 'react-icons/fa';
+import { FaRegFilePdf, FaRegIdBadge, FaWhatsapp } from 'react-icons/fa';
 import { GoVerified } from 'react-icons/go';
+
 import { BotonesFormulario } from '@/components/botones/BotonesFormulario';
 import Link from 'next/link';
 
@@ -137,6 +138,16 @@ export default async function usePerfilNegocio({
                 >
                   <FaWhatsapp size={25} />
                   Ver contacto
+                </a>
+              )}
+              {negocio?.catologoPdf && (
+                <a
+                  className="inline-flex items-center gap-2 bg-primary text-forest px-5 py-2.5 rounded-lg font-bold hover:brightness-95 transition-all shadow-sm"
+                  href={negocio.catologoPdf}
+                  download
+                >
+                  <FaRegFilePdf size={25} />
+                  Descargar catalogo
                 </a>
               )}
               {negocio?.url_negocio && <BotonesFormulario url={negocio?.url_negocio ?? ''} />}

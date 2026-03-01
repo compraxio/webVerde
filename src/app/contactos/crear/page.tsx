@@ -56,7 +56,7 @@ export default function Crear() {
     toast.promise(
       CrearContacto({
         nombre: data.nombre,
-        telefono: `${data.extension} ${data.numero}`,
+        telefono: `${data.extension}${data.numero}`,
         correo: data.correo,
         id_negocio: Number(data.id_negocio),
       }),

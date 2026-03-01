@@ -57,6 +57,8 @@ export async function CrearNegocio(formData: FormData) {
   const a_o_verificacion = formData.get('a_o_verificacion') as string;
   const autorizado_por = formData.get('autorizado_por') as string;
   const logo = formData.get('logo') as File;
+  const catalogo = formData.get('catalogo') as string;
+  const catalogoPdf = formData.get('catalogoPdf') as string;
   const fotografias = formData.getAll('fotografias') as File[];
   const lat = formData.get('latitud') as string;
   const lng = formData.get('longitud') as string;
@@ -80,8 +82,8 @@ export async function CrearNegocio(formData: FormData) {
 
   try {
 
-    const blob = await put(`dir_verde/${crypto.randomUUID()}`, logo, { access: 'public' });
-    blobUrl = blob.url;
+      const blob = await put(`dir_verde/${crypto.randomUUID()}`, logo, { access: 'public' });
+      blobUrl = blob.url;
 
     const nuevoNegocio = await prisma.dir_verde.create({
       data: {
@@ -101,6 +103,8 @@ export async function CrearNegocio(formData: FormData) {
         representante,
         pos_gps: lat && lng ? `${lat},${lng}` : null,
         logo: blobUrl,
+        catalogo,
+        catologoPdf: catalogoPdf,
         id_grupo: Number(id_grupo),
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),
@@ -159,7 +163,7 @@ export async function CrearNegocio(formData: FormData) {
   }
 }
 
-export async function EliminarNegocio(id_negocio: number, url: string) {
+export async function EliminarNegocio(id_negocio: number, url: string, urlPdf?: string) {
   try {
     // Obtener las fotografías del negocio
     const fotos = await prisma.fotografias.findMany({
@@ -180,6 +184,7 @@ export async function EliminarNegocio(id_negocio: number, url: string) {
 
     // Eliminar el logo de Vercel Blob
     if (url) await del(url);
+    if (urlPdf) await del(urlPdf)
 
     // Eliminar el negocio
     await prisma.dir_verde.delete({

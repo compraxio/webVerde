@@ -37,21 +37,20 @@ export function BotonAgregarNegocioTargeta() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   if (!isAuthenticated) return null;
   return (
-
-      <Link
-        href="/crearNegocio"
-        className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
-      >
-        <div className="w-16 h-16 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400 text-3xl">
-          <MdAddBusiness />
-        </div>
-        <div>
-          <p className="font-bold text-slate-800 dark:text-white">Añadir Nueva Empresa</p>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Inicia el proceso de certificación y registro en el directorio.
-          </p>
-        </div>
-      </Link>
+    <Link
+      href="/crearNegocio"
+      className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
+    >
+      <div className="w-16 h-16 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400 text-3xl">
+        <MdAddBusiness />
+      </div>
+      <div>
+        <p className="font-bold text-slate-800 dark:text-white">Añadir Nueva Empresa</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Inicia el proceso de certificación y registro en el directorio.
+        </p>
+      </div>
+    </Link>
   );
 }
 
@@ -61,12 +60,16 @@ export function AccionesNegocios({
   setId_negocio,
   setUrl_foto,
   logo,
+  pdf,
+  setUrl_pdf
 }: {
   id_negocio: number;
   setOpen: (open: boolean) => void;
   setId_negocio: (id: number) => void;
   setUrl_foto: (url: string) => void;
+  setUrl_pdf: (url: string) => void;
   logo?: string | null;
+  pdf?: string | null;
 }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   if (!isAuthenticated) return null;
@@ -84,6 +87,7 @@ export function AccionesNegocios({
           setOpen(true);
           setId_negocio(id_negocio);
           setUrl_foto(logo ?? '');
+          setUrl_pdf(pdf ?? '')
         }}
       >
         <svg

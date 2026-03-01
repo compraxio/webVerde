@@ -1066,6 +1066,8 @@ export const Dir_verdeScalarFieldEnum = {
   direccion: 'direccion',
   representante: 'representante',
   logo: 'logo',
+  catalogo: 'catalogo',
+  catologoPdf: 'catologoPdf',
   whatsup: 'whatsup',
   url_youtube: 'url_youtube',
   url_facebook: 'url_facebook',

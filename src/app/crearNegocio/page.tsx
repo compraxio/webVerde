@@ -9,6 +9,8 @@ import { DirVerdeSchema } from '@/schemas/NegociosShema';
 
 import { useEffect, useState } from 'react';
 
+import { upload } from '@vercel/blob/client';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -56,12 +58,12 @@ export default function CrearNego() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const router = useRouter();
   const [files, setFiles] = useState<any[]>([]);
+  const [catalogo, setCatalogo] = useState<any[]>([]);
   const [fotos, setFotos] = useState<any[]>([]);
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
   const [municipios, setMunicipios] = useState<municipio[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-
 
   useEffect(() => {
     function verificarAutenticacion() {
@@ -116,10 +118,20 @@ export default function CrearNego() {
         setOpen={setOpen}
         title="Estas seguro?"
         descripcion="El logo es obligatorio y ademas de eso luego no podras cambiarlo"
-        funcion={() => {
+        funcion={async () => {
           const formData = new FormData();
+          if (catalogo[0]?.file) {
+            toast.info('subiendo el catalogo')
+            const blob = await upload(`catalogo/${crypto.randomUUID()}.pdf`, catalogo[0].file, {
+              access: 'public',
+              handleUploadUrl: '/api/upload',
+            });
+            formData.append('catalogo', blob.url)
+            formData.append('catalogoPdf', blob.downloadUrl);
+            toast.success('catalogo subido')
+          }
           formData.append('negocio', getValues('negocio'));
-          formData.append('whatsup', getValues('whatsup') || '');
+          formData.append('whatsup', `+57${getValues('whatsup')}` || '');
           formData.append('id_grupo', String(getValues('id_grupo')));
           formData.append('id_fase', String(getValues('id_fase')));
           formData.append('unidad_productiva', getValues('unidad_productiva') || '');
@@ -144,7 +156,6 @@ export default function CrearNego() {
           if (files[0]?.file) {
             formData.append('logo', files[0].file);
           }
-
           // Agregar las fotografías (máximo 5)
           // NOTA: Las fotos se guardan en tabla relacionada, necesitas crear el negocio primero
           // para obtener el id_negocio y luego crear las fotografías
@@ -409,8 +420,22 @@ export default function CrearNego() {
                 required
               />
             </div>
-
             <div className="flex flex-col gap-1.5">
+              <FilePond
+                files={catalogo}
+                onupdatefiles={setCatalogo}
+                name="files"
+                labelIdle='Arrastra tu archivo PDF o selecciona  <span class="filepond--label-action">Catalogo opcional</span>'
+                acceptedFileTypes={['application/pdf']}
+                labelFileTypeNotAllowed="Archivo no válido"
+                fileValidateTypeLabelExpectedTypes="Se espera un archivo PDF"
+                maxFileSize="10MB"
+                labelMaxFileSizeExceeded="El archivo es demasiado grande"
+                labelMaxFileSize="El tamaño máximo permitido es {filesize}"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5 ">
               <label className="text-sm font-semibold" htmlFor="url_negocio">
                 Página Web
               </label>
@@ -466,7 +491,7 @@ export default function CrearNego() {
               {errors.url_instagram?.message && <p>{errors.url_instagram.message}</p>}
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5 ">
               <label className="text-sm font-semibold" htmlFor="url_tiktok">
                 TikTok
               </label>
