@@ -1,6 +1,6 @@
 export interface GoogleRuta {
-  success: boolean;
-  data: Datum[];
+  ok: boolean;
+  message: Datum[];
 }
 
 export interface Datum {
