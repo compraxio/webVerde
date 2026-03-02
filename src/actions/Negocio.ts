@@ -4,10 +4,9 @@ import prisma from '@/lib/prisma';
 import { del, put } from '@vercel/blob';
 import { Prisma } from '../../generated/prisma/client';
 
-
 export async function ConseguirTodosNegocios() {
-  const negocios = await prisma.dir_verde.findMany()
-  return negocios
+  const negocios = await prisma.dir_verde.findMany();
+  return negocios;
 }
 
 export async function ConseguirTodosNegociosMapa() {
@@ -25,18 +24,16 @@ export async function ConseguirNegocio(id_negocio: number) {
   const negocio = await prisma.dir_verde.findFirst({
     where: {
       id_negocio,
-
     },
     include: {
       grupos: true,
       municipios: true,
-    }
+    },
   });
   return negocio;
 }
 
 export async function CrearNegocio(formData: FormData) {
-
   const negocio = formData.get('negocio') as string;
   const whatsup = formData.get('whatsup') as string;
   const id_grupo = formData.get('id_grupo') as unknown;
@@ -65,13 +62,7 @@ export async function CrearNegocio(formData: FormData) {
 
   const fechaVerificacion = a_o_verificacion ? new Date(a_o_verificacion) : null;
 
-  if (
-    !negocio ||
-    !id_grupo ||
-    !id_municipio ||
-    !actividad ||
-    !logo
-  ) {
+  if (!negocio || !id_grupo || !id_municipio || !actividad || !logo) {
     return {
       ok: false,
       message: 'Datos incompletos',
@@ -81,9 +72,8 @@ export async function CrearNegocio(formData: FormData) {
   let blobUrl: string | null = null;
 
   try {
-
-      const blob = await put(`dir_verde/${crypto.randomUUID()}`, logo, { access: 'public' });
-      blobUrl = blob.url;
+    const blob = await put(`dir_verde/${crypto.randomUUID()}`, logo, { access: 'public' });
+    blobUrl = blob.url;
 
     const nuevoNegocio = await prisma.dir_verde.create({
       data: {
@@ -109,7 +99,7 @@ export async function CrearNegocio(formData: FormData) {
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),
         estado,
-        whatsup: whatsup
+        whatsup: whatsup,
       },
     });
 
@@ -184,7 +174,7 @@ export async function EliminarNegocio(id_negocio: number, url: string, urlPdf?: 
 
     // Eliminar el logo de Vercel Blob
     if (url) await del(url);
-    if (urlPdf) await del(urlPdf)
+    if (urlPdf) await del(urlPdf);
 
     // Eliminar el negocio
     await prisma.dir_verde.delete({
@@ -207,8 +197,7 @@ export async function EliminarNegocio(id_negocio: number, url: string, urlPdf?: 
   }
 }
 
-export async function EditarNegocio(formData: FormData, id_negocio:number) {
-
+export async function EditarNegocio(formData: FormData, id_negocio: number) {
   const negocio = formData.get('negocio') as string;
   const whatsup = formData.get('whatsup') as string;
   const id_grupo = formData.get('id_grupo') as unknown;
@@ -228,18 +217,14 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
   const estado = formData.get('estado') as string;
   const a_o_verificacion = formData.get('a_o_verificacion') as string;
   const autorizado_por = formData.get('autorizado_por') as string;
+  const catalogo = formData.get('catalogo') as string;
+  const catalogoPdf = formData.get('catalogoPdf') as string;
   const latitud = formData.get('latitud') as string;
   const longitud = formData.get('longitud') as string;
 
   const fechaVerificacion = a_o_verificacion ? new Date(a_o_verificacion) : null;
 
-  if (
-    !id_negocio ||
-    !negocio ||
-    !id_grupo ||
-    !id_municipio ||
-    !actividad
-  ) {
+  if (!id_negocio || !negocio || !id_grupo || !id_municipio || !actividad) {
     return {
       ok: false,
       message: 'Datos incompletos',
@@ -258,7 +243,6 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
       };
     }
 
-
     await prisma.dir_verde.update({
       where: { id_negocio: Number(id_negocio) },
       data: {
@@ -276,12 +260,14 @@ export async function EditarNegocio(formData: FormData, id_negocio:number) {
         url_facebook,
         unidad_productiva,
         representante,
-        pos_gps:  latitud && longitud ? `${latitud},${longitud}` : null,
+        pos_gps: latitud && longitud ? `${latitud},${longitud}` : null,
+        catalogo,
+        catologoPdf: catalogoPdf,
         id_grupo: Number(id_grupo),
         id_fase: Number(id_fase),
         id_municipio: Number(id_municipio),
         estado,
-        whatsup
+        whatsup,
       },
     });
 

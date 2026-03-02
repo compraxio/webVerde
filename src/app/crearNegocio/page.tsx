@@ -425,7 +425,7 @@ export default function CrearNego() {
                 files={catalogo}
                 onupdatefiles={setCatalogo}
                 name="files"
-                labelIdle='Arrastra tu archivo PDF o selecciona  <span class="filepond--label-action">Catalogo opcional</span>'
+                labelIdle='Arrastra tu catalogo en PDF o selecciona  <span class="filepond--label-action">Catalogo opcional</span>'
                 acceptedFileTypes={['application/pdf']}
                 labelFileTypeNotAllowed="Archivo no válido"
                 fileValidateTypeLabelExpectedTypes="Se espera un archivo PDF"

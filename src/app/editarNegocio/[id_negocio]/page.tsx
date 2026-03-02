@@ -18,10 +18,28 @@ import { obtenerTodosFases } from '@/actions/Fases';
 import { ConseguirNegocio, EditarNegocio } from '@/actions/Negocio';
 import { useAuthStore } from '@/store/AuthStore';
 
+import { FilePond, registerPlugin } from 'react-filepond';
+
+import 'filepond/dist/filepond.min.css';
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType,
+  FilePondPluginFileValidateSize,
+);
+
 type Inputs = z.infer<typeof DirVerdeEditarSchema>;
 
 import { Prisma } from '../../../../generated/prisma/client';
 import { ConseguirTodosMunicipios } from '@/actions/Municipios';
+import { upload } from '@vercel/blob/client';
 
 type grupo = Prisma.gruposGetPayload<{
   include: {
@@ -40,8 +58,8 @@ export default function ActualizarNegocio() {
   const [grupos, setGrupos] = useState<grupo[]>();
   const [fases, setFases] = useState<fase[]>();
   const [municipios, setMunicipios] = useState<municipio[]>([]);
-
-
+  const [catalogo, setCatalogo] = useState<any[]>([]);
+  const [existeCatalogo, setExisteCatalogo] = useState<boolean>(false);
 
   useEffect(() => {
     function verificarAutorizacion() {
@@ -82,7 +100,7 @@ export default function ActualizarNegocio() {
 
   useEffect(() => {
     async function cargarNegocio() {
-      if(!grupos || !fases || municipios.length === 0) return
+      if (!grupos || !fases || municipios.length === 0) return;
       const negocio = await ConseguirNegocio(id_negocio);
 
       if (!negocio) {
@@ -90,8 +108,9 @@ export default function ActualizarNegocio() {
         router.refresh();
         router.back();
       }
+      if (negocio?.catalogo) setExisteCatalogo(true);
       setValue('negocio', `${negocio?.negocio}`);
-      setValue('whatsup', `${negocio?.whatsup?.substring(3)}`);
+      setValue('whatsup', negocio?.whatsup ? String(negocio?.whatsup?.substring(3)) : '');
       setValue('id_grupo', negocio?.id_grupo ? String(negocio.id_grupo) : '');
       setValue('id_fase', negocio?.id_fase ? String(negocio.id_fase) : '');
       setValue('id_municipio', negocio?.id_municipio ? String(negocio.id_municipio) : '');
@@ -107,7 +126,10 @@ export default function ActualizarNegocio() {
       setValue('url_instagram', `${negocio?.url_instagram || ''}`);
       setValue('url_tiktok', `${negocio?.url_tiktok || ''}`);
       setValue('estado', negocio?.estado as 'Activo' | 'Inactivo');
-      setValue('a_o_verificacion', `${negocio?.a_o_verificacion?.toISOString().split('T')[0] || ''}`);
+      setValue(
+        'a_o_verificacion',
+        `${negocio?.a_o_verificacion?.toISOString().split('T')[0] || ''}`,
+      );
       setValue('autorizado_por', `${negocio?.autorizado_por || ''}`);
       setValue('latitud', `${negocio?.pos_gps?.split(',')[0] || ''}`);
       setValue('longitud', `${negocio?.pos_gps?.split(',')[1] || ''}`);
@@ -119,13 +141,20 @@ export default function ActualizarNegocio() {
     toast.promise(
       async () => {
         const formData = new FormData();
-
+        if (catalogo[0]?.file && !existeCatalogo) {
+          const blob = await upload(`catalogo/${crypto.randomUUID()}.pdf`, catalogo[0].file, {
+            access: 'public',
+            handleUploadUrl: '/api/upload',
+          });
+          formData.append('catalogo', blob.url);
+          formData.append('catalogoPdf', blob.downloadUrl);
+        }
         formData.append('negocio', data.negocio);
         formData.append('id_grupo', data.id_grupo);
         formData.append('whatsup', `+57${data.whatsup?.trim()}` || '');
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
-        formData.append('descripcion', data.descripcion || "");
+        formData.append('descripcion', data.descripcion || '');
         formData.append('actividad', data.actividad);
         formData.append('sub_categoria', data.sub_categoria || '');
         formData.append('id_municipio', String(data.id_municipio));
@@ -386,8 +415,23 @@ export default function ActualizarNegocio() {
             </div>
             <h3 className="text-lg font-bold">Redes y Multimedia</h3>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {!existeCatalogo && (
+              <div className="flex flex-col gap-1.5">
+                <FilePond
+                  files={catalogo}
+                  onupdatefiles={setCatalogo}
+                  name="files"
+                  labelIdle='Arrastra tu catalogo en PDF o selecciona  <span class="filepond--label-action">Catalogo opcional</span>'
+                  acceptedFileTypes={['application/pdf']}
+                  labelFileTypeNotAllowed="Archivo no válido"
+                  fileValidateTypeLabelExpectedTypes="Se espera un archivo PDF"
+                  maxFileSize="10MB"
+                  labelMaxFileSizeExceeded="El archivo es demasiado grande"
+                  labelMaxFileSize="El tamaño máximo permitido es {filesize}"
+                />
+              </div>
+            )}
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold" htmlFor="url_negocio">
                 Página Web
