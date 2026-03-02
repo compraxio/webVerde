@@ -144,7 +144,7 @@ export function AppSidebar() {
               </svg>
               Grupos
             </Link>
-            <Link
+            {/* <Link
               className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
               href="/fase"
             >
@@ -163,7 +163,7 @@ export function AppSidebar() {
                 />
               </svg>
               Fase
-            </Link>
+            </Link> */}
             <Link
               className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
               href="/mapa"

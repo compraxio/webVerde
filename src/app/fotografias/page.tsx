@@ -18,12 +18,16 @@ export default async function Fotografias() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {fotos.map((f) => (
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all" key={f.id_foto}>
+          <div
+            className="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all"
+            key={f.id_foto}
+          >
             <div className="aspect-video overflow-hidden relative">
               <img
                 alt={f.dir_verde.negocio}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 src={f.url_foto ?? ''}
+                loading="lazy"
               />
             </div>
             <div className="p-4 flex items-center justify-between">

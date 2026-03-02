@@ -122,7 +122,7 @@ export default function ActualizarNegocio() {
 
         formData.append('negocio', data.negocio);
         formData.append('id_grupo', data.id_grupo);
-        formData.append('whatsup', `+57${data.whatsup}` || '');
+        formData.append('whatsup', `+57${data.whatsup?.trim()}` || '');
         formData.append('id_fase', String(data.id_fase));
         formData.append('unidad_productiva', data.unidad_productiva || '');
         formData.append('descripcion', data.descripcion || "");

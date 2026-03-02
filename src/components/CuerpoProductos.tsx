@@ -23,7 +23,12 @@ export async function CuerpoProductos({ negocio }: Readonly<{ negocio: number }>
           key={p.id_prodcucto}
         >
           <div className="bg-slate-100 dark:bg-zinc-800 flex items-center justify-center relative overflow-hidden">
-            <img src={p.img_prodcto ?? ''} alt={p.nombre ?? ''} className="bg-cover" />
+            <img
+              src={p.img_prodcto ?? ''}
+              alt={p.nombre ?? ''}
+              className="bg-cover"
+              loading="lazy"
+            />
           </div>
           <div className="p-4">
             <h4 className="font-bold text-slate-900 dark:text-white truncate">{p.nombre}</h4>

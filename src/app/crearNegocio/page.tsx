@@ -131,7 +131,7 @@ export default function CrearNego() {
             toast.success('catalogo subido')
           }
           formData.append('negocio', getValues('negocio'));
-          formData.append('whatsup', `+57${getValues('whatsup')}` || '');
+          formData.append('whatsup', `+57${getValues('whatsup')?.trim()}` || '');
           formData.append('id_grupo', String(getValues('id_grupo')));
           formData.append('id_fase', String(getValues('id_fase')));
           formData.append('unidad_productiva', getValues('unidad_productiva') || '');

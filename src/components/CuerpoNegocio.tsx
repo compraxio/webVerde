@@ -12,7 +12,7 @@ import { EliminarNegocio } from '@/actions/Negocio';
 import { useState } from 'react';
 import { AlertDelate } from './alerts/alertDelate';
 import { AccionesNegocios } from './Admin/NegociosAuth';
-import { FaFacebook, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
 import { FaSquareInstagram } from 'react-icons/fa6';
 import { MdVisibility, MdWeb } from 'react-icons/md';
@@ -59,6 +59,7 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                 src={n.logo}
                 alt={n.negocio}
                 className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
               />
             ) : (
               <Image
@@ -103,71 +104,102 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                   {n?.sub_categoria && n.sub_categoria}
                 </p>
               </div>
-              <div className="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  className="size-6"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
+              {!n.whatsup ? (
+                <div className="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="currentColor"
+                    className="size-6"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3 3 0 0 0 3.75-.615A3 3 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a3 3 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3 3 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75"
+                    />
+                  </svg>
+                </div>
+              ) : (
+                <a
+                  href={`https://wa.me/${n.whatsup}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3 3 0 0 0 3.75-.615A3 3 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a3 3 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3 3 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75"
-                  />
-                </svg>
-              </div>
+                  <FaWhatsapp size={25} />
+                </a>
+              )}
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-6">
               {n.descripcion}
             </p>
             <div className="flex items-center justify-center border-t border-slate-100 dark:border-zinc-800 pt-4">
               <div className="flex items-center gap-2">
-                {n.url_negocio && (
+                {n.url_negocio ? (
                   <a href={n.url_negocio ?? ''} target="_blank" rel="noopener noreferrer">
                     <MdWeb
                       size={25}
-                      className="text-slate-400 hover:text-sky-500 transition-colors duration-300"
+                      className="text-sky-500 hover:text-white transition-colors duration-300"
                     />
                   </a>
+                ) : (
+                  <div className="opacity-40 cursor-not-allowed">
+                    <MdWeb size={25} className="text-slate-300" />
+                  </div>
                 )}
 
-                {n.url_instagram && (
+                {n.url_instagram ? (
                   <a href={n.url_instagram ?? ''} target="_blank" rel="noopener noreferrer">
                     <FaSquareInstagram
                       size={25}
-                      className="text-slate-400 hover:text-pink-500 transition-colors duration-300"
+                      className="text-pink-500 hover:text-white transition-colors duration-300"
                     />
                   </a>
+                ) : (
+                  <div className="opacity-40 cursor-not-allowed">
+                    <FaSquareInstagram size={25} className="text-slate-300" />
+                  </div>
                 )}
 
-                {n.url_youtube && (
+                {n.url_youtube ? (
                   <a href={n.url_youtube ?? ''} target="_blank" rel="noopener noreferrer">
                     <FaYoutube
                       size={25}
-                      className="text-slate-400 hover:text-red-600 transition-colors duration-300"
+                      className="text-red-600 hover:text-white transition-colors duration-300"
                     />
                   </a>
+                ) : (
+                  <div className="opacity-40 cursor-not-allowed">
+                    <FaYoutube size={25} className="text-slate-300" />
+                  </div>
                 )}
 
-                {n.url_tiktok && (
+                {n.url_tiktok ? (
                   <a href={n.url_tiktok ?? ''} target="_blank" rel="noopener noreferrer">
                     <AiFillTikTok
                       size={25}
-                      className="text-slate-400 hover:text-black dark:hover:text-white transition-colors duration-300"
+                      className="text-black dark:text-white hover:text-white transition-colors duration-300"
                     />
                   </a>
+                ) : (
+                  <div className="opacity-40 cursor-not-allowed">
+                    <AiFillTikTok size={25} className="text-slate-300" />
+                  </div>
                 )}
 
-                {n.url_facebook && (
+                {n.url_facebook ? (
                   <a href={n.url_facebook ?? ''} target="_blank" rel="noopener noreferrer">
                     <FaFacebook
                       size={25}
-                      className="text-slate-400 hover:text-blue-600 transition-colors duration-300"
+                      className="text-blue-600 hover:text-white transition-colors duration-300"
                     />
                   </a>
+                ) : (
+                  <div className="opacity-40 cursor-not-allowed">
+                    <FaFacebook size={25} className="text-slate-300" />
+                  </div>
                 )}
 
                 <AccionesNegocios

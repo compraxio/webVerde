@@ -50,6 +50,7 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
               alt={evento.evento}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               src={evento.Img_Presentacion}
+              loading="lazy"
             />
           </div>
           <div className="flex-1 min-w-0">
@@ -74,7 +75,8 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
             </div>
           </div>
           <div className="flex items-center gap-2 pr-2">
-            <Link href={`/eventos/verEvento/${evento.id_evento}`}
+            <Link
+              href={`/eventos/verEvento/${evento.id_evento}`}
               className="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-xl transition-all"
               title="Ver"
             >

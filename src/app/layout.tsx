@@ -4,6 +4,7 @@ import './globals.css';
 import Link from 'next/link';
 import { ModeToggle } from '@/components/mode-toggle';
 
+import { Carrusel } from '@/components/Carrusel';
 import { Inter } from 'next/font/google';
 import { ApoyoNegocios } from '@/components/Apoyo-negocios';
 import { Suspense } from 'react';
@@ -160,7 +161,7 @@ export default function RootLayout({
                   </svg>
                   Grupos
                 </Link>
-                <Link
+                {/* <Link
                   className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
                   href="/fase"
                 >
@@ -179,7 +180,7 @@ export default function RootLayout({
                     />
                   </svg>
                   Fase
-                </Link>
+                </Link> */}
                 <Link
                   className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
                   href="/mapa"
@@ -241,7 +242,8 @@ export default function RootLayout({
                   Eventos
                 </Link>
               </nav>
-              <div className="p-4 mt-auto">
+              <Carrusel />
+              <div className="p-2 mt-auto">
                 <Suspense fallback={<ApoyoNegociosEsqueleto />}>
                   <ApoyoNegocios />
                 </Suspense>

@@ -51,6 +51,7 @@ export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
             src={g.logo_grupo ?? ''}
             alt={g.actividad}
             className="bg-cover w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"
+            loading="lazy"
           />
           <div className="flex-1 min-w-0">
             <h3 className="font-bold text-lg text-slate-800 dark:text-white">

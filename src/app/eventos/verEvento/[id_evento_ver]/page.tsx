@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import Image from 'next/image';
 import { FaInfoCircle } from 'react-icons/fa';
 import { IoLocationOutline } from 'react-icons/io5';
 import { MdCalendarMonth, MdOutlineDescription, MdOutlineSchedule } from 'react-icons/md';
@@ -21,8 +22,8 @@ export default async function VerEvento({
           <img
             alt={evento?.evento}
             className="w-full h-full object-cover"
-            data-alt="Panoramic view of dense tropical rainforest with mist"
             src={evento?.Img_Presentacion}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-linear-to-t from-background-dark/90 via-background-dark/20 to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-8 flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
@@ -83,6 +84,7 @@ export default async function VerEvento({
                         className="w-full h-full object-cover"
                         data-alt="Professional logo of Amazon Conservation Association"
                         src={evento?.Img_Presentacion}
+                        loading="lazy"
                       />
                     </div>
                     <div>
@@ -157,12 +159,12 @@ export default async function VerEvento({
               </div>
               <div className="px-6 pb-6">
                 <div className="w-full h-40 rounded-xl bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
-                  <img
+                  <Image
                     alt="Map view"
                     className="w-full h-full object-cover opacity-60"
-                    data-alt="Stylized map showing Manaus city center location"
-                    data-location="Manaus, Brazil"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbBiW4uP0KtztQMo-VY0RkctSF056kMnPVP6kerlz4ndp3VNmSyO-alj7oqab1G6RqNdeQVGeewjIrIs8zeuWvqKFtttO6sGtoQONJ0fNk0-oQ5c5D0vhp48VQd19xh0AwtjkxFo0LcpTTvPYGZxz8ejXO4GeF0hWUEUaBsuBmrqAIi3E6_zXDMDhjsuaYPr1Hu0oWFHyjhmIMSKHemOaRGGXUJ76etSlsuNhzK3VFhv2ESvpFx2Ob-ZfP5qL6R338-95Yp9fWVcNR"
+                    src="/src/components/ui/mapa.png"
+                    height={512}
+                    width={512}
                   />
                   <div className="absolute inset-0 flex items-center flex-col justify-center">
                     <div className="bg-primary text-background-dark p-2 rounded-full shadow-lg">

@@ -63,7 +63,12 @@ export default async function usePerfilNegocio({
               } overflow-hidden`}
             >
               {negocio?.logo ? (
-                <img alt={negocio?.negocio} className="object-contain p-4" src={negocio.logo} />
+                <img
+                  alt={negocio?.negocio}
+                  className="object-contain p-4"
+                  src={negocio.logo}
+                  loading="lazy"
+                />
               ) : (
                 <Image
                   alt="Honey production"
@@ -271,10 +276,7 @@ export default async function usePerfilNegocio({
             )}
           </div>
         </div>
-        {negocio?.url_youtube ||
-        negocio?.url_facebook ||
-        negocio?.url_instagram ||
-        negocio?.url_tiktok ? (
+        {true && (
           <div className="bg-white dark:bg-background-dark p-6 rounded-xl border border-amber-50/10 shadow-sm lg:col-span-2">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
@@ -283,7 +285,7 @@ export default async function usePerfilNegocio({
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {negocio?.url_youtube && (
+              {negocio?.url_youtube ? (
                 <a
                   className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
                   href={negocio?.url_youtube}
@@ -293,27 +295,41 @@ export default async function usePerfilNegocio({
                   <span className="size-8 rounded flex items-center justify-center bg-red-600 text-white font-bold text-xs">
                     YT
                   </span>
-                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                  <span className="text-sm font-bold text-red-600 group-hover:text-white transition-colors">
                     YouTube
                   </span>
                 </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg opacity-50 cursor-not-allowed">
+                  <span className="size-8 rounded flex items-center justify-center bg-slate-300 text-white font-bold text-xs">
+                    YT
+                  </span>
+                  <span className="text-sm font-bold text-slate-400">YouTube</span>
+                </div>
               )}
-              {negocio?.url_facebook && (
+              {negocio?.url_facebook ? (
                 <a
                   className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
                   href={negocio?.url_facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="size-8 rounded flex items-center justify-center bg-blue-700 text-white font-bold text-xs">
+                  <span className="size-8 rounded flex items-center justify-center bg-blue-600 text-white font-bold text-xs">
                     FB
                   </span>
-                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                  <span className="text-sm font-bold text-blue-600 group-hover:text-white transition-colors">
                     Facebook
                   </span>
                 </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg opacity-50 cursor-not-allowed">
+                  <span className="size-8 rounded flex items-center justify-center bg-slate-300 text-white font-bold text-xs">
+                    FB
+                  </span>
+                  <span className="text-sm font-bold text-slate-400">Facebook</span>
+                </div>
               )}
-              {negocio?.url_instagram && (
+              {negocio?.url_instagram ? (
                 <a
                   className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
                   href={negocio?.url_instagram}
@@ -323,12 +339,19 @@ export default async function usePerfilNegocio({
                   <span className="size-8 rounded flex items-center justify-center bg-pink-600 text-white font-bold text-xs">
                     IG
                   </span>
-                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                  <span className="text-sm font-bold text-pink-600 group-hover:text-white transition-colors">
                     Instagram
                   </span>
                 </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg opacity-50 cursor-not-allowed">
+                  <span className="size-8 rounded flex items-center justify-center bg-slate-300 text-white font-bold text-xs">
+                    IG
+                  </span>
+                  <span className="text-sm font-bold text-slate-400">Instagram</span>
+                </div>
               )}
-              {negocio?.url_tiktok && (
+              {negocio?.url_tiktok ? (
                 <a
                   className="flex items-center gap-3 p-3 bg-leaf/5 rounded-lg hover:bg-amber-50/10 transition-colors group"
                   href={negocio?.url_tiktok}
@@ -338,14 +361,21 @@ export default async function usePerfilNegocio({
                   <span className="size-8 rounded flex items-center justify-center bg-black text-white font-bold text-xs">
                     TK
                   </span>
-                  <span className="text-sm font-bold text-leaf group-hover:text-forest">
+                  <span className="text-sm font-bold text-black group-hover:text-white transition-colors">
                     TikTok
                   </span>
                 </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-zinc-800 rounded-lg opacity-50 cursor-not-allowed">
+                  <span className="size-8 rounded flex items-center justify-center bg-slate-300 text-white font-bold text-xs">
+                    TK
+                  </span>
+                  <span className="text-sm font-bold text-slate-400">TikTok</span>
+                </div>
               )}
             </div>
           </div>
-        ) : null}
+        )}
         {showVerification && (
           <div className="bg-forest dark:bg-primary/5 bg-primary p-6 rounded-xl shadow-sm lg:col-span-1 text-white dark:text-forest">
             <div className="flex items-center gap-3 mb-6">
