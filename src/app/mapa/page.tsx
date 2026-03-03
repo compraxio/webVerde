@@ -14,12 +14,7 @@ import {
   MapRoute,
 } from '@/components/ui/map';
 import { Button } from '@/components/ui/button';
-import {
-  Navigation,
-  Loader2,
-  Clock,
-  Route,
-} from 'lucide-react';
+import { Navigation, Loader2, Clock, Route } from 'lucide-react';
 import { ConseguirNegocio, ConseguirTodosNegociosMapa } from '@/actions/Negocio';
 import { IoLocationOutline } from 'react-icons/io5';
 import { FaLocationCrosshairs } from 'react-icons/fa6';
@@ -45,49 +40,12 @@ import {
 } from '@/components/ui/dialog';
 import { Field, FieldGroup } from '@/components/ui/field';
 import { toast } from 'sonner';
-import axios from 'axios';
-import { GoogleRuta } from '@/types/mapsRouteApi';
 
-function decodePolyline(encoded: string): [number, number][] {
-  const poly: [number, number][] = [];
-  let index = 0;
-  let lat = 0;
-  let lng = 0;
-  while (index < encoded.length) {
-    let b: number;
-    let shift = 0;
-    let result = 0;
-    do {
-      b = encoded.charCodeAt(index++) - 63;
-      result |= (b & 0x1f) << shift;
-      shift += 5;
-    } while (b >= 0x20);
-    lat += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    shift = 0;
-    result = 0;
-    do {
-      b = encoded.charCodeAt(index++) - 63;
-      result |= (b & 0x1f) << shift;
-      shift += 5;
-    } while (b >= 0x20);
-    lng += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    poly.push([lng / 1e5, lat / 1e5]);
-  }
-  return poly;
+interface RouteData {
+  coordinates: [number, number][];
+  duration: number;
+  distance: number;
 }
-//*marcador
-
-//*rutas
-// const start = { name: 'Amsterdam', lng: 4.9041, lat: 52.3676 };
-// const end = { name: 'Rotterdam', lng: 4.4777, lat: 51.9244 };
-// const waypoint = { name: 'Utrecht', lng: 5.1214, lat: 52.0907 };
-// const third = { name: 'The Hague', lng: 4.3007, lat: 52.0705 };
-
-// interface RouteData {
-//   coordinates: [number, number][];
-//   duration: number; // seconds
-//   distance: number; // meters
-// }
 
 function formatDuration(seconds: number): string {
   const mins = Math.round(seconds / 60);
@@ -102,7 +60,6 @@ function formatDistance(meters: number): string {
   return `${(meters / 1000).toFixed(1)} km`;
 }
 
-//*estilos
 const styles = {
   default: undefined,
   openstreetmap: 'https://tiles.openfreemap.org/styles/bright',
@@ -123,7 +80,9 @@ export default function CustomStyleExample() {
   const [alternativas, setAlternativas] = useState<string>('');
 
   const [rutaCoord, setRutaCoords] = useState<[number, number][]>([]);
-  const [routes, setRoutes] = useState<{ coordinates: [number, number][]; duration: number; distance: number }[]>([]);
+  const [routes, setRoutes] = useState<
+    { coordinates: [number, number][]; duration: number; distance: number }[]
+  >([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -134,12 +93,13 @@ export default function CustomStyleExample() {
     };
     ConseguirNegocio();
   }, []);
-  //*rutas
-  // const [routes, setRoutes] = useState<RouteData[]>([]);
-  // const [selectedIndex, setSelectedIndex] = useState(0);
-  // const [isLoading, setIsLoading] = useState(true);
 
-  const OnSumbit = async (inicio: number, final: number, transporte: string, conAlternativas: boolean) => {
+  const OnSumbit = async (
+    inicio: number,
+    final: number,
+    transporte: string,
+    conAlternativas: boolean,
+  ) => {
     if (inicio == null || final == null || transporte == null) {
       throw new Error('Falta inicio, final o transporte');
     }
@@ -178,83 +138,49 @@ export default function CustomStyleExample() {
     const [latIni, lngIni] = iniGps.split(',');
     const [latFin, lngFin] = finGps.split(',');
 
+    const profileMap: Record<string, string> = {
+      DRIVE: 'driving',
+      TWO_WHEELER: 'motorcycle',
+      BICYCLE: 'bicycle',
+      WALK: 'foot',
+      TRANSIT: 'driving',
+    };
+
+    const profile = profileMap[transporte] || 'driving';
+
     try {
-      const url = conAlternativas
-        ? `/api/direcciones?origen=${latIni},${lngIni}&destino=${latFin},${lngFin}&mode=${transporte}&alternativas=true`
-        : `/api/direcciones?origen=${latIni},${lngIni}&destino=${latFin},${lngFin}&mode=${transporte}`;
+      const alternativesParam = conAlternativas ? 'true' : 'false';
+      const url = `https://router.project-osrm.org/route/v1/${profile}/${lngIni},${latIni};${lngFin},${latFin}?overview=full&geometries=geojson&alternatives=${alternativesParam}`;
 
-      const res = await axios(url);
-      const data: GoogleRuta = await res.data;
+      const response = await fetch(url);
+      const data = await response.json();
 
-      if (!data.ok) {
-        throw new Error(String(data.message) || 'Error al conseguir ruta');
+      if (data.routes?.length > 0) {
+        const routesData: RouteData[] = data.routes.map(
+          (route: {
+            geometry: { coordinates: [number, number][] };
+            duration: number;
+            distance: number;
+          }) => ({
+            coordinates: route.geometry.coordinates,
+            duration: route.duration,
+            distance: route.distance,
+          }),
+        );
 
+        setRoutes(routesData);
+        setRutaCoords(routesData[0]?.coordinates || []);
+        setSelectedIndex(0);
+      } else {
+        throw new Error('No se encontraron rutas');
       }
-
-      const routesData = data.message.map((route: any) => {
-        const leg = route.legs[0];
-        const coords: [number, number][] = [];
-        for (const step of leg.steps) {
-          const decoded = decodePolyline(step.polyline.points);
-          coords.push(...decoded);
-        }
-        return {
-          coordinates: coords,
-          duration: leg.duration.value,
-          distance: leg.distance.value,
-        };
-      });
-
-      setRoutes(routesData);
-      setRutaCoords(routesData[0]?.coordinates || []);
-      setSelectedIndex(0);
     } catch (error) {
       throw error;
     } finally {
       setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  //   async function fetchRoutes() {
-  //     try {
-  //       const response = await fetch(
-  //         `https://router.project-osrm.org/route/v1/driving/${start.lng},${start.lat};${waypoint.lng},${waypoint.lat};${end.lng},${end.lat};${third.lng},${third.lat}?overview=full&geometries=geojson`,
-  //       );
-  //       const data = await response.json();
 
-  //       if (data.routes?.length > 0) {
-  //         const routeData: RouteData[] = data.routes.map(
-  //           (route: {
-  //             geometry: { coordinates: [number, number][] };
-  //             duration: number;
-  //             distance: number;
-  //           }) => ({
-  //             coordinates: route.geometry.coordinates,
-  //             duration: route.duration,
-  //             distance: route.distance,
-  //           }),
-  //         );
-  //         setRoutes(routeData);
-  //       }
-  //     } catch (error) {
-  //       console.error('Failed to fetch routes:', error);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-
-  //   fetchRoutes();
-  // }, []);
-
-  // const sortedRoutes = routes
-  //   .map((route, index) => ({ route, index }))
-  //   .sort((a, b) => {
-  //     if (a.index === selectedIndex) return 1;
-  //     if (b.index === selectedIndex) return -1;
-  //     return 0;
-  //   });
-
-  //*estilos
   const mapRef = useRef<MapRef>(null);
   const [style, setStyle] = useState<StyleKey>('default');
   const selectedStyle = styles[style];
@@ -375,11 +301,19 @@ export default function CustomStyleExample() {
                   toast.error('no se permiten estas direcciones');
                   return;
                 }
-                toast.promise(OnSumbit(Number(rutaInicio), Number(rutaFin), transporte, alternativas === 'true'), {
-                  loading: 'consiguiendo ruta',
-                  success: 'ruta conseguida',
-                  error: (error) => String(error),
-                });
+                toast.promise(
+                  OnSumbit(
+                    Number(rutaInicio),
+                    Number(rutaFin),
+                    transporte,
+                    alternativas === 'true',
+                  ),
+                  {
+                    loading: 'consiguiendo ruta',
+                    success: 'ruta conseguida',
+                    error: (error) => String(error),
+                  },
+                );
               }}
             >
               Save changes
@@ -405,7 +339,6 @@ export default function CustomStyleExample() {
             >
               Ruta de 2 direcciones
             </Button>
-            {/* <Button type="button">Ruta de varias direcciones</Button> */}
           </div>
           <SheetFooter>
             <SheetClose asChild>
@@ -428,34 +361,6 @@ export default function CustomStyleExample() {
             <MapRoute coordinates={rutaCoord} color="#6366f1" width={5} opacity={0.8} />
           )}
 
-          {/* <MapMarker longitude={start.lng} latitude={start.lat}>
-          <MarkerContent>
-            <div className="size-5 rounded-full bg-green-500 border-2 border-white shadow-lg" />
-            <MarkerLabel position="top">{start.name}</MarkerLabel>
-          </MarkerContent>
-        </MapMarker>
-        <MapMarker longitude={waypoint.lng} latitude={waypoint.lat}>
-          <MarkerContent>
-            <div className="size-5 rounded-full bg-green-500 border-2 border-white shadow-lg" />
-            <MarkerLabel position="top">{waypoint.name}</MarkerLabel>
-          </MarkerContent>
-        </MapMarker>
-
-        <MapMarker longitude={end.lng} latitude={end.lat}>
-          <MarkerContent>
-            <div className="size-5 rounded-full bg-red-500 border-2 border-white shadow-lg" />
-            <MarkerLabel position="bottom">{end.name}</MarkerLabel>
-          </MarkerContent>
-        </MapMarker>
-
-        <MapMarker longitude={third.lng} latitude={third.lat}>
-          <MarkerContent>
-            <div className="size-5 rounded-full bg-red-500 border-2 border-white shadow-lg" />
-            <MarkerLabel position="bottom">{third.name}</MarkerLabel>
-          </MarkerContent>
-        </MapMarker> */}
-
-          {/* marcador */}
           {lat && long && (
             <MapMarker longitude={long} latitude={lat}>
               <MarkerContent>
