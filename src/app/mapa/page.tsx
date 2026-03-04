@@ -209,6 +209,7 @@ export default function CustomStyleExample() {
               <select
                 id="partida"
                 className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
+                value={rutaInicio}
                 onChange={(e) => {
                   setRutaInicio(e.target.value);
                 }}
@@ -232,10 +233,11 @@ export default function CustomStyleExample() {
               </label>
               <select
                 id="final"
+                className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
+                value={rutaFin}
                 onChange={(e) => {
                   setRutaFin(e.target.value);
                 }}
-                className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               >
                 <option value="">Selecciona una ubicacion</option>
                 <option value={0}>Mi ubicacion</option>
@@ -256,10 +258,11 @@ export default function CustomStyleExample() {
               </label>
               <select
                 id="transporte"
+                className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
+                value={transporte}
                 onChange={(e) => {
                   setTransporte(e.target.value);
                 }}
-                className="px-4 py-2.5 bg-slate-50 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white text-sm"
               >
                 <option value="">Selecciona un transporte</option>
                 <option value="DRIVE">Carro</option>
@@ -279,6 +282,7 @@ export default function CustomStyleExample() {
               <input
                 type="checkbox"
                 id="alternativas"
+                value={alternativas}
                 onChange={(e) => {
                   setAlternativas(String(e.target.checked));
                 }}
@@ -301,6 +305,7 @@ export default function CustomStyleExample() {
                   toast.error('no se permiten estas direcciones');
                   return;
                 }
+                setDialog(false);
                 toast.promise(
                   OnSumbit(
                     Number(rutaInicio),
