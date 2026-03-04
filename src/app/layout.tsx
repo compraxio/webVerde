@@ -81,6 +81,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <meta name="google-site-verification" content="_py-3iSk1bVaogo4aCahCvxdLHcFIPdRE8URklpBRr8" />
       <body
         className={`${inter.className} bg-background-light  dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200`}
       >
