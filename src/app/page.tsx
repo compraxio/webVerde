@@ -23,7 +23,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const negocios = await prisma.dir_verde.findMany();
+  const negocios = await prisma.dir_verde.findMany({
+    orderBy: {
+      negocio: 'asc'
+    }
+  });
 
   const jsonLd = {
     '@context': 'https://schema.org',

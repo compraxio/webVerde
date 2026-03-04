@@ -5,7 +5,11 @@ import { del, put } from '@vercel/blob';
 import { Prisma } from '../../generated/prisma/client';
 
 export async function ConseguirTodosNegocios() {
-  const negocios = await prisma.dir_verde.findMany();
+  const negocios = await prisma.dir_verde.findMany({
+    orderBy: {
+      negocio: 'asc'
+    }
+  });
   return negocios;
 }
 
@@ -15,6 +19,9 @@ export async function ConseguirTodosNegociosMapa() {
       pos_gps: {
         not: null,
       },
+    },
+    orderBy: {
+      negocio: 'asc',
     },
   });
   return negocios;

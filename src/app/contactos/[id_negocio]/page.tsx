@@ -8,9 +8,9 @@ import { CuerpoContactosEsqueleto } from '@/components/esqueletons/CuerpoContact
 export const generateMetadata = async ({
   params,
 }: {
-  params: { id_negocio: string };
+  params: Promise<{ id_negocio: string }>;
 }): Promise<Metadata> => {
-  const negocioId = params.id_negocio;
+  const { id_negocio: negocioId } = await params;
 
   return {
     title:

@@ -10,8 +10,9 @@ import { Suspense } from 'react';
 import { CuerpoMunicipiosEsqueleto } from '@/components/esqueletons/CuerpoMunicipiosEsqueleto';
 
 
-export const generateMetadata = ({ params }: { params: { zona: string } }): Metadata => {
-  const zonaFormateada = params.zona === 'todos' ? 'Todos los Municipios' : params.zona;
+export const generateMetadata = async ({ params }: { params: Promise<{ zona: string }> }): Promise<Metadata> => {
+  const { zona } = await params;
+  const zonaFormateada = zona === 'todos' ? 'Todos los Municipios' : zona;
 
   return {
     title: `${zonaFormateada} | Negocios Verdes Cardique`,
