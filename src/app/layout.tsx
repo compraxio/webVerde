@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 export const dynamic = 'force-dynamic';
 
 import './globals.css';
@@ -19,6 +21,58 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { Admin } from '@/components/Admin/LayoutAuth';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://web-verde.vercel.app/'),
+  title: {
+    default: 'Negocios Verdes Cardique | Directorio de Empresas Sostenibles',
+    template: '%s | Negocios Verdes Cardique',
+  },
+  description:
+    'Directorio oficial de negocios verdes en la jurisdicción de Cardique. Encuentra empresas sostenibles, ecológicas y responsables con el medio ambiente en Colombia.',
+  keywords: [
+    'negocios verdes',
+    'Cardique',
+    'empresas sostenibles',
+    'ecológico',
+    'Colombia',
+    'medio ambiente',
+    'directorio empresarial',
+  ],
+  authors: [{ name: 'Cardique' }],
+  creator: 'Cardique',
+  publisher: 'Cardique',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_CO',
+    url: 'https://web-verde.vercel.app/',
+    siteName: 'Negocios Verdes Cardique',
+    title: 'Negocios Verdes Cardique | Directorio de Empresas Sostenibles',
+    description:
+      'Directorio oficial de negocios verdes en Cardique. Empresas que cuidan el medio ambiente.',
+    images: [
+      {
+        url: 'https://gs2sg87dcifti8xw.public.blob.vercel-storage.com/Cardique.png',
+        width: 1200,
+        height: 630,
+        alt: 'Negocios Verdes Cardique',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Negocios Verdes Cardique',
+    description: 'Directorio de negocios verdes en Cardique',
+    images: ['https://gs2sg87dcifti8xw.public.blob.vercel-storage.com/Cardique.png'],
+  },
+  alternates: {
+    canonical: 'https://web-verde.vercel.app/',
+  },
+};
 
 export default function RootLayout({
   children,

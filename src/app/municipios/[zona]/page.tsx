@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { CuerpoMunicipios } from '@/components/CuerpoMunicipios';
 import {
   BotonAgregarMunicipio,
@@ -6,6 +8,21 @@ import {
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { CuerpoMunicipiosEsqueleto } from '@/components/esqueletons/CuerpoMunicipiosEsqueleto';
+
+
+export const generateMetadata = ({ params }: { params: { zona: string } }): Metadata => {
+  const zonaFormateada = params.zona === 'todos' ? 'Todos los Municipios' : params.zona;
+
+  return {
+    title: `${zonaFormateada} | Negocios Verdes Cardique`,
+    description: `Negocios verdes en ${zonaFormateada}. Encuentra empresas sostenibles en este municipio de la jurisdicción de Cardique.`,
+    openGraph: {
+      title: `Negocios Verdes en ${zonaFormateada}`,
+      description: `Directorio de negocios ecológicos en ${zonaFormateada}, Cardique.`,
+    },
+  };
+};
+
 export default async function Municipio({
   params,
 }: Readonly<{ params: Promise<{ zona: string }> }>) {

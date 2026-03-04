@@ -24,7 +24,7 @@ export default async function Fase() {
               >
                 <img
                   src={g.logo_fase}
-                  alt={g.id_fasex ?? ''}
+                  alt={`Logo de fase ${g.id_fasex}`}
                   className="bg-cover w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"
                   loading="lazy"
                 />

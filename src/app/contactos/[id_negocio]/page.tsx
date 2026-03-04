@@ -1,7 +1,33 @@
+
+import { Metadata } from 'next';
 import { CuerpoContactos } from '@/components/CuerpoContactos';
 import { BotonAgregar, SeccionAcciones } from '@/components/Admin/ContactosAuth';
 import { Suspense } from 'react';
 import { CuerpoContactosEsqueleto } from '@/components/esqueletons/CuerpoContactosEsqueleto';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id_negocio: string };
+}): Promise<Metadata> => {
+  const negocioId = params.id_negocio;
+
+  return {
+    title:
+      negocioId === '0'
+        ? 'Contactos | Negocios Verdes Cardique'
+        : 'Datos de Contacto | Negocios Verdes Cardique',
+    description:
+      negocioId === '0'
+        ? 'Contactos de todos los negocios verdes de Cardique. Teléfonos, emails y direcciones.'
+        : 'Información de contacto del negocio verde. Teléfono, email, dirección y más.',
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+};
+
 
 export default async function Contactos({
   params,

@@ -33,6 +33,24 @@ export function Carrusel() {
             className="rounded-4xl border shadow"
           />
         </CarouselItem>
+        <CarouselItem className="flex aspect-square items-center justify-center p-6">
+          <Image
+            src="https://gs2sg87dcifti8xw.public.blob.vercel-storage.com/carrucel3.png"
+            alt="Cardique"
+            height={1024}
+            width={1024}
+            className="rounded-4xl border shadow"
+          />
+        </CarouselItem>
+        <CarouselItem className="flex aspect-square items-center justify-center p-6">
+          <Image
+            src="https://gs2sg87dcifti8xw.public.blob.vercel-storage.com/carrucel4.png"
+            alt="Cardique"
+            height={1024}
+            width={1024}
+            className="rounded-4xl border shadow"
+          />
+        </CarouselItem>
       </CarouselContent>
     </Carousel>
   );
