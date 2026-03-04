@@ -1,15 +1,24 @@
 import prisma from '@/lib/prisma';
 import { AccionesMunicipios } from './Admin/MunicipiosAuth';
 
-export async function CuerpoMunicipios({ zona }: Readonly<{ zona: string }>) {
-  const municipios = await prisma.municipios.findMany({
-    where:
-      zona === 'TODOS'
-        ? {}
-        : {
-            zona: zona,
-          },
-  });
+export async function CuerpoMunicipios({
+  zona,
+  skip,
+  pageSize,
+}: Readonly<{ zona: string; skip: number; pageSize: number}>) {
+  const [municipios] = await Promise.all([
+    prisma.municipios.findMany({
+      where:
+        zona === 'TODOS'
+          ? {}
+          : {
+              zona: zona,
+            },
+      skip,
+      take: pageSize,
+    }),
+  ]);
+
 
   return (
     <>
@@ -29,6 +38,8 @@ export async function CuerpoMunicipios({ zona }: Readonly<{ zona: string }>) {
           <AccionesMunicipios cod_munic={m.cod_munic} />
         </tr>
       ))}
+
+
     </>
   );
 }

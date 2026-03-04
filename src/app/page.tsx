@@ -9,6 +9,8 @@ import {
   BotonAgregarNegocioTargeta,
 } from '@/components/Admin/NegociosAuth';
 import { CuerpoNegocio } from '@/components/CuerpoNegocio';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Directorio de Negocios Verdes Cardique',
@@ -22,12 +24,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Home() {
-  const negocios = await prisma.dir_verde.findMany({
-    orderBy: {
-      negocio: 'asc'
-    }
-  });
+export default async function Home({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page } = await searchParams;
+  const pageNumber = parseInt(page || '1');
+  const pageSize = 8;
+  const skip = (pageNumber - 1) * pageSize;
+
+  const [negocios, total] = await Promise.all([
+    prisma.dir_verde.findMany({
+      orderBy: { negocio: 'asc' },
+      skip,
+      take: pageSize,
+    }),
+    prisma.dir_verde.count(),
+  ]);
+
+  const totalPages = Math.ceil(total / pageSize);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -77,6 +89,30 @@ export default async function Home() {
           <CuerpoNegocio negocios={negocios} />
           <BotonAgregarNegocioTargeta />
         </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mt-8 pt-4 border-t">
+            <div className="text-sm text-slate-500 dark:text-slate-400">
+              Página {pageNumber} de {totalPages} ({total} negocios)
+            </div>
+            <div className="flex gap-2">
+              {pageNumber > 1 && (
+                <Link href={`/?page=${pageNumber - 1}`}>
+                  <Button variant="outline" size="sm">
+                    Anterior
+                  </Button>
+                </Link>
+              )}
+              {pageNumber < totalPages && (
+                <Link href={`/?page=${pageNumber + 1}`}>
+                  <Button variant="outline" size="sm">
+                    Siguiente
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
         {/* Boton add en cel*/}
         <BotonAgregarNegocioCel />
       </div>
