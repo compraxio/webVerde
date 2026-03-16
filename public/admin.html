@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#13ec5b",
+            "background-light": "#f6f8f6",
+            "background-dark": "#102216",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <title>Negocios Verdes - Acceso Administrador</title>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+  <div class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+      <div class="absolute top-[-10%] left-[-5%] w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+      <div class="absolute bottom-[-10%] right-[-5%] w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+    </div>
+    <!-- Main Content Container -->
+    <main class="relative z-10 w-full max-w-md px-6">
+      <!-- Brand Logo/Header -->
+      <div class="flex flex-col items-center mb-8 gap-4">
+        <div class="flex items-center justify-center p-3 bg-primary/10 rounded-xl">
+          <div class="size-10 text-primary">
+            <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                fill="currentColor" fill-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Negocios Verdes</h1>
+      </div>
+      <!-- Login Card -->
+      <div
+        class="bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden">
+        <!-- Card Image/Banner -->
+        <div class="h-40 w-full bg-cover bg-center" data-alt="Abstract green leaves in soft sunlight"
+          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfQna3AiTPGGps9Oqmu8cbNE3IHh-LyGqbnfW1Hg6Tb8VJMvOXxeTL_EMxzmReXF1pFUNoG0oUuK1m3sb8z7VOv1B_MEse-knjOLvHiO3VSCeN0MVrPmGAwkpDi1qFT9VF-R3KoNPModR4ozdYWd_FoZ6WuXQU7WT3vYEZc7Xl7Qk57mdnLXCgewWCa6w9e6yA77_-gNXZtrMOdnDIOZRqcYree-JTV2eALJeRfwne3_v1HeYbZgTwnuakHmoRJXeeihhxpEDkcgLm");'>
+          <div class="w-full h-full bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+            <div class="flex items-center gap-2 text-white">
+              <span class="material-symbols-outlined text-primary">lock</span>
+              <span class="text-sm font-medium">Área Segura</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-8">
+          <div class="mb-6">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Acceso de Administrador</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Ingrese la contraseña para continuar</p>
+          </div>
+          <form class="space-y-6" onsubmit="return false;">
+            <div class="space-y-2">
+              <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="password">Contraseña</label>
+              <div class="relative flex items-center">
+                <input
+                  class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white placeholder-slate-400"
+                  id="password" placeholder="••••••••" type="password" />
+                <button class="absolute right-3 text-slate-400 hover:text-primary transition-colors" type="button">
+                  <span class="material-symbols-outlined">visibility</span>
+                </button>
+              </div>
+            </div>
+            <button
+              class="w-full h-12 bg-primary hover:bg-primary/90 text-slate-950 font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+              type="submit">
+              <span>Verificar</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </form>
+          <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-slate-400 text-sm">shield_lock</span>
+            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Protección de Datos SSL</span>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Help -->
+      <p class="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        ¿Olvidó su contraseña? <a class="text-primary hover:underline font-medium" href="#">Contacte a soporte</a>
+      </p>
+    </main>
+    <!-- Small utility bar bottom -->
+    <footer
+      class="absolute bottom-6 w-full px-6 flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-widest font-bold">
+      <span>© 2024 Negocios Verdes</span>
+      <div class="flex gap-4">
+        <a class="hover:text-primary transition-colors" href="#">Privacidad</a>
+        <a class="hover:text-primary transition-colors" href="#">Soporte</a>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

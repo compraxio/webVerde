@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gestión de Galería - Negocios Verdes Cardique</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2D7A3E",
+                        secondary: "#8DC63F",
+                        accent: "#0091DA",
+                        "background-light": "#F8FAF8",
+                        "background-dark": "#0F1713",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+    <style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .dark .glass-effect {
+            background: rgba(15, 23, 19, 0.8);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200">
+    <aside
+        class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 hidden lg:flex flex-col z-20">
+        <div class="p-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined">eco</span>
+                </div>
+                <h1 class="font-bold text-lg leading-tight text-primary">Negocios<br /><span
+                        class="text-secondary">Verdes</span></h1>
+            </div>
+        </div>
+        <nav class="flex-1 px-4 space-y-1 mt-4">
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-zinc-800 rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                Resumen
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-zinc-800 rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">menu_book</span>
+                Directorio
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary/10 rounded-xl font-medium" href="#">
+                <span class="material-symbols-outlined">photo_library</span>
+                Galería
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-zinc-800 rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">analytics</span>
+                Analíticas
+            </a>
+        </nav>
+        <div class="p-4 mt-auto">
+            <div class="bg-secondary/10 dark:bg-secondary/5 p-4 rounded-2xl border border-secondary/20">
+                <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">Impacto Ambiental</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Has apoyado a 124 negocios locales este mes.</p>
+                <div class="w-full bg-slate-200 dark:bg-zinc-700 h-2 rounded-full mt-3 overflow-hidden">
+                    <div class="bg-secondary h-full w-3/4"></div>
+                </div>
+            </div>
+            <a class="flex items-center gap-3 px-4 py-3 mt-4 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-zinc-800 rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                Configuración
+            </a>
+        </div>
+    </aside>
+    <main class="lg:ml-64 min-h-screen">
+        <header
+            class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-200 dark:border-zinc-800">
+            <div class="flex items-center gap-4 lg:hidden">
+                <button class="p-2 text-slate-600 dark:text-slate-400">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h1 class="font-bold text-primary">Cardique NV</h1>
+            </div>
+            <div class="relative flex-1 max-w-md hidden md:block">
+                <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input
+                    class="w-full pl-10 pr-4 py-2 bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-700 rounded-xl focus:ring-primary focus:border-primary dark:text-white"
+                    placeholder="Buscar fotos por título o etiqueta..." type="text" />
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-slate-400"
+                    onclick="toggleDarkMode()">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                </button>
+                <button
+                    class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-slate-400 relative">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span
+                        class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900"></span>
+                </button>
+                <div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-zinc-800">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-semibold">Admin Cardique</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Gestionar Galería</p>
+                    </div>
+                    <img alt="Admin Profile" class="w-10 h-10 rounded-full ring-2 ring-primary/20"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAgHAy6p5O3N6DJko9qVgl2y-BRdLLu8aDo8qo1rPKYvocjzi2u1_Z4j4NCjHCJ4ofzsWyKfprDwZEe9RsDtBs6qNLQdpI2xDcWxu7c3oZ3Ow7_YM7sqlIqDklysDiakFkwEEsvty226PPNWyMvapTJcYyHxbMv8StCdLvXCdbLekG0hU5JdpiyWlKjRlvPDd6KyCfAnRxgR-07NcQLbOWh9y0lva609LnmmlvBawSfXbM9U6d7qsGb4Pjjndn9GAqsjc_i5KWU4A" />
+                </div>
+            </div>
+        </header>
+        <div class="p-6 lg:p-10 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight mb-2">Fotos</h2>
+                    <p class="text-slate-500 dark:text-slate-400 italic">Gestión de imágenes de negocios verdes y
+                        paisajes de la jurisdicción.</p>
+                </div>
+                <button
+                    class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
+                    <span class="material-symbols-outlined">add</span>
+                    Agregar Foto
+                </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img alt="Hotel campo verde"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQBH85DBoPO8XvrZAZXWZss5Lg1GlzIu9Ce-mFbiYNQZSW47rKcWt5yfKkyL-d7GSLI1QtMPhOHD0YMerKgLh4XVyZODHCAH6-MpXlcIG1oWKHTf7tb9BEfGLDmLA6snJGPhTzTy9_21KVsywP539FA6FcwRgfggontGmoQDyQ3mke6_iQ39KZuQJNEjNw27b73MAaFuDWthnJIpFtg7SSi5ycs3bS3sRG0FUcl8jk5uPiWOnL86JBeeOW5YF9O7O3RoBF47Ia2ztL" />
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <h4 class="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">Hotel campo verde
+                        </h4>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img alt="Cocotera Beach"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYo3x8M1LBR9RHwc7ZC5HJ-KBahCneS0Nwta7fT-CckNILbUN2ZTa59o3w8tIIRlzA67AgGuI1O7AacuFo20RI5Sy5ZdRrLRuYzcdI6xjZFYVhAqJTebMiwzdyHkC68o2ntOAKr_56DvT6sGH4hlmaAGPJl-BZAD_j3835BnaqkP4nvZLRQRcPsjiqvcKwzkxUphGnQdMae_ZCI24eZHXLFpnKTq3FueUG2GRjjZpT2kDZ6XYEGJ44dnQrsae6DduiyRcQWmdCveNX" />
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <h4 class="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">Cocotera Beach</h4>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img alt="Reserva Natural"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBlrLFHXG6tnHJJd3FlvVZ3dq3umHqOJCkDMBX_dy7qViis8KVD75qBUFMFrGDtag8IDlNKaMyALlhun7vsGili68s7bA94_TGOcaUCvqEWZIaxCguFBN4VJJCfIoPIxDRqeyUs4WHeSP35NTzDQODayceCbrOJ2U9461PtuqIFmVU0QGk34hmkU54qZXERmnif4XyS3rZzDEGXUM1GThjc7QRvq4X8L_SEltkiYtAY6aynEZrQNaHhopjyboG2X5_cJu7IDW3YWTS" />
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <h4 class="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">Reserva Natural
+                        </h4>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img alt="Vista al Mar"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYAgHAy6p5O3N6DJko9qVgl2y-BRdLLu8aDo8qo1rPKYvocjzi2u1_Z4j4NCjHCJ4ofzsWyKfprDwZEe9RsDtBs6qNLQdpI2xDcWxu7c3oZ3Ow7_YM7sqlIqDklysDiakFkwEEsvty226PPNWyMvapTJcYyHxbMv8StCdLvXCdbLekG0hU5JdpiyWlKjRlvPDd6KyCfAnRxgR-07NcQLbOWh9y0lva609LnmmlvBawSfXbM9U6d7qsGb4Pjjndn9GAqsjc_i5KWU4A" />
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <h4 class="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">Vista al Mar</h4>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <div class="aspect-video overflow-hidden relative">
+                        <img alt="Sendero Ecológico"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQBH85DBoPO8XvrZAZXWZss5Lg1GlzIu9Ce-mFbiYNQZSW47rKcWt5yfKkyL-d7GSLI1QtMPhOHD0YMerKgLh4XVyZODHCAH6-MpXlcIG1oWKHTf7tb9BEfGLDmLA6snJGPhTzTy9_21KVsywP539FA6FcwRgfggontGmoQDyQ3mke6_iQ39KZuQJNEjNw27b73MAaFuDWthnJIpFtg7SSi5ycs3bS3sRG0FUcl8jk5uPiWOnL86JBeeOW5YF9O7O3RoBF47Ia2ztL" />
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <h4 class="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">Sendero Ecológico
+                        </h4>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-2 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer aspect-video h-full">
+                    <div
+                        class="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400">
+                        <span class="material-symbols-outlined">add_a_photo</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm text-slate-800 dark:text-white">Subir Imagen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 flex items-center justify-between border-t border-slate-200 dark:border-zinc-800 pt-8">
+                <p class="text-sm text-slate-500 dark:text-slate-400">Mostrando 5 de 124 imágenes en la galería</p>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-zinc-800 disabled:opacity-50"
+                        disabled="">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-medium">1</button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800">2</button>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800">3</button>
+                    <span class="px-2 text-slate-400">...</span>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="lg:hidden fixed bottom-6 right-6 z-30">
+        <button class="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center">
+            <span class="material-symbols-outlined">add</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
