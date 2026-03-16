@@ -40,6 +40,7 @@ import {
 } from '@/components/ui/dialog';
 import { Field, FieldGroup } from '@/components/ui/field';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 interface RouteData {
   coordinates: [number, number][];
@@ -386,12 +387,16 @@ export default function CustomStyleExample() {
               </MarkerContent>
               <MarkerPopup className="p-0 w-62">
                 <div className="relative h-32 overflow-hidden rounded-t-md">
-                  <img
-                    src={place.logo ?? ''}
-                    alt={place.negocio}
-                    className="bg-cover"
-                    loading="eager"
-                  />
+                  {place.logo && (
+                    <Image
+                      src={place.logo}
+                      alt={place.negocio ?? ''}
+                      fill
+                      unoptimized
+                      loading="eager"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 <div className="space-y-2 p-3">
                   <div>

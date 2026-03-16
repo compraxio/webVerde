@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import Image from 'next/image';
 
 
 export default async function Fase() {
@@ -22,12 +23,18 @@ export default async function Fase() {
                 className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-5 flex items-center gap-6 hover:shadow-md transition-all group"
                 key={g.id_fase}
               >
-                <img
-                  src={g.logo_fase}
-                  alt={`Logo de fase ${g.id_fasex}`}
-                  className="bg-cover w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"
-                  loading="lazy"
-                />
+                <div className="relative w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0">
+                  {g.logo_fase && (
+                    <Image
+                      src={g.logo_fase}
+                      alt={`Logo de fase ${g.id_fasex}`}
+                      fill
+                      unoptimized
+
+                      className="rounded-full object-cover"
+                    />
+                  )}
+                </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg text-slate-800 dark:text-white">{g.id_fasex}</h3>
                   <p className="text-slate-500 dark:text-slate-400 text-sm max-md:line-clamp-1">

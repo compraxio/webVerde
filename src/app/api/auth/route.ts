@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       );
     }
   } catch (error) {
-    return NextResponse.json({ success: false, message: 'Error del servidor' }, { status: 500 });
+    return NextResponse.json({ success: false, message: error instanceof Error ? error.message : 'Error del servidor' }, { status: 500 });
   }
 }
 

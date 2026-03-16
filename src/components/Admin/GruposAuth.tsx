@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
-
 
 export function BotonAgregarGrupo() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -19,7 +18,7 @@ export function BotonAgregarGrupo() {
 
   return (
     <Link
-      href="/grupos/crear"
+      href="/admin/grupos/crear"
       className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex max-lg:hidden items-center gap-2 shadow-lg shadow-primary/20 transition-all"
     >
       <svg
@@ -53,7 +52,7 @@ export function BotonAgregarGrupoCel() {
   return (
     <div className="lg:hidden fixed bottom-6 right-6 z-30">
       <Link
-        href="/grupos/crear"
+        href="/admin/grupos/crear"
         className="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center"
       >
         <svg
@@ -99,7 +98,7 @@ export function AccionesGrupos({
   return (
     <div className="flex items-center gap-1">
       <Link
-        href={`/grupos/editar/${id_grupo}`}
+        href={`/admin/grupos/editar/${id_grupo}`}
         className="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all"
       >
         <svg

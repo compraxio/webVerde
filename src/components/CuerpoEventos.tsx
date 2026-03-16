@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { EliminarEvento } from '@/actions/eventos';
 import { AccionesEvento } from './Admin/EventosAuth';
 import Link from 'next/link';
+import Image from 'next/image';
 type evento = Prisma.eventosGetPayload<object>;
 
 export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
@@ -45,14 +46,19 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
           className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 hover:shadow-md transition-all group"
           key={evento.id_evento}
         >
-          <div className="w-full sm:w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-slate-100 dark:bg-zinc-800">
-            <img
-              alt={evento.evento}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              src={evento.Img_Presentacion}
-              loading="lazy"
-            />
+          <div className="relative w-full sm:w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-slate-100 dark:bg-zinc-800">
+            {evento.Img_Presentacion && (
+              <Image
+                src={evento.Img_Presentacion}
+                alt={evento.evento ?? ''}
+                fill
+                unoptimized
+            
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            )}
           </div>
+
           <div className="flex-1 min-w-0">
             <h3 className="font-bold text-lg text-slate-800 dark:text-white truncate">
               {evento.evento}
@@ -74,6 +80,7 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
               </span>
             </div>
           </div>
+
           <div className="flex items-center gap-2 pr-2">
             <Link
               href={`/eventos/verEvento/${evento.id_evento}`}

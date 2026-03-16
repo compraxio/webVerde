@@ -1,11 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 import { IoMdAdd } from 'react-icons/io';
-
-
-
 
 export function BotonAgregarEvento() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -22,7 +19,7 @@ export function BotonAgregarEvento() {
 
   return (
     <Link
-      href="/eventos/crear"
+      href="/admin/eventos/crear"
       className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all"
     >
       <IoMdAdd size={25} />
@@ -59,7 +56,7 @@ export function AccionesEvento({
   return (
     <>
       <Link
-        href={`/eventos/editar/${id_evento}`}
+        href={`/admin/eventos/editar/${id_evento}`}
         className="p-2.5 text-slate-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all"
         title="Editar"
       >
@@ -80,12 +77,12 @@ export function AccionesEvento({
       </Link>
       <button
         className="p-2.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
-              title="Eliminar"
-              onClick={() => {
-                setOpen(true);
-                setId_evento(id_evento);
-                setUrl_foto(logo ?? '');
-              }}
+        title="Eliminar"
+        onClick={() => {
+          setOpen(true);
+          setId_evento(id_evento);
+          setUrl_foto(logo ?? '');
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

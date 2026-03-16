@@ -112,22 +112,28 @@ export default async function usePerfilNegocio({
               <div
                 className={`size-32 md:size-40 rounded-xl bg-leaf/5 flex items-center justify-center border-2 ${
                   showVerification ? 'border-primary' : 'border-red-500'
-                } overflow-hidden`}
+                } overflow-hidden relative`}
               >
                 {negocio?.logo ? (
-                  <img
-                    alt={negocio?.negocio}
-                    className="object-contain p-4"
+                  // Logo desconocido: usamos fill
+                  <Image
                     src={negocio.logo}
-                    loading="lazy"
+                    alt={negocio?.negocio ?? ''}
+                    fill
+                    unoptimized
+
+                    className="object-contain p-4"
                   />
                 ) : (
+                  // Placeholder conocido: usamos width/height
                   <Image
+                    src={errorImg}
                     alt="Honey production"
-                    className="object-contain p-4 bg-white "
-                    src={negocio?.logo ?? errorImg}
-                    height="1508"
-                    width="1920"
+                    width={1920} // dimensiones reales del placeholder
+                    height={1508}
+                    unoptimized
+                 
+                    className="object-contain p-4 bg-white"
                   />
                 )}
               </div>

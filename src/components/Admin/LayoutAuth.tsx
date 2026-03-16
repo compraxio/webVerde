@@ -1,13 +1,12 @@
 'use client';
 
-import { useAuthStore } from '@/store/AuthStore';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
+import { logout } from '@/actions/auth/logout';
 
 export function Admin() {
-  const logout = useAuthStore((store) => store.logout);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -16,10 +15,13 @@ export function Admin() {
       setIsAuthenticated(autenticado);
     }
     verificar();
+
+    const interval = setInterval(verificar, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   if (isAuthenticated === null) return null;
-  
+
   if (!isAuthenticated) {
     return (
       <Link

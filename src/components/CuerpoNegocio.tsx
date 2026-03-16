@@ -55,19 +55,20 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
         >
           <div className="relative h-48 overflow-hidden">
             {n.logo ? (
-              <img
+              <Image
                 src={n.logo}
-                alt={n.negocio}
-                className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
-                loading="lazy"
+                alt={n.negocio ?? ''}
+                fill
+                unoptimized
+                className="object-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
               />
             ) : (
               <Image
                 alt="Honey production"
                 className="w-full h-full bg-cover bg-amber-50 group-hover:scale-110 transition-transform duration-500"
                 src={errorImg}
-                height="1508"
-                width="1920"
+                height={1508}
+                width={1920}
               />
             )}
             {n.a_o_verificacion ? (

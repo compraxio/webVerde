@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 
 export function BotonAgregarMunicipio() {
@@ -20,7 +20,7 @@ export function BotonAgregarMunicipio() {
   return (
     <Link
       className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all text-sm"
-      href="/municipios/crear"
+      href="/admin/municipios/crear"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -38,24 +38,22 @@ export function BotonAgregarMunicipio() {
 }
 
 export function SeccionAccionesMunicipiosTabla() {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-    useEffect(() => {
-      async function verificar() {
-        const autenticado = await getUser();
-        setIsAuthenticated(autenticado);
-      }
-      verificar();
-    }, []);
+  useEffect(() => {
+    async function verificar() {
+      const autenticado = await getUser();
+      setIsAuthenticated(autenticado);
+    }
+    verificar();
+  }, []);
 
-    if (!isAuthenticated) return null;
+  if (!isAuthenticated) return null;
 
-    return (
-        <th className="px-6 py-4 text-right">Acciones</th>
-    );
+  return <th className="px-6 py-4 text-right">Acciones</th>;
 }
 
-export function AccionesMunicipios({cod_munic}: Readonly<{cod_munic: number}>) {
+export function AccionesMunicipios({ cod_munic }: Readonly<{ cod_munic: number }>) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export function AccionesMunicipios({cod_munic}: Readonly<{cod_munic: number}>) {
       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <Link
           className="p-1 text-slate-400 hover:text-primary"
-          href={`/municipios/editar/${cod_munic}`}
+          href={`/admin/municipios/editar/${cod_munic}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

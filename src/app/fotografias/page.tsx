@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import Image from 'next/image';
 
 export default async function Fotografias() {
   const fotos = await prisma.fotografias.findMany({
@@ -23,12 +24,16 @@ export default async function Fotografias() {
             key={f.id_foto}
           >
             <div className="aspect-video overflow-hidden relative">
-              <img
-                alt={f.dir_verde.negocio}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src={f.url_foto ?? ''}
-                loading="lazy"
-              />
+              {f.url_foto && (
+                <Image
+                  src={f.url_foto}
+                  alt={f.dir_verde.negocio ?? ''}
+                  fill
+                  unoptimized
+
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              )}
             </div>
             <div className="p-4 flex items-center justify-between">
               <h4 className="font-medium text-sm text-slate-800 dark:text-white truncate pr-2">

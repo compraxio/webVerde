@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 
 export function BotonAgregar() {
@@ -19,7 +19,7 @@ export function BotonAgregar() {
 
   return (
     <Link
-      href="/contactos/crear"
+      href="/admin/contactos/crear"
       className="bg-primary hover:bg-primary/90 text-white font-bold px-5 py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20"
     >
       <svg
@@ -75,7 +75,7 @@ export function AccionesContacto({ id }: { id: number }) {
   if (!isAuthenticated) return null;
   return (
     <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 flex justify-end gap-2">
-      <Link href={`/contactos/editar/${id}`}>
+      <Link href={`/admin/contactos/editar/${id}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

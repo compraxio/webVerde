@@ -1,20 +1,17 @@
 'use client';
 
-import { useAuthStore } from '@/store/AuthStore';
 import { MdOutlineLockOpen, MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 import { authSchema, Input } from '@/schemas/authSchema';
-import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-
+import { login } from '@/actions/auth/login';
+import { useRouter } from 'next/navigation';
 export default function Page() {
-  const router = useRouter();
   const [vercontrasena, setVercontrasena] = useState<boolean>(false);
-  const login = useAuthStore((state) => state.login);
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -27,7 +24,7 @@ export default function Page() {
     const result = await login(data.password);
     if (result.success) {
       toast.success(result.message);
-      window.location.href = '/';
+      router.back()
     } else {
       toast.error(result.message);
     }

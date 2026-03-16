@@ -37,12 +37,15 @@ export default async function VerEvento({
       <div className="flex-1 overflow-y-auto bg-slate-50/50 dark:bg-background-dark/50">
         <div className="max-w-6xl mx-auto p-8">
           <div className="relative w-full h-100 rounded-2xl overflow-hidden mb-8 shadow-xl">
-            <img
-              alt={evento?.evento}
-              className="w-full h-full object-cover"
-              src={evento?.Img_Presentacion}
-              loading="lazy"
-            />
+            {evento?.Img_Presentacion && (
+              <Image
+                src={evento.Img_Presentacion}
+                alt={evento?.evento ?? ''}
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-linear-to-t from-background-dark/90 via-background-dark/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
               <div>
@@ -96,14 +99,17 @@ export default async function VerEvento({
                   </div>
                   <div className="p-6 flex flex-col items-center justify-center">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-2 border-primary/10">
-                        <img
-                          alt="Organizer logo"
-                          className="w-full h-full object-cover"
-                          data-alt="Professional logo of Amazon Conservation Association"
-                          src={evento?.Img_Presentacion}
-                          loading="lazy"
-                        />
+                      <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-2 border-primary/10 relative">
+                        {evento?.Img_Presentacion && (
+                          <Image
+                            src={evento.Img_Presentacion}
+                            alt="Organizer logo"
+                            fill
+                            unoptimized
+
+                            className="object-cover"
+                          />
+                        )}
                       </div>
                       <div>
                         <h4 className="text-slate-900 dark:text-white font-bold leading-tight">
@@ -180,7 +186,7 @@ export default async function VerEvento({
                     <Image
                       alt="Map view"
                       className="w-full h-full object-cover opacity-60"
-                      src="/src/components/ui/mapa.png"
+                      src="/images/mapa.png"
                       height={512}
                       width={512}
                     />

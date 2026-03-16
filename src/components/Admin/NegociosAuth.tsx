@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { getUser } from '@/lib/auth-client';
+import { getUser } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 import { MdAddBusiness, MdEditNote } from 'react-icons/md';
 
@@ -19,7 +19,7 @@ export function BotonAgregarNegocio() {
   if (!isAuthenticated) return null;
   return (
     <Link
-      href="/crearNegocio"
+      href="/admin/negocios/crearNegocio"
       className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex max-lg:hidden items-center gap-2 shadow-lg shadow-primary/20 transition-all"
     >
       <MdAddBusiness size={25} />
@@ -43,7 +43,7 @@ export function BotonAgregarNegocioCel() {
   return (
     <div className="lg:hidden fixed bottom-6 right-6 z-30">
       <Link
-        href="/crearNegocio"
+        href="/admin/negocios/crearNegocio"
         className="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center"
       >
         <MdAddBusiness size={25} />
@@ -66,7 +66,7 @@ export function BotonAgregarNegocioTargeta() {
   if (!isAuthenticated) return null;
   return (
     <Link
-      href="/crearNegocio"
+      href="/admin/negocios/crearNegocio"
       className="border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-white dark:hover:bg-zinc-900 hover:border-primary/50 transition-all cursor-pointer min-h-100"
     >
       <div className="w-16 h-16 bg-slate-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-slate-400 text-3xl">
@@ -89,7 +89,7 @@ export function AccionesNegocios({
   setUrl_foto,
   logo,
   pdf,
-  setUrl_pdf
+  setUrl_pdf,
 }: {
   id_negocio: number;
   setOpen: (open: boolean) => void;
@@ -114,7 +114,7 @@ export function AccionesNegocios({
     <>
       <Link
         className="p-2 text-slate-400 hover:text-blue-500 transition-colors"
-        href={`/editarNegocio/${id_negocio}`}
+        href={`/admin/negocios/editarNegocio/${id_negocio}`}
       >
         <MdEditNote size={25} />
       </Link>
@@ -124,7 +124,7 @@ export function AccionesNegocios({
           setOpen(true);
           setId_negocio(id_negocio);
           setUrl_foto(logo ?? '');
-          setUrl_pdf(pdf ?? '')
+          setUrl_pdf(pdf ?? '');
         }}
       >
         <svg

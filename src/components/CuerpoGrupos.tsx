@@ -13,6 +13,7 @@ import { EliminarGrupo } from '@/actions/Grupos';
 import { useState } from 'react';
 import { AlertDelate } from './alerts/alertDelate';
 import { AccionesGrupos } from './Admin/GruposAuth';
+import Image from 'next/image';
 
 export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
   const router = useRouter();
@@ -47,12 +48,19 @@ export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
           className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-5 flex items-center gap-6 hover:shadow-md transition-all group"
           key={g.id_grupo}
         >
-          <img
-            src={g.logo_grupo ?? ''}
-            alt={g.actividad}
-            className="bg-cover w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0"
-            loading="lazy"
-          />
+          <div className="relative w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0 overflow-hidden">
+            {g.logo_grupo && (
+              <Image
+                src={g.logo_grupo}
+                alt={g.actividad ?? ''}
+                fill
+                unoptimized
+          
+                className="object-cover"
+              />
+            )}
+          </div>
+
           <div className="flex-1 min-w-0">
             <h3 className="font-bold text-lg text-slate-800 dark:text-white">
               {g.actividad.split(':')[0]}
@@ -61,6 +69,7 @@ export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
               {g.actividad.split(':')[1]}
             </p>
           </div>
+
           <div className="flex items-center gap-6">
             <span className="block max-md:hidden text-sm font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full whitespace-nowrap">
               Negocios ({g.dir_verde.length})
