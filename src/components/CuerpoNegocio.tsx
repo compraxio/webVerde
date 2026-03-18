@@ -51,7 +51,7 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
       {negocios.map((n) => (
         <div
           key={n.id_negocio}
-          className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300"
+          className="group bg-card border border-border rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300"
         >
           <div className="relative h-48 overflow-hidden">
             {n.logo ? (
@@ -100,13 +100,13 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
           <div className="p-6">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <h4 className="text-lg font-bold text-slate-800 dark:text-white">{n.negocio}</h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <h4 className="text-lg font-bold text-card-foreground">{n.negocio}</h4>
+                <p className="text-sm text-muted-foreground">
                   {n?.sub_categoria && n.sub_categoria}
                 </p>
               </div>
               {!n.whatsup ? (
-                <div className="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                <div className="w-10 h-10 bg-muted rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -127,16 +127,16 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                   href={`https://wa.me/${n.whatsup}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-50 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors"
+                  className="w-10 h-10 bg-muted rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
                 >
                   <FaWhatsapp size={25} />
                 </a>
               )}
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-6">
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-6">
               {n.descripcion}
             </p>
-            <div className="flex items-center justify-center border-t border-slate-100 dark:border-zinc-800 pt-4">
+            <div className="flex items-center justify-center border-t border-border pt-4">
               <div className="flex items-center gap-2">
                 {n.url_negocio ? (
                   <a href={n.url_negocio ?? ''} target="_blank" rel="noopener noreferrer">
@@ -214,7 +214,7 @@ export function CuerpoNegocio({ negocios }: Readonly<{ negocios: negocios[] }>) 
                 />
                 <Link
                   href={`/verPerfilNegocio/${n.id_negocio}`}
-                  className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 px-2 py-1.5 rounded-lg text-xs font-semibold"
+                  className="bg-muted hover:bg-muted/80 px-2 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground"
                 >
                   <MdVisibility size={25} />
                 </Link>

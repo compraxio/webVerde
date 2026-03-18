@@ -45,7 +45,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <nav className="flex-1 px-4 space-y-1 mt-4">
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/"
             >
               <svg
@@ -65,7 +65,7 @@ export function AppSidebar() {
               Negocios verdes
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/contactos/0"
             >
               <svg
@@ -85,7 +85,7 @@ export function AppSidebar() {
               Contactos
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/municipios/todos"
             >
               <svg
@@ -105,7 +105,7 @@ export function AppSidebar() {
               Municipios
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/productos/0"
             >
               <svg
@@ -125,7 +125,7 @@ export function AppSidebar() {
               Productos
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/grupos"
             >
               <svg
@@ -165,7 +165,7 @@ export function AppSidebar() {
               Fase
             </Link> */}
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/mapa"
             >
               <svg
@@ -185,7 +185,7 @@ export function AppSidebar() {
               Mapa
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/fotografias"
             >
               <svg
@@ -205,7 +205,7 @@ export function AppSidebar() {
               Fotos
             </Link>
             <Link
-              className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
               href="/eventos/activos"
             >
               <svg

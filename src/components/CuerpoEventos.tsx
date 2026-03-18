@@ -43,10 +43,10 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
       />
       {eventos.map((evento) => (
         <div
-          className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 hover:shadow-md transition-all group"
+          className="bg-card border border-border rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 hover:shadow-md transition-all group"
           key={evento.id_evento}
         >
-          <div className="relative w-full sm:w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-slate-100 dark:bg-zinc-800">
+          <div className="relative w-full sm:w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-muted">
             {evento.Img_Presentacion && (
               <Image
                 src={evento.Img_Presentacion}
@@ -60,10 +60,10 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-lg text-slate-800 dark:text-white truncate">
+            <h3 className="font-bold text-lg text-card-foreground truncate">
               {evento.evento}
             </h3>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-y-1 gap-x-4 mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-y-1 gap-x-4 mt-1 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <IoLocationOutline size={18} />
                 {evento.direccion}
@@ -84,7 +84,7 @@ export function CuerpoEventos({ eventos }: Readonly<{ eventos: evento[] }>) {
           <div className="flex items-center gap-2 pr-2">
             <Link
               href={`/eventos/verEvento/${evento.id_evento}`}
-              className="p-2.5 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-xl transition-all"
+              className="p-2.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-xl transition-all"
               title="Ver"
             >
               <MdVisibility size={25} />

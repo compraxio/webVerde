@@ -83,12 +83,12 @@ export default function RootLayout({
     <html lang="es" suppressHydrationWarning>
       <meta name="google-site-verification" content="_py-3iSk1bVaogo4aCahCvxdLHcFIPdRE8URklpBRr8" />
       <body
-        className={`${inter.className} bg-background-light  dark:bg-background-dark text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200`}
+        className={`${inter.className} bg-background text-foreground min-h-screen transition-colors duration-200`}
       >
         <Providers>
           {/* DESKTOP */}
           <div className="hidden lg:flex">
-            <aside className="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 hidden lg:flex flex-col z-20">
+            <aside className="fixed left-0 top-0 h-screen w-64 bg-sidebar border-r border-sidebar-border hidden lg:flex flex-col z-20">
               <div className="p-6">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
@@ -117,7 +117,7 @@ export default function RootLayout({
               </div>
               <nav className="flex-1 px-4 space-y-1 mt-4">
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/"
                 >
                   <svg
@@ -137,7 +137,7 @@ export default function RootLayout({
                   Negocios verdes
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/contactos/0"
                 >
                   <svg
@@ -157,7 +157,7 @@ export default function RootLayout({
                   Contactos
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/municipios/todos"
                 >
                   <svg
@@ -177,7 +177,7 @@ export default function RootLayout({
                   Municipios
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300 rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/productos/0"
                 >
                   <svg
@@ -197,7 +197,7 @@ export default function RootLayout({
                   Productos
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/grupos"
                 >
                   <svg
@@ -237,7 +237,7 @@ export default function RootLayout({
                   Fase
                 </Link> */}
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/mapa"
                 >
                   <svg
@@ -257,7 +257,7 @@ export default function RootLayout({
                   Mapa
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/fotografias"
                 >
                   <svg
@@ -277,7 +277,7 @@ export default function RootLayout({
                   Fotos
                 </Link>
                 <Link
-                  className="flex items-center gap-3 px-4 py-3 text-primary dark:text-gray-300   rounded-xl font-medium hover:bg-black/10 transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-xl font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                   href="/eventos/Activo"
                 >
                   <svg
@@ -305,7 +305,7 @@ export default function RootLayout({
               </div>
             </aside>
             <main className="flex-1 lg:ml-64 p-6">
-              <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-slate-200 dark:border-zinc-800">
+              <header className="sticky top-0 z-10 bg-background/80 dark:bg-background/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-border">
                 <div className="flex items-center gap-4">
                   <ModeToggle />
                   <Admin />
@@ -320,7 +320,7 @@ export default function RootLayout({
             <SidebarProvider>
               <AppSidebar />
               <main className="lg:ml-64 min-h-screen ">
-                <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-slate-200 dark:border-zinc-800">
+                <header className="sticky top-0 z-10 bg-background/80 dark:bg-background/80 backdrop-blur-md px-6 py-4 flex items-center justify-end border-b max-md:justify-center border-border">
                   <div className="flex items-center gap-4">
                     <ModeToggle />
                     <Admin />

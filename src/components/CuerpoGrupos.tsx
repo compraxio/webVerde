@@ -45,10 +45,10 @@ export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
       />
       {grupos.map((g) => (
         <div
-          className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-5 flex items-center gap-6 hover:shadow-md transition-all group"
+          className="bg-card border border-border rounded-2xl p-5 flex items-center gap-6 hover:shadow-md transition-all group"
           key={g.id_grupo}
         >
-          <div className="relative w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0 overflow-hidden">
+          <div className="relative w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center shrink-0 overflow-hidden">
             {g.logo_grupo && (
               <Image
                 src={g.logo_grupo}
@@ -62,16 +62,16 @@ export function CuerpoGrupos({ grupos }: Readonly<{ grupos: grupo[] }>) {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-lg text-slate-800 dark:text-white">
+            <h3 className="font-bold text-lg text-card-foreground">
               {g.actividad.split(':')[0]}
             </h3>
-            <p className="text-slate-500 dark:text-slate-400 text-sm max-md:line-clamp-1">
+            <p className="text-muted-foreground text-sm max-md:line-clamp-1">
               {g.actividad.split(':')[1]}
             </p>
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="block max-md:hidden text-sm font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full whitespace-nowrap">
+            <span className="block max-md:hidden text-sm font-semibold text-muted-foreground bg-muted px-3 py-1 rounded-full whitespace-nowrap">
               Negocios ({g.dir_verde.length})
             </span>
             <AccionesGrupos
